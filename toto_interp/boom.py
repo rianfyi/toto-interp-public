@@ -1,3 +1,8 @@
+# Contains a helper adapted from Datadog Toto, licensed under Apache-2.0.
+# Copyright [2005-Present] Datadog, Inc.
+# Modified for toto-interp: standalone BOOM downloading and audit integration.
+# See THIRD_PARTY_NOTICES.md and licenses/ for attribution and license terms.
+
 from __future__ import annotations
 
 import json

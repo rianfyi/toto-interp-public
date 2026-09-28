@@ -1,5 +1,20 @@
 # toto-interp — code for "A Control-First Representation Audit of an Observability Forecasting Foundation Model" (NeurIPS 2026)
 
+Camera-ready code release: [`neurips-2026-v1`](https://github.com/DhyeyMavani2003/toto-interp/releases/tag/neurips-2026-v1).
+Use this tag when reproducing or citing the released package. The release
+includes a source ZIP and its SHA-256 checksum.
+
+## License and third-party material
+
+The authors' original code, documentation, and aggregate results are available
+under the [MIT License](LICENSE), copyright 2026 toto-interp contributors.
+Material adapted from Datadog Toto retains its Apache-2.0 terms and attribution;
+see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [licenses/](licenses/).
+This license does not cover third-party datasets, checkpoints, or dependencies.
+No new dataset or model weights are released.
+
+## Reproduction scope
+
 This repository reproduces the reported five-resplit results at two levels:
 
 - **Level A (CPU, minutes):** recompute the reported results (424 checks
@@ -242,8 +257,12 @@ MOMENT interchange 1–2 min / 2–3 GB.
 - LSTF (ETTh1, ETTh2, weather, electricity): Google Drive bundles
   resolved by `toto_interp/lsf.py`.
 
-No data files of any kind are included in this package. Third-party
+No raw dataset files are included in this package; `results/` contains aggregate
+experimental results and provenance records. Third-party
 dataset and model terms apply to anything downloaded at rerun time.
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution and
+unresolved source terms, and [docs/asset_provenance.md](docs/asset_provenance.md)
+for recorded rerun revisions and the limits of the historical provenance.
 
 ## Known limitations (factual)
 

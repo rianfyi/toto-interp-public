@@ -1,3 +1,8 @@
+# Contains material adapted from Datadog Toto, licensed under Apache-2.0.
+# Copyright [2005-Present] Datadog, Inc.
+# Modified for toto-interp: Python task registry and audit-specific selectors.
+# See THIRD_PARTY_NOTICES.md and licenses/ for attribution and license terms.
+
 from __future__ import annotations
 
 from dataclasses import dataclass

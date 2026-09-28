@@ -1,0 +1,18 @@
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.venv*/
+.DS_Store
+# Downloaded data, activations, and pipeline outputs are never committed.
+data/
+runs/
+# Figure data written by the figure scripts (see README, Level A).
+paper/
+logs/
+.cache/
+*.pt
+*.npy
+*.npz
+*.safetensors
+*.parquet
+*.arrow
