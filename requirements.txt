@@ -1,0 +1,36 @@
+# Frozen runtime pins for the five-resplit pipeline (Level B) and figure regen.
+#
+# Provenance of each pin:
+#   [uv.lock]  Exact version resolved in the authors' development lockfile
+#              (not distributed) for the released code. The cluster venv (.venv-gpu) was built
+#              from the same pyproject ranges; uv.lock is the authoritative
+#              resolved record available locally.
+#   [runtime]  Version observed in the local Python environment
+#              (torch 2.7.0 matches the lockfile).
+#   UNKNOWN    Not recorded in any checked-in artifact; marked, not guessed.
+#
+# Level A (verify numbers + regenerate figures) needs only:
+#   numpy pandas scipy matplotlib
+# Level B (GPU cluster rerun) needs the full list below.
+
+numpy==1.26.4            # [uv.lock]
+pandas==2.2.3            # [uv.lock]
+scikit-learn==1.5.0      # [uv.lock]
+scipy==1.15.3            # [uv.lock]
+torch==2.7.0             # [uv.lock] (+[runtime] local: 2.7.0)
+matplotlib==3.9.2        # [uv.lock]
+toto-ts==0.2.0           # [uv.lock] (Toto checkpoint loader)
+datasets==2.17.1         # [uv.lock] (BOOM/FEV via HuggingFace datasets)
+gluonts==0.16.2          # [uv.lock, as gluonts[torch]]
+huggingface-hub==0.36.2  # [uv.lock]
+gdown==6.0.0             # [uv.lock] (LSF archives via Google Drive links)
+transformers==4.52.1     # [uv.lock] (used by momentfm/Toto loaders)
+einops==0.7.0            # [uv.lock]
+pytest==8.3.5            # [uv.lock] (unit tests)
+setuptools==69.5.1       # [uv.lock] (lightning, via toto-ts, imports pkg_resources)
+# momentfm (MOMENTPipeline loader): not in pyproject.toml or the lockfile.
+#   Install with `pip install --no-deps momentfm==0.1.4` (its own pins,
+#   numpy==1.25.2 and huggingface-hub==0.24.0, have no Python 3.12 wheels).
+# CUDA build of torch: UNKNOWN -- cluster used a CUDA-enabled torch 2.7.0;
+#   select the build matching your cluster CUDA (e.g. cu126) at install time.
+# Python: 3.12.10.

@@ -1,0 +1,10 @@
+conditional_key,target,conditions,alternative,test_macro_f1_gap_mean,test_macro_f1_gap_ci95,test_macro_f1_gap_n,test_macro_f1_wins
+domain_given_gauge_short,domain,"{""frequency_bucket"": ""Short"", ""metric_type"": ""gauge""}",random_init,0.05593291741927823,0.12867808734614478,5,4
+domain_given_gauge_short,domain,"{""frequency_bucket"": ""Short"", ""metric_type"": ""gauge""}",raw_six_stat,0.029735429652537393,0.08551048769050956,5,3
+domain_given_gauge_short,domain,"{""frequency_bucket"": ""Short"", ""metric_type"": ""gauge""}",shuffled,0.13689611347549588,0.12958075717079492,5,4
+frequency_given_infra_gauge,frequency_bucket,"{""domain"": ""Infrastructure"", ""metric_type"": ""gauge""}",random_init,0.11150207976385404,0.13606425138344552,5,5
+frequency_given_infra_gauge,frequency_bucket,"{""domain"": ""Infrastructure"", ""metric_type"": ""gauge""}",raw_six_stat,0.21196902922667843,0.15014668622437813,5,5
+frequency_given_infra_gauge,frequency_bucket,"{""domain"": ""Infrastructure"", ""metric_type"": ""gauge""}",shuffled,0.32874489946381147,0.13737941147026633,5,5
+metric_type_given_app_short,metric_type,"{""domain"": ""Application Usage"", ""frequency_bucket"": ""Short""}",random_init,0.10767032443980411,0.06997828403835804,5,5
+metric_type_given_app_short,metric_type,"{""domain"": ""Application Usage"", ""frequency_bucket"": ""Short""}",raw_six_stat,0.13156044101917755,0.04515358033983266,5,5
+metric_type_given_app_short,metric_type,"{""domain"": ""Application Usage"", ""frequency_bucket"": ""Short""}",shuffled,0.1300158436249809,0.08607866758023952,5,5

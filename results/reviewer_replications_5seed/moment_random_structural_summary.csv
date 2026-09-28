@@ -1,0 +1,5 @@
+label,n_resplits,random_test_score_n_resplits,random_test_score_mean,random_test_score_ci95_half_width
+cardinality_bucket,5,5,0.25718492234002693,0.018036467270759145
+domain,5,5,0.4087649779227083,0.019912466088884574
+frequency_bucket,5,5,0.5563171882414402,0.1049625025441223
+metric_type,5,5,0.4517346211502439,0.028567244885009273

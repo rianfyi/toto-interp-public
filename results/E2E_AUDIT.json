@@ -1,0 +1,197 @@
+{
+  "checks": {
+    "external_transfer": {
+      "path": "runs/rebuttal/reviewer_replications_5seed/transfer_per_resplit.csv",
+      "replicated_cells": 12,
+      "rows": 60,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "954f97d816c7e4499986179421ac3fbc6c53a0c8cb99908e08d88740986f5acf",
+      "status": "complete"
+    },
+    "moment_dynamic": {
+      "path": "runs/rebuttal/reviewer_replications_5seed/moment_dynamic_per_resplit.csv",
+      "replicated_cells": 6,
+      "rows": 30,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "ffc044ced719e7d93440fea4fa082d69018f71af4fec899e4dfe41d63036dedd",
+      "status": "complete"
+    },
+    "moment_matched_interchange": {
+      "path": "runs/rebuttal/reviewer_replications_5seed/moment_interchange_per_resplit.csv",
+      "replicated_cells": 3,
+      "rows": 15,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "f0d851c95ecb90040732725310e6fe89ef114fbab38804fc852ae55588e219a8",
+      "status": "complete"
+    },
+    "moment_random_dynamic": {
+      "path": "runs/rebuttal/reviewer_replications_5seed/moment_random_dynamic_per_resplit.csv",
+      "replicated_cells": 6,
+      "rows": 30,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "fbe4da5f7d5ee38874c32e083d36c88224f4e7df181be19ba7823deb1f8b1683",
+      "status": "complete"
+    },
+    "moment_random_structural": {
+      "path": "runs/rebuttal/reviewer_replications_5seed/moment_random_structural_per_resplit.csv",
+      "replicated_cells": 4,
+      "rows": 20,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "588455cf8e921e9d333ae6cb5f3ef9d6e278c1373eebedd86406d2085c1dc475",
+      "status": "complete"
+    },
+    "moment_structural": {
+      "path": "runs/rebuttal/reviewer_replications_5seed/moment_per_resplit.csv",
+      "replicated_cells": 4,
+      "rows": 20,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "c73aa9875cca1f309d39e59646fc7659d7de45eba6edeada7c96f0426329fcae",
+      "status": "complete"
+    },
+    "reviewer3_conditional": {
+      "path": "runs/rebuttal/reviewer3_controls/conditional_all_seeds.csv",
+      "replicated_cells": 6,
+      "rows": 30,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "bec3545a8b99233b1d7bd429654d8795ec30a12218dad6bfc160e631e639daac",
+      "status": "complete"
+    },
+    "reviewer3_confounding": {
+      "path": "runs/rebuttal/reviewer3_controls/pairwise_cramers_v_all_seeds.csv",
+      "replicated_cells": 12,
+      "rows": 60,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "7b539275f02539891a575b96f87e42149ef79b54bd78edd5f8bcaee3f86f280d",
+      "status": "complete"
+    },
+    "reviewer3_layer_permuted": {
+      "path": "runs/rebuttal/reviewer3_controls/layer_permuted_selected_all_seeds.csv",
+      "replicated_cells": 4,
+      "rows": 20,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "2e6fc2b5a961f941ca53da3ef87815a7669ac10e4424f8e51314f57b661e3f1b",
+      "status": "complete"
+    },
+    "reviewer3_raw_controls": {
+      "path": "runs/rebuttal/reviewer3_controls/raw_control_all_seeds.csv",
+      "replicated_cells": 16,
+      "rows": 80,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "eb925357067e37be85c1ba0a0312c7928b35d10f9ac155cd2d38135809b61b87",
+      "status": "complete"
+    },
+    "reviewer3_structural_holdout": {
+      "path": "runs/rebuttal/reviewer3_controls/structural_holdout_all_seeds.csv",
+      "replicated_cells": 8,
+      "rows": 40,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "e4dfbf89b36cff6205b2f30c3ef3adea151bf0a9d959131d681a9a7ec06ea2fa",
+      "status": "complete"
+    },
+    "reviewer3_toto_pretrained_random": {
+      "path": "runs/rebuttal/reviewer3_controls/unconditional_selected_all_seeds.csv",
+      "replicated_cells": 8,
+      "rows": 40,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "f926012576d0af5eceda3b543d17c185ee36cfed5cc78130713b89d2150b896c",
+      "status": "complete"
+    },
+    "toto_matched_patch": {
+      "path": "runs/rebuttal/reviewer_replications_5seed/paired_patch_per_resplit.csv",
+      "replicated_cells": 3,
+      "rows": 15,
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "sha256": "5c56a68db697d6c1030f56e9dd2c162da692177a08c647adc2d2e41000b5342b",
+      "status": "complete"
+    }
+  },
+  "interval_role": "descriptive_between_resplit_variability",
+  "replication_unit": "seeded_series_disjoint_boom_resplit",
+  "schema_version": 1,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "status": "complete"
+}

@@ -1,0 +1,425 @@
+key,location,description,expected,kind
+T1A.cad.toto.mean,Table 1A,Cadence Toto test macro-F1 mean,0.766,m3
+T1A.cad.toto.hw,Table 1A,Cadence Toto test macro-F1 half-width,0.024,h3
+T1A.cad.raw.mean,Table 1A,Cadence raw six-stat mean,0.409,m3
+T1A.cad.raw.hw,Table 1A,Cadence raw six-stat half-width,0.047,h3
+T1A.cad.shuf.mean,Table 1A,Cadence shuffled mean,0.486,m3
+T1A.cad.shuf.hw,Table 1A,Cadence shuffled half-width,0.011,h3
+T1A.cad.ri.mean,Table 1A,Cadence random-init mean,0.547,m3
+T1A.cad.ri.hw,Table 1A,Cadence random-init half-width,0.040,h3
+T1A.met.toto.mean,Table 1A,Metric-type Toto mean,0.545,m3
+T1A.met.toto.hw,Table 1A,Metric-type Toto half-width,0.037,h3
+T1A.met.raw.mean,Table 1A,Metric-type raw six-stat mean,0.347,m3
+T1A.met.raw.hw,Table 1A,Metric-type raw six-stat half-width,0.030,h3
+T1A.met.shuf.mean,Table 1A,Metric-type shuffled mean,0.321,m3
+T1A.met.shuf.hw,Table 1A,Metric-type shuffled half-width,0.032,h3
+T1A.met.ri.mean,Table 1A,Metric-type random-init mean,0.398,m3
+T1A.met.ri.hw,Table 1A,Metric-type random-init half-width,0.035,h3
+T1A.dom.toto.mean,Table 1A,Domain Toto mean,0.484,m3
+T1A.dom.toto.hw,Table 1A,Domain Toto half-width,0.011,h3
+T1A.dom.raw.mean,Table 1A,Domain raw six-stat mean,0.371,m3
+T1A.dom.raw.hw,Table 1A,Domain raw six-stat half-width,0.037,h3
+T1A.dom.shuf.mean,Table 1A,Domain shuffled mean,0.317,m3
+T1A.dom.shuf.hw,Table 1A,Domain shuffled half-width,0.037,h3
+T1A.dom.ri.mean,Table 1A,Domain random-init mean,0.362,m3
+T1A.dom.ri.hw,Table 1A,Domain random-init half-width,0.017,h3
+T1A.card.toto.mean,Table 1A,Cardinality Toto mean,0.471,m3
+T1A.card.toto.hw,Table 1A,Cardinality Toto half-width,0.029,h3
+T1A.card.raw.mean,Table 1A,Cardinality raw six-stat mean,0.635,m3
+T1A.card.raw.hw,Table 1A,Cardinality raw six-stat half-width,0.027,h3
+T1A.card.shuf.mean,Table 1A,Cardinality shuffled mean,0.217,m3
+T1A.card.shuf.hw,Table 1A,Cardinality shuffled half-width,0.029,h3
+T1A.card.ri.mean,Table 1A,Cardinality random-init mean,0.250,m3
+T1A.card.ri.hw,Table 1A,Cardinality random-init half-width,0.025,h3
+T1B.cad.perm.mean,Table 1B,Cadence block-perm mean,0.567,m3
+T1B.cad.perm.hw,Table 1B,Cadence block-perm half-width,0.020,h3
+T1B.cad.fam,Table 1B,Cadence strongest raw-window family,FNO,str
+T1B.cad.fammean,Table 1B,Cadence strongest-family mean,0.633,m3
+T1B.cad.famhw,Table 1B,Cadence strongest-family half-width,0.047,h3
+T1B.cad.gap.mean,Table 1B,Cadence paired gap mean,0.133,m3
+T1B.cad.gap.hw,Table 1B,Cadence paired gap half-width,0.063,h3
+T1B.cad.gap.wins,Table 1B,Cadence paired gap wins,5,int
+T1B.met.perm.mean,Table 1B,Metric-type block-perm mean,0.420,m3
+T1B.met.perm.hw,Table 1B,Metric-type block-perm half-width,0.016,h3
+T1B.met.fam,Table 1B,Metric-type strongest raw-window family,GBDT,str
+T1B.met.fammean,Table 1B,Metric-type strongest-family mean,0.498,m3
+T1B.met.famhw,Table 1B,Metric-type strongest-family half-width,0.007,h3
+T1B.met.gap.mean,Table 1B,Metric-type paired gap mean,0.047,m3
+T1B.met.gap.hw,Table 1B,Metric-type paired gap half-width,0.036,h3
+T1B.met.gap.wins,Table 1B,Metric-type paired gap wins,5,int
+T1B.dom.perm.mean,Table 1B,Domain block-perm mean,0.394,m3
+T1B.dom.perm.hw,Table 1B,Domain block-perm half-width,0.011,h3
+T1B.dom.fam,Table 1B,Domain strongest raw-window family,GBDT,str
+T1B.dom.fammean,Table 1B,Domain strongest-family mean,0.482,m3
+T1B.dom.famhw,Table 1B,Domain strongest-family half-width,0.040,h3
+T1B.dom.gap.mean,Table 1B,Domain paired gap mean,0.002,m3
+T1B.dom.gap.hw,Table 1B,Domain paired gap half-width,0.040,h3
+T1B.dom.gap.wins,Table 1B,Domain paired gap wins,2,int
+T1B.card.perm.mean,Table 1B,Cardinality block-perm mean,0.428,m3
+T1B.card.perm.hw,Table 1B,Cardinality block-perm half-width,0.127,h3
+T1B.card.fam,Table 1B,Cardinality strongest raw-window family,FNO,str
+T1B.card.fammean,Table 1B,Cardinality strongest-family mean,0.961,m3
+T1B.card.famhw,Table 1B,Cardinality strongest-family half-width,0.016,h3
+T1B.card.gap.mean,Table 1B,Cardinality paired gap mean,-0.490,m3
+T1B.card.gap.hw,Table 1B,Cardinality paired gap half-width,0.044,h3
+T1B.card.gap.wins,Table 1B,Cardinality paired gap wins,0,int
+ACC.dom.toto.mean,Sec 5.1 text,Domain Toto accuracy mean,0.534,m3
+ACC.dom.gbdt.mean,Sec 5.1 text,Domain GBDT accuracy mean,0.573,m3
+ACC.dom.wins,Sec 5.1 text,Domain Toto accuracy wins vs GBDT,0,int
+T2.cad.toto.mean,Table 2,Cadence stratum Toto mean,0.697,m3
+T2.cad.toto.hw,Table 2,Cadence stratum Toto half-width,0.060,h3
+T2.cad.ri.mean,Table 2,Cadence stratum random-init mean,0.586,m3
+T2.cad.ri.hw,Table 2,Cadence stratum random-init half-width,0.121,h3
+T2.cad.raw.mean,Table 2,Cadence stratum raw six-stat mean,0.485,m3
+T2.cad.raw.hw,Table 2,Cadence stratum raw six-stat half-width,0.137,h3
+T2.cad.wins_ri,Table 2,Cadence stratum wins vs random-init,5,int
+T2.cad.wins_raw,Table 2,Cadence stratum wins vs raw,5,int
+T2.met.toto.mean,Table 2,Metric-type stratum Toto mean,0.502,m3
+T2.met.toto.hw,Table 2,Metric-type stratum Toto half-width,0.053,h3
+T2.met.ri.mean,Table 2,Metric-type stratum random-init mean,0.395,m3
+T2.met.ri.hw,Table 2,Metric-type stratum random-init half-width,0.048,h3
+T2.met.raw.mean,Table 2,Metric-type stratum raw six-stat mean,0.371,m3
+T2.met.raw.hw,Table 2,Metric-type stratum raw six-stat half-width,0.034,h3
+T2.met.wins_ri,Table 2,Metric-type stratum wins vs random-init,5,int
+T2.met.wins_raw,Table 2,Metric-type stratum wins vs raw,5,int
+T2.dom.toto.mean,Table 2,Domain stratum Toto mean,0.406,m3
+T2.dom.toto.hw,Table 2,Domain stratum Toto half-width,0.073,h3
+T2.dom.ri.mean,Table 2,Domain stratum random-init mean,0.350,m3
+T2.dom.ri.hw,Table 2,Domain stratum random-init half-width,0.091,h3
+T2.dom.raw.mean,Table 2,Domain stratum raw six-stat mean,0.376,m3
+T2.dom.raw.hw,Table 2,Domain stratum raw six-stat half-width,0.087,h3
+T2.dom.wins_ri,Table 2,Domain stratum wins vs random-init,4,int
+T2.dom.wins_raw,Table 2,Domain stratum wins vs raw,3,int
+T2SUP.cad.min,Table 2 caption,Cadence balanced test support min,11,int
+T2SUP.cad.max,Table 2 caption,Cadence balanced test support max,19,int
+T2SUP.met.min,Table 2 caption,Metric-type balanced test support min,17,int
+T2SUP.met.max,Table 2 caption,Metric-type balanced test support max,26,int
+T2SUP.dom.min,Table 2 caption,Domain balanced test support min,11,int
+T2SUP.dom.max,Table 2 caption,Domain balanced test support max,18,int
+T3.cad.mom.mean,Table 3,Cadence MOMENT mean,0.632,m3
+T3.cad.mom.hw,Table 3,Cadence MOMENT half-width,0.113,h3
+T3.cad.ri.mean,Table 3,Cadence MOMENT random-init mean,0.556,m3
+T3.cad.ri.hw,Table 3,Cadence MOMENT random-init half-width,0.105,h3
+T3.cad.raw.mean,Table 3,Cadence MOMENT raw six-stat mean,0.401,m3
+T3.cad.raw.hw,Table 3,Cadence MOMENT raw six-stat half-width,0.099,h3
+T3.cad.gap.mean,Table 3,Cadence MOMENT-minus-raw mean,0.231,m3
+T3.cad.gap.hw,Table 3,Cadence MOMENT-minus-raw half-width,0.044,h3
+T3.cad.gap.wins,Table 3,Cadence MOMENT-minus-raw wins,5,int
+T3.met.mom.mean,Table 3,Metric-type MOMENT mean,0.499,m3
+T3.met.mom.hw,Table 3,Metric-type MOMENT half-width,0.022,h3
+T3.met.ri.mean,Table 3,Metric-type MOMENT random-init mean,0.452,m3
+T3.met.ri.hw,Table 3,Metric-type MOMENT random-init half-width,0.029,h3
+T3.met.raw.mean,Table 3,Metric-type MOMENT raw six-stat mean,0.351,m3
+T3.met.raw.hw,Table 3,Metric-type MOMENT raw six-stat half-width,0.042,h3
+T3.met.gap.mean,Table 3,Metric-type MOMENT-minus-raw mean,0.148,m3
+T3.met.gap.hw,Table 3,Metric-type MOMENT-minus-raw half-width,0.030,h3
+T3.met.gap.wins,Table 3,Metric-type MOMENT-minus-raw wins,5,int
+T3.dom.mom.mean,Table 3,Domain MOMENT mean,0.437,m3
+T3.dom.mom.hw,Table 3,Domain MOMENT half-width,0.014,h3
+T3.dom.ri.mean,Table 3,Domain MOMENT random-init mean,0.409,m3
+T3.dom.ri.hw,Table 3,Domain MOMENT random-init half-width,0.020,h3
+T3.dom.raw.mean,Table 3,Domain MOMENT raw six-stat mean,0.337,m3
+T3.dom.raw.hw,Table 3,Domain MOMENT raw six-stat half-width,0.034,h3
+T3.dom.gap.mean,Table 3,Domain MOMENT-minus-raw mean,0.100,m3
+T3.dom.gap.hw,Table 3,Domain MOMENT-minus-raw half-width,0.023,h3
+T3.dom.gap.wins,Table 3,Domain MOMENT-minus-raw wins,5,int
+T3.card.mom.mean,Table 3,Cardinality MOMENT mean,0.259,m3
+T3.card.mom.hw,Table 3,Cardinality MOMENT half-width,0.010,h3
+T3.card.ri.mean,Table 3,Cardinality MOMENT random-init mean,0.257,m3
+T3.card.ri.hw,Table 3,Cardinality MOMENT random-init half-width,0.018,h3
+T3.card.raw.mean,Table 3,Cardinality MOMENT raw six-stat mean,0.668,m3
+T3.card.raw.hw,Table 3,Cardinality MOMENT raw six-stat half-width,0.013,h3
+T3.card.gap.mean,Table 3,Cardinality MOMENT-minus-raw mean,-0.409,m3
+T3.card.gap.hw,Table 3,Cardinality MOMENT-minus-raw half-width,0.012,h3
+T3.card.gap.wins,Table 3,Cardinality MOMENT-minus-raw wins,0,int
+T3GAPRI.cad.mean,Sec 5.3 text,Cadence MOMENT-minus-random mean,0.076,m3
+T3GAPRI.cad.hw,Sec 5.3 text,Cadence MOMENT-minus-random half-width,0.021,h3
+T3GAPRI.cad.wins,Sec 5.3 text,Cadence MOMENT beats random-init resplits,5,int
+T3GAPRI.met.mean,Sec 5.3 text,Metric-type MOMENT-minus-random mean,0.047,m3
+T3GAPRI.met.hw,Sec 5.3 text,Metric-type MOMENT-minus-random half-width,0.013,h3
+T3GAPRI.met.wins,Sec 5.3 text,Metric-type MOMENT beats random-init resplits,5,int
+T3GAPRI.dom.mean,Sec 5.3 text,Domain MOMENT-minus-random mean,0.028,m3
+T3GAPRI.dom.hw,Sec 5.3 text,Domain MOMENT-minus-random half-width,0.015,h3
+T3GAPRI.dom.wins,Sec 5.3 text,Domain MOMENT beats random-init resplits,5,int
+T4.025.burst.mean,Table 6,Blend 0.25 forecast-burst wins mean,0.480,m3
+T4.025.burst.hw,Table 6,Blend 0.25 forecast-burst wins half-width,0.086,h3
+T4.025.cnt,Table 6,Blend 0.25 resplits above 0.5,1,int
+T4.025.wape.mean,Table 6,Blend 0.25 median WAPE ratio mean,0.969,m3
+T4.025.wape.hw,Table 6,Blend 0.25 median WAPE ratio half-width,0.062,h3
+T4.05.burst.mean,Table 6,Blend 0.50 forecast-burst wins mean,0.430,m3
+T4.05.burst.hw,Table 6,Blend 0.50 forecast-burst wins half-width,0.046,h3
+T4.05.cnt,Table 6,Blend 0.50 resplits above 0.5,0,int
+T4.05.wape.mean,Table 6,Blend 0.50 median WAPE ratio mean,0.952,m3
+T4.05.wape.hw,Table 6,Blend 0.50 median WAPE ratio half-width,0.108,h3
+T4.10.burst.mean,Table 6,Blend 1.00 forecast-burst wins mean,0.390,m3
+T4.10.burst.hw,Table 6,Blend 1.00 forecast-burst wins half-width,0.127,h3
+T4.10.cnt,Table 6,Blend 1.00 resplits above 0.5,1,int
+T4.10.wape.mean,Table 6,Blend 1.00 median WAPE ratio mean,0.903,m3
+T4.10.wape.hw,Table 6,Blend 1.00 median WAPE ratio half-width,0.155,h3
+T4PROBE.mean,Table 6 caption,Toto probe check mean,0.655,m3
+T4PROBE.hw,Table 6 caption,Toto probe check half-width,0.136,h3
+T4PROBE.wins,Table 6 caption,Toto probe check resplits above 0.5,5,int
+T4R2.probe.mean,Sec 5.4 text,Donor probe R2 mean,0.106,m3
+T4R2.probe.hw,Sec 5.4 text,Donor probe R2 half-width,0.100,h3
+T4R2.raw.mean,Sec 5.4 text,Donor raw six-stat R2 mean,0.111,m3
+T4R2.raw.hw,Sec 5.4 text,Donor raw six-stat R2 half-width,0.066,h3
+T4R2.wins,Sec 5.4 text,Donor probe above raw resplits,3,int
+T5.fev.mean,Table 7,FEV coordination R2 mean,-0.938,m3
+T5.fev.hw,Table 7,FEV coordination R2 half-width,0.654,h3
+T5.fev.n,Table 7,FEV configuration count,11,int
+T5.lsf.mean,Table 7,LSTF coordination R2 mean,-17.668,m3
+T5.lsf.hw,Table 7,LSTF coordination R2 half-width,10.896,h3
+T5.lsf.n,Table 7,LSTF dataset count,4,int
+T6.cnn.k,Table 4,CNN parameters thousands,39.5,k1
+T6.fno.k,Table 4,FNO parameters thousands,105.9,k1
+T6.trx.k,Table 4,Patch Transformer parameters thousands,246.7,k1
+T7.cad_comb.toto.mean,Table 5,Cadence domain-x-metric Toto mean,0.865,m3
+T7.cad_comb.toto.min,Table 5,Cadence domain-x-metric Toto bracket low,0.627,m3
+T7.cad_comb.toto.max,Table 5,Cadence domain-x-metric Toto bracket high,1.000,m3
+T7.cad_comb.ri.mean,Table 5,Cadence domain-x-metric random-init mean,0.541,m3
+T7.cad_comb.ri.min,Table 5,Cadence domain-x-metric random-init bracket low,0.250,m3
+T7.cad_comb.ri.max,Table 5,Cadence domain-x-metric random-init bracket high,1.000,m3
+T7.cad_dom.toto.mean,Table 5,Cadence domain holdout Toto mean,0.654,m3
+T7.cad_dom.toto.min,Table 5,Cadence domain holdout Toto bracket low,0.513,m3
+T7.cad_dom.toto.max,Table 5,Cadence domain holdout Toto bracket high,0.766,m3
+T7.cad_dom.ri.mean,Table 5,Cadence domain holdout random-init mean,0.511,m3
+T7.cad_dom.ri.min,Table 5,Cadence domain holdout random-init bracket low,0.420,m3
+T7.cad_dom.ri.max,Table 5,Cadence domain holdout random-init bracket high,0.575,m3
+T7.met_comb.toto.mean,Table 5,Metric-type domain-x-cadence Toto mean,0.258,m3
+T7.met_comb.toto.min,Table 5,Metric-type domain-x-cadence Toto bracket low,0.130,m3
+T7.met_comb.toto.max,Table 5,Metric-type domain-x-cadence Toto bracket high,0.472,m3
+T7.met_comb.ri.mean,Table 5,Metric-type domain-x-cadence random-init mean,0.179,m3
+T7.met_comb.ri.min,Table 5,Metric-type domain-x-cadence random-init bracket low,0.135,m3
+T7.met_comb.ri.max,Table 5,Metric-type domain-x-cadence random-init bracket high,0.224,m3
+T7.met_dom.toto.mean,Table 5,Metric-type domain holdout Toto mean,0.281,m3
+T7.met_dom.toto.min,Table 5,Metric-type domain holdout Toto bracket low,0.188,m3
+T7.met_dom.toto.max,Table 5,Metric-type domain holdout Toto bracket high,0.505,m3
+T7.met_dom.ri.mean,Table 5,Metric-type domain holdout random-init mean,0.220,m3
+T7.met_dom.ri.min,Table 5,Metric-type domain holdout random-init bracket low,0.161,m3
+T7.met_dom.ri.max,Table 5,Metric-type domain holdout random-init bracket high,0.266,m3
+T8.coord.mom.mean,Table 8,Coordination MOMENT R2 mean,0.092,m3
+T8.coord.mom.hw,Table 8,Coordination MOMENT R2 half-width,0.047,h3
+T8.coord.ri.mean,Table 8,Coordination random-init R2 mean,0.083,m3
+T8.coord.ri.hw,Table 8,Coordination random-init R2 half-width,0.041,h3
+T8.coord.raw.mean,Table 8,Coordination raw six-stat R2 mean,0.071,m3
+T8.coord.raw.hw,Table 8,Coordination raw six-stat R2 half-width,0.041,h3
+T8.coord.wins,Table 8,Coordination MOMENT above raw resplits,3,int
+T8.curb.mom.mean,Table 8,Current burstiness MOMENT R2 mean,0.024,m3
+T8.curb.mom.hw,Table 8,Current burstiness MOMENT R2 half-width,0.025,h3
+T8.curb.ri.mean,Table 8,Current burstiness random-init R2 mean,0.007,m3
+T8.curb.ri.hw,Table 8,Current burstiness random-init R2 half-width,0.018,h3
+T8.curb.raw.mean,Table 8,Current burstiness raw six-stat R2 mean,0.057,m3
+T8.curb.raw.hw,Table 8,Current burstiness raw six-stat R2 half-width,0.620,h3
+T8.curb.wins,Table 8,Current burstiness MOMENT above raw resplits,2,int
+T8.futb.mom.mean,Table 8,Future burstiness MOMENT R2 mean,0.015,m3
+T8.futb.mom.hw,Table 8,Future burstiness MOMENT R2 half-width,0.027,h3
+T8.futb.ri.mean,Table 8,Future burstiness random-init R2 mean,0.002,m3
+T8.futb.ri.hw,Table 8,Future burstiness random-init R2 half-width,0.021,h3
+T8.futb.raw.mean,Table 8,Future burstiness raw six-stat R2 mean,-0.005,m3
+T8.futb.raw.hw,Table 8,Future burstiness raw six-stat R2 half-width,0.082,h3
+T8.futb.wins,Table 8,Future burstiness MOMENT above raw resplits,2,int
+T8.shift.mom.mean,Table 8,Shift risk MOMENT R2 mean,-0.006,m3
+T8.shift.mom.hw,Table 8,Shift risk MOMENT R2 half-width,0.067,h3
+T8.shift.ri.mean,Table 8,Shift risk random-init R2 mean,-0.018,m3
+T8.shift.ri.hw,Table 8,Shift risk random-init R2 half-width,0.062,h3
+T8.shift.raw.mean,Table 8,Shift risk raw six-stat R2 mean,0.021,m3
+T8.shift.raw.hw,Table 8,Shift risk raw six-stat R2 half-width,0.076,h3
+T8.shift.wins,Table 8,Shift risk MOMENT above raw resplits,1,int
+T9.025.mae.mean,Table 9,Blend 0.25 lower-MAE fraction mean,0.410,m3
+T9.025.mae.hw,Table 9,Blend 0.25 lower-MAE fraction half-width,0.084,h3
+T9.025.cnt,Table 9,Blend 0.25 resplits above 0.5,0,int
+T9.05.mae.mean,Table 9,Blend 0.50 lower-MAE fraction mean,0.365,m3
+T9.05.mae.hw,Table 9,Blend 0.50 lower-MAE fraction half-width,0.109,h3
+T9.05.cnt,Table 9,Blend 0.50 resplits above 0.5,0,int
+T9.10.mae.mean,Table 9,Blend 1.00 lower-MAE fraction mean,0.405,m3
+T9.10.mae.hw,Table 9,Blend 1.00 lower-MAE fraction half-width,0.104,h3
+T9.10.cnt,Table 9,Blend 1.00 resplits above 0.5,1,int
+T9PROBE.mean,Table 9 caption,MOMENT probe check mean,0.590,m3
+T9PROBE.hw,Table 9 caption,MOMENT probe check half-width,0.071,h3
+T9PROBE.wins,Table 9 caption,MOMENT probe check resplits above 0.5,5,int
+T10.cad.toto.mean,Table 10,Cadence Toto mean,0.766,m3
+T10.cad.toto.hw,Table 10,Cadence Toto half-width,0.024,h3
+T10.cad.ri.mean,Table 10,Cadence random-init mean,0.547,m3
+T10.cad.ri.hw,Table 10,Cadence random-init half-width,0.040,h3
+T10.cad.perm.mean,Table 10,Cadence block-perm mean,0.567,m3
+T10.cad.perm.hw,Table 10,Cadence block-perm half-width,0.020,h3
+T10.cad.CNN.mean,Table 10,Cadence CNN mean,0.545,m3
+T10.cad.CNN.hw,Table 10,Cadence CNN half-width,0.019,h3
+T10.cad.FNO.mean,Table 10,Cadence FNO mean,0.633,m3
+T10.cad.FNO.hw,Table 10,Cadence FNO half-width,0.047,h3
+T10.cad.PatchTransformer.mean,Table 10,Cadence patch Transformer mean,0.553,m3
+T10.cad.PatchTransformer.hw,Table 10,Cadence patch Transformer half-width,0.027,h3
+T10.cad.GBDT.mean,Table 10,Cadence GBDT mean,0.580,m3
+T10.cad.GBDT.hw,Table 10,Cadence GBDT half-width,0.042,h3
+T10.met.toto.mean,Table 10,Metric-type Toto mean,0.545,m3
+T10.met.toto.hw,Table 10,Metric-type Toto half-width,0.037,h3
+T10.met.ri.mean,Table 10,Metric-type random-init mean,0.398,m3
+T10.met.ri.hw,Table 10,Metric-type random-init half-width,0.035,h3
+T10.met.perm.mean,Table 10,Metric-type block-perm mean,0.420,m3
+T10.met.perm.hw,Table 10,Metric-type block-perm half-width,0.016,h3
+T10.met.CNN.mean,Table 10,Metric-type CNN mean,0.431,m3
+T10.met.CNN.hw,Table 10,Metric-type CNN half-width,0.047,h3
+T10.met.FNO.mean,Table 10,Metric-type FNO mean,0.366,m3
+T10.met.FNO.hw,Table 10,Metric-type FNO half-width,0.061,h3
+T10.met.PatchTransformer.mean,Table 10,Metric-type patch Transformer mean,0.398,m3
+T10.met.PatchTransformer.hw,Table 10,Metric-type patch Transformer half-width,0.018,h3
+T10.met.GBDT.mean,Table 10,Metric-type GBDT mean,0.498,m3
+T10.met.GBDT.hw,Table 10,Metric-type GBDT half-width,0.007,h3
+T10.dom.toto.mean,Table 10,Domain Toto mean,0.484,m3
+T10.dom.toto.hw,Table 10,Domain Toto half-width,0.011,h3
+T10.dom.ri.mean,Table 10,Domain random-init mean,0.362,m3
+T10.dom.ri.hw,Table 10,Domain random-init half-width,0.017,h3
+T10.dom.perm.mean,Table 10,Domain block-perm mean,0.394,m3
+T10.dom.perm.hw,Table 10,Domain block-perm half-width,0.011,h3
+T10.dom.CNN.mean,Table 10,Domain CNN mean,0.432,m3
+T10.dom.CNN.hw,Table 10,Domain CNN half-width,0.025,h3
+T10.dom.FNO.mean,Table 10,Domain FNO mean,0.381,m3
+T10.dom.FNO.hw,Table 10,Domain FNO half-width,0.069,h3
+T10.dom.PatchTransformer.mean,Table 10,Domain patch Transformer mean,0.437,m3
+T10.dom.PatchTransformer.hw,Table 10,Domain patch Transformer half-width,0.029,h3
+T10.dom.GBDT.mean,Table 10,Domain GBDT mean,0.482,m3
+T10.dom.GBDT.hw,Table 10,Domain GBDT half-width,0.040,h3
+T10.card.toto.mean,Table 10,Cardinality Toto mean,0.471,m3
+T10.card.toto.hw,Table 10,Cardinality Toto half-width,0.029,h3
+T10.card.ri.mean,Table 10,Cardinality random-init mean,0.250,m3
+T10.card.ri.hw,Table 10,Cardinality random-init half-width,0.025,h3
+T10.card.perm.mean,Table 10,Cardinality block-perm mean,0.428,m3
+T10.card.perm.hw,Table 10,Cardinality block-perm half-width,0.127,h3
+T10.card.CNN.mean,Table 10,Cardinality CNN mean,0.959,m3
+T10.card.CNN.hw,Table 10,Cardinality CNN half-width,0.010,h3
+T10.card.FNO.mean,Table 10,Cardinality FNO mean,0.961,m3
+T10.card.FNO.hw,Table 10,Cardinality FNO half-width,0.016,h3
+T10.card.PatchTransformer.mean,Table 10,Cardinality patch Transformer mean,0.948,m3
+T10.card.PatchTransformer.hw,Table 10,Cardinality patch Transformer half-width,0.023,h3
+T10.card.GBDT.mean,Table 10,Cardinality GBDT mean,0.663,m3
+T10.card.GBDT.hw,Table 10,Cardinality GBDT half-width,0.038,h3
+CRAMER.dom_met.mean,Sec 5.2 text,Domain-metric-type Cramers V mean,0.402,m3
+CRAMER.dom_met.hw,Sec 5.2 text,Domain-metric-type Cramers V half-width,0.011,h3
+CRAMER.dom_cad.mean,Sec 5.2 text,Domain-cadence Cramers V mean,0.055,m3
+CRAMER.dom_cad.hw,Sec 5.2 text,Domain-cadence Cramers V half-width,0.012,h3
+CRAMER.met_cad.mean,Sec 5.2 text,Metric-type-cadence Cramers V mean,0.050,m3
+CRAMER.met_cad.hw,Sec 5.2 text,Metric-type-cadence Cramers V half-width,0.018,h3
+MARGIN.cad,Sec 5.2 text,Cadence stratum Toto-minus-raw margin about,0.21,about2
+MARGIN.met,Sec 5.2 text,Metric-type stratum Toto-minus-raw margin about,0.13,about2
+MARGIN.dom,Sec 5.2 text,Domain stratum Toto-minus-raw margin about,0.03,about2
+GAP100.cad,Sec 5.1 text,Cadence gap in macro-F1 points,13.3,k1
+GAP100.met,Sec 5.1 text,Metric-type gap in macro-F1 points,4.7,k1
+FIG1.cad.raw,Win-count summary (supplementary),Cadence vs raw six-stat cell,5,int
+FIG1.cad.strongest,Win-count summary (supplementary),Cadence vs strongest raw-window cell,5,int
+FIG1.cad.strat,Win-count summary (supplementary),Cadence common-support cell,5,int
+FIG1.cad.randinit,Win-count summary (supplementary),Cadence vs random-init cell,5,int
+FIG1.cad.blockperm,Win-count summary (supplementary),Cadence vs block-perm cell,5,int
+FIG1.cad.moment,Win-count summary (supplementary),Cadence MOMENT-base cell,5,int
+FIG1.cad.donor,Win-count summary (supplementary),Cadence donor-exchange cell not tested,--,str
+FIG1.cad.transfer,Win-count summary (supplementary),Cadence transfer cell not tested,--,str
+FIG1.met.raw,Win-count summary (supplementary),Metric-type vs raw six-stat cell,5,int
+FIG1.met.strongest,Win-count summary (supplementary),Metric-type vs strongest raw-window cell,5,int
+FIG1.met.strat,Win-count summary (supplementary),Metric-type common-support cell,5,int
+FIG1.met.randinit,Win-count summary (supplementary),Metric-type vs random-init cell,5,int
+FIG1.met.blockperm,Win-count summary (supplementary),Metric-type vs block-perm cell,5,int
+FIG1.met.moment,Win-count summary (supplementary),Metric-type MOMENT-base cell,5,int
+FIG1.met.donor,Win-count summary (supplementary),Metric-type donor-exchange cell not tested,--,str
+FIG1.met.transfer,Win-count summary (supplementary),Metric-type transfer cell not tested,--,str
+FIG1.dom.raw,Win-count summary (supplementary),Domain vs raw six-stat cell,5,int
+FIG1.dom.strongest,Win-count summary (supplementary),Domain vs strongest raw-window cell,2,int
+FIG1.dom.strat,Win-count summary (supplementary),Domain common-support cell,3,int
+FIG1.dom.randinit,Win-count summary (supplementary),Domain vs random-init cell,5,int
+FIG1.dom.blockperm,Win-count summary (supplementary),Domain vs block-perm cell,5,int
+FIG1.dom.moment,Win-count summary (supplementary),Domain MOMENT-base cell,5,int
+FIG1.dom.donor,Win-count summary (supplementary),Domain donor-exchange cell not tested,--,str
+FIG1.dom.transfer,Win-count summary (supplementary),Domain transfer cell not tested,--,str
+FIG1.card.raw,Win-count summary (supplementary),Cardinality vs raw six-stat cell,0,int
+FIG1.card.strongest,Win-count summary (supplementary),Cardinality vs strongest raw-window cell,0,int
+FIG1.card.strat,Win-count summary (supplementary),Cardinality common-support cell not tested,--,str
+FIG1.card.randinit,Win-count summary (supplementary),Cardinality vs random-init cell,5,int
+FIG1.card.blockperm,Win-count summary (supplementary),Cardinality vs block-perm cell,4,int
+FIG1.card.moment,Win-count summary (supplementary),Cardinality MOMENT-base cell,0,int
+FIG1.card.donor,Win-count summary (supplementary),Cardinality donor-exchange cell not tested,--,str
+FIG1.card.transfer,Win-count summary (supplementary),Cardinality transfer cell not tested,--,str
+FIG1.futb.raw,Win-count summary (supplementary),Future burstiness vs raw six-stat cell,3,int
+FIG1.futb.strongest,Win-count summary (supplementary),Future burstiness strongest raw-window not tested,--,str
+FIG1.futb.strat,Win-count summary (supplementary),Future burstiness common-support not tested,--,str
+FIG1.futb.randinit,Win-count summary (supplementary),Future burstiness random-init not tested,--,str
+FIG1.futb.blockperm,Win-count summary (supplementary),Future burstiness block-perm not tested,--,str
+FIG1.futb.moment,Win-count summary (supplementary),Future burstiness MOMENT-base cell,2,int
+FIG1.futb.donor,Win-count summary (supplementary),Future burstiness donor-exchange cell,1,int
+FIG1.futb.transfer,Win-count summary (supplementary),Future burstiness transfer cell not tested,--,str
+FIG1.coord.raw,Win-count summary (supplementary),Coordination raw six-stat cell not tested,--,str
+FIG1.coord.strongest,Win-count summary (supplementary),Coordination strongest raw-window not tested,--,str
+FIG1.coord.strat,Win-count summary (supplementary),Coordination common-support not tested,--,str
+FIG1.coord.randinit,Win-count summary (supplementary),Coordination random-init not tested,--,str
+FIG1.coord.blockperm,Win-count summary (supplementary),Coordination block-perm not tested,--,str
+FIG1.coord.moment,Win-count summary (supplementary),Coordination MOMENT-base cell,3,int
+FIG1.coord.donor,Win-count summary (supplementary),Coordination donor-exchange cell not tested,--,str
+FIG1.coord.transfer,Win-count summary (supplementary),Coordination transfer cell,0,int
+FIG2A.cad.seed42,Figure 3,Cadence seed-42 Toto-minus-strongest gap,0.052568,f6
+FIG2A.cad.seed43,Figure 3,Cadence seed-43 Toto-minus-strongest gap,0.150047,f6
+FIG2A.cad.seed44,Figure 3,Cadence seed-44 Toto-minus-strongest gap,0.190802,f6
+FIG2A.cad.seed45,Figure 3,Cadence seed-45 Toto-minus-strongest gap,0.126615,f6
+FIG2A.cad.seed46,Figure 3,Cadence seed-46 Toto-minus-strongest gap,0.142792,f6
+FIG2A.met.seed42,Figure 3,Metric-type seed-42 Toto-minus-strongest gap,0.007584,f6
+FIG2A.met.seed43,Figure 3,Metric-type seed-43 Toto-minus-strongest gap,0.084244,f6
+FIG2A.met.seed44,Figure 3,Metric-type seed-44 Toto-minus-strongest gap,0.049526,f6
+FIG2A.met.seed45,Figure 3,Metric-type seed-45 Toto-minus-strongest gap,0.063327,f6
+FIG2A.met.seed46,Figure 3,Metric-type seed-46 Toto-minus-strongest gap,0.032240,f6
+FIG2A.dom.seed42,Figure 3,Domain seed-42 Toto-minus-strongest gap,0.056635,f6
+FIG2A.dom.seed43,Figure 3,Domain seed-43 Toto-minus-strongest gap,-0.024563,f6
+FIG2A.dom.seed44,Figure 3,Domain seed-44 Toto-minus-strongest gap,0.002085,f6
+FIG2A.dom.seed45,Figure 3,Domain seed-45 Toto-minus-strongest gap,-0.013060,f6
+FIG2A.dom.seed46,Figure 3,Domain seed-46 Toto-minus-strongest gap,-0.012988,f6
+FIG2A.card.seed42,Figure 3,Cardinality seed-42 Toto-minus-strongest gap,-0.511449,f6
+FIG2A.card.seed43,Figure 3,Cardinality seed-43 Toto-minus-strongest gap,-0.444877,f6
+FIG2A.card.seed44,Figure 3,Cardinality seed-44 Toto-minus-strongest gap,-0.486559,f6
+FIG2A.card.seed45,Figure 3,Cardinality seed-45 Toto-minus-strongest gap,-0.535136,f6
+FIG2A.card.seed46,Figure 3,Cardinality seed-46 Toto-minus-strongest gap,-0.469862,f6
+FIG2B.toto.probe.seed42,Figure 4 (left),Toto probe-check fraction seed 42,0.725000,f6
+FIG2B.toto.probe.seed43,Figure 4 (left),Toto probe-check fraction seed 43,0.550000,f6
+FIG2B.toto.probe.seed44,Figure 4 (left),Toto probe-check fraction seed 44,0.650000,f6
+FIG2B.toto.probe.seed45,Figure 4 (left),Toto probe-check fraction seed 45,0.800000,f6
+FIG2B.toto.probe.seed46,Figure 4 (left),Toto probe-check fraction seed 46,0.550000,f6
+FIG2B.toto.b025.seed42,Figure 4 (left),Toto blend-0.25 forecast fraction seed 42,0.400000,f6
+FIG2B.toto.b025.seed43,Figure 4 (left),Toto blend-0.25 forecast fraction seed 43,0.425000,f6
+FIG2B.toto.b025.seed44,Figure 4 (left),Toto blend-0.25 forecast fraction seed 44,0.500000,f6
+FIG2B.toto.b025.seed45,Figure 4 (left),Toto blend-0.25 forecast fraction seed 45,0.575000,f6
+FIG2B.toto.b025.seed46,Figure 4 (left),Toto blend-0.25 forecast fraction seed 46,0.500000,f6
+FIG2B.toto.b05.seed42,Figure 4 (left),Toto blend-0.50 forecast fraction seed 42,0.425000,f6
+FIG2B.toto.b05.seed43,Figure 4 (left),Toto blend-0.50 forecast fraction seed 43,0.375000,f6
+FIG2B.toto.b05.seed44,Figure 4 (left),Toto blend-0.50 forecast fraction seed 44,0.425000,f6
+FIG2B.toto.b05.seed45,Figure 4 (left),Toto blend-0.50 forecast fraction seed 45,0.475000,f6
+FIG2B.toto.b05.seed46,Figure 4 (left),Toto blend-0.50 forecast fraction seed 46,0.450000,f6
+FIG2B.toto.b10.seed42,Figure 4 (left),Toto blend-1.00 forecast fraction seed 42,0.525000,f6
+FIG2B.toto.b10.seed43,Figure 4 (left),Toto blend-1.00 forecast fraction seed 43,0.275000,f6
+FIG2B.toto.b10.seed44,Figure 4 (left),Toto blend-1.00 forecast fraction seed 44,0.300000,f6
+FIG2B.toto.b10.seed45,Figure 4 (left),Toto blend-1.00 forecast fraction seed 45,0.425000,f6
+FIG2B.toto.b10.seed46,Figure 4 (left),Toto blend-1.00 forecast fraction seed 46,0.425000,f6
+FIG2B.mom.probe.seed42,Figure 4 (right),MOMENT probe-check fraction seed 42,0.550000,f6
+FIG2B.mom.probe.seed43,Figure 4 (right),MOMENT probe-check fraction seed 43,0.650000,f6
+FIG2B.mom.probe.seed44,Figure 4 (right),MOMENT probe-check fraction seed 44,0.575000,f6
+FIG2B.mom.probe.seed45,Figure 4 (right),MOMENT probe-check fraction seed 45,0.525000,f6
+FIG2B.mom.probe.seed46,Figure 4 (right),MOMENT probe-check fraction seed 46,0.650000,f6
+FIG2B.mom.b025.seed42,Figure 4 (right),MOMENT blend-0.25 MAE fraction seed 42,0.475000,f6
+FIG2B.mom.b025.seed43,Figure 4 (right),MOMENT blend-0.25 MAE fraction seed 43,0.450000,f6
+FIG2B.mom.b025.seed44,Figure 4 (right),MOMENT blend-0.25 MAE fraction seed 44,0.350000,f6
+FIG2B.mom.b025.seed45,Figure 4 (right),MOMENT blend-0.25 MAE fraction seed 45,0.325000,f6
+FIG2B.mom.b025.seed46,Figure 4 (right),MOMENT blend-0.25 MAE fraction seed 46,0.450000,f6
+FIG2B.mom.b05.seed42,Figure 4 (right),MOMENT blend-0.50 MAE fraction seed 42,0.325000,f6
+FIG2B.mom.b05.seed43,Figure 4 (right),MOMENT blend-0.50 MAE fraction seed 43,0.425000,f6
+FIG2B.mom.b05.seed44,Figure 4 (right),MOMENT blend-0.50 MAE fraction seed 44,0.350000,f6
+FIG2B.mom.b05.seed45,Figure 4 (right),MOMENT blend-0.50 MAE fraction seed 45,0.250000,f6
+FIG2B.mom.b05.seed46,Figure 4 (right),MOMENT blend-0.50 MAE fraction seed 46,0.475000,f6
+FIG2B.mom.b10.seed42,Figure 4 (right),MOMENT blend-1.00 MAE fraction seed 42,0.375000,f6
+FIG2B.mom.b10.seed43,Figure 4 (right),MOMENT blend-1.00 MAE fraction seed 43,0.400000,f6
+FIG2B.mom.b10.seed44,Figure 4 (right),MOMENT blend-1.00 MAE fraction seed 44,0.350000,f6
+FIG2B.mom.b10.seed45,Figure 4 (right),MOMENT blend-1.00 MAE fraction seed 45,0.350000,f6
+FIG2B.mom.b10.seed46,Figure 4 (right),MOMENT blend-1.00 MAE fraction seed 46,0.550000,f6
+APP.series.train,App A protocol,Train series per resplit,500,int
+APP.series.val,App A protocol,Validation series per resplit,421,int
+APP.series.test,App A protocol,Test series per resplit,422,int
+APP.win.train.min,App A protocol,MOMENT train windows min across resplits,1224,int
+APP.win.train.max,App A protocol,MOMENT train windows max across resplits,1296,int
+APP.win.val.min,App A protocol,MOMENT validation windows min,984,int
+APP.win.val.max,App A protocol,MOMENT validation windows max,1077,int
+APP.win.test.min,App A protocol,MOMENT test windows min,1044,int
+APP.win.test.max,App A protocol,MOMENT test windows max,1074,int
+APP.win.pool.min,App A protocol,Paired-patch test window pool min,1032,int
+APP.win.pool.max,App A protocol,Paired-patch test window pool max,1068,int
