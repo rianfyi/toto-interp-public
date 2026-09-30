@@ -20,8 +20,8 @@ def sha256_file(path: Path) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Enrich legacy MOMENT run metadata with split/eval provenance that is "
-            "derivable from the recorded seed, split hashes, and eval-only loader."
+            "Enrich MOMENT run metadata with split/eval provenance derived from "
+            "the recorded seed, split hashes, and eval-only loader."
         )
     )
     parser.add_argument("--seed-root", type=Path, required=True)

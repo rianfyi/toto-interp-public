@@ -22,7 +22,7 @@ DYNAMIC_LABELS = (
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Aggregate five-resplit paired-patch and MOMENT replications."
+        description="Aggregate the five-resplit Toto donor-exchange, MOMENT, and external-transfer runs."
     )
     parser.add_argument("--runs-root", type=Path, required=True)
     parser.add_argument(
@@ -703,14 +703,17 @@ def render_markdown(
 ) -> str:
     lines = [
         "# Five-Resplit Replications\n\n",
-        "All ± values are descriptive t-based half-widths across five seeded, "
-        "series-disjoint BOOM resplits (seeds 42-46). They describe BOOM resplit variability, "
-        "not confidence intervals, hypothesis tests, or independent-corpus inference.\n\n",
-        "## Same-target randomized-donor future-burstiness intervention\n\n",
+        "All ± values are Student-t 95% half-widths across five seeded, "
+        "series-disjoint BOOM resplits (seeds 42-46); they measure variability across "
+        "resplits of one corpus and are descriptive rather than significance tests.\n\n",
+        "## Toto donor exchange (future burstiness)\n\n",
         "Each resplit fits the fixed L11/all-context/series-mean probe on its training "
         "series and evaluates 40 paired high-burst/randomized-donor source patches "
         "on held-out test series. The randomized donor is from another series but "
-        "is not covariate- or taxonomy-matched. Pair observations are summarized "
+        "is not covariate- or taxonomy-matched. Probe wins give the probe check; "
+        "forecast wins (forecast burstier under the high-burst than under the "
+        "randomized donor) give the forecast endpoint; the median WAPE ratio "
+        "(high-burst/randomized) is the secondary endpoint. Pair observations are summarized "
         "within split before aggregation; the five data resplits are the "
         "replication units.\n\n",
         "| Blend | Forecast wins/losses/ties | Probe wins/losses/ties | Median forecast difference | "
@@ -813,11 +816,11 @@ def render_markdown(
         )
     lines.extend(
         [
-            "\n## MOMENT-base matched source-residual interchange\n\n",
+            "\n## MOMENT-base matched interchange\n\n",
             "The future-burstiness view is selected by BOOM validation R2 only. "
             "Each resplit uses 40 exact target/real/null triples on held-out test "
-            "series, with the same triples at all blends. The primary endpoint is "
-            "a same-site probe manipulation check, not a forecasting claim.\n\n",
+            "series, with the same triples at all blends. Probe wins give the probe "
+            "check; the lower future-MAE fraction is the forecast endpoint.\n\n",
             "| Blend | Probe wins/losses/ties | Median probe difference | "
             "Resplits with win fraction > .5 | Lower future-MAE fraction |\n",
             "|---:|---:|---:|---:|---:|\n",
@@ -848,9 +851,9 @@ def render_markdown(
             "\n## Five-resplit external transfer\n\n",
             "Each row macro-averages the fixed external datasets within a BOOM resplit, "
             "then summarizes the five BOOM-trained probe sets. No target dataset is selected "
-            "post hoc. Several external labels are nearly constant, making their R2 "
-            "magnitudes unstable; coordination is the nondegenerate headline, while the "
-            "remaining rows are retained for completeness rather than promoted as evidence.\n\n",
+            "post hoc. Several external labels are nearly constant, which makes their R2 "
+            "unstable; the paper reports coordination, and the remaining labels are "
+            "listed for completeness.\n\n",
             "| Benchmark | Label | Transfer R2 | Raw six-stat. R2 | Transfer-raw gap / wins |\n",
             "|---|---|---:|---:|---:|\n",
         ]

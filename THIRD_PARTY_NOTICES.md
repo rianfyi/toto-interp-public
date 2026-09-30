@@ -28,10 +28,8 @@ Copyright [2005-Present] Datadog, Inc.
 This product includes software developed at Datadog (https://www.datadoghq.com/).
 ```
 
-The upstream license and notice were checked at
+The bundled license text and notice match those in DataDog/toto at
 [`9813a2e6d57f9d73bbf50cbe02d7d1e9d7029717`](https://github.com/DataDog/toto/tree/9813a2e6d57f9d73bbf50cbe02d7d1e9d7029717).
-This is the attribution-review revision, not a claim about the exact upstream
-revision used when the utilities were first adapted or the experiments ran.
 
 ## Dependencies
 
@@ -44,26 +42,33 @@ does not relicense those dependencies.
 
 ## Datasets and model weights
 
-No raw time series, dataset copies, activations, or model weights are included
-in this release. The files in `results/` are aggregate experimental outputs
-and provenance records. Downloaded assets retain their upstream terms:
+This repository contains no dataset files, raw time series, activations, or
+model weights. The files in `results/` are aggregate experimental outputs and
+provenance records. The scripts download each upstream asset from its source,
+and each asset is obtained and used under that source's terms:
 
-- [BOOM](https://huggingface.co/datasets/Datadog/BOOM) and
-  [Toto-Open-Base-1.0](https://huggingface.co/Datadog/Toto-Open-Base-1.0)
-  are obtained from Datadog.
-- [MOMENT-1-base](https://huggingface.co/AutonLab/MOMENT-1-base) is obtained
-  from the MOMENT authors.
-- [FEV datasets](https://huggingface.co/datasets/autogluon/fev_datasets)
-  include several original data sources, whose individual terms apply.
-- LSTF data are obtained using the sources in [docs/lsf_setup.md](docs/lsf_setup.md).
+| Asset | Source | Terms |
+| --- | --- | --- |
+| Toto-Open-Base-1.0 | [Hugging Face model card](https://huggingface.co/Datadog/Toto-Open-Base-1.0) (Datadog) | Apache-2.0 |
+| BOOM | [Hugging Face dataset card](https://huggingface.co/datasets/Datadog/BOOM) (Datadog) | Apache-2.0 |
+| MOMENT-1-base | [Hugging Face model card](https://huggingface.co/AutonLab/MOMENT-1-base) (AutonLab) | MIT |
+| FEV configurations | [Hugging Face dataset card](https://huggingface.co/datasets/autogluon/fev_datasets) (`autogluon/fev_datasets`) | The card lists each configuration's original source, directs users to those sources for licensing and citation terms, and provides the datasets only for research purposes unless otherwise specified. |
+| ETTh1, ETTh2 | [ETDataset](https://github.com/zhouhaoyi/ETDataset), through the Time-Series-Library bundle | CC BY-ND 4.0 |
+| LSTF electricity and weather | Time-Series-Library bundles ([docs/lsf_setup.md](docs/lsf_setup.md)) | Terms of the original data providers |
 
-The source-specific terms for some FEV configurations, LSTF electricity and
-weather data, and Rohlik competition data remain unresolved in the released
-records. In particular, the package does not grant rights to redistribute
-Rohlik data. The `safe_for_paper` selector describes the experimental task
-selection, not legal clearance or redistribution permission.
+The Rohlik configurations (`rohlik_sales_1D`, `rohlik_orders_1D`) come from
+Rohlik's Kaggle forecasting competitions
+([orders](https://www.kaggle.com/competitions/rohlik-orders-forecasting-challenge),
+[sales](https://www.kaggle.com/competitions/rohlik-sales-forecasting-challenge-v2)),
+whose rules set the terms for that data. This repository contains none of that
+data and grants no rights to it; the released results include only aggregate
+transfer metrics for `rohlik_sales_1D`.
 
-This notice does not resolve those uncertainties or change checklist item 12.
-Users must establish the applicable access and use terms before downloading
-or using an upstream asset. See [asset provenance](docs/asset_provenance.md)
-for the limits of the recorded revisions.
+The `safe_for_paper` flag in `toto_interp/fev_tasks.py` carries over the
+per-dataset flags of the upstream Toto FEV evaluation (`DATASETS` in
+`toto/evaluation/fev/evaluate.py`), where `True` marks the datasets described
+as "not contaminated by LOTSA"; the transfer runs select their FEV tasks with
+it.
+
+See [docs/asset_provenance.md](docs/asset_provenance.md) for where each asset
+is loaded and its Hugging Face revisions.

@@ -1,10 +1,12 @@
 """
-Unit tests for the on-manifold paired-patch primitive.
+Unit tests for the paired-patch primitive behind the donor exchange.
 
 These exercise the hook mechanics on a tiny mock Toto and don't require
-network/GPU. They're intentionally narrow: they verify the patch is applied,
-that random patches differ from real patches, and that the no-op blend (0.0)
-leaves the forward pass unchanged.
+network/GPU. They're intentionally narrow: they verify residual capture, that
+a full blend (1.0) replaces the residual at the requested layer and leaves
+earlier layers unchanged, that the no-op blend (0.0) leaves the forward pass
+unchanged, and that a sample-expanded source residual applies to a
+single-batch target.
 """
 from __future__ import annotations
 
@@ -155,7 +157,7 @@ def test_paired_patch_with_zero_blend_is_noop():
 
 def test_paired_patch_aligns_mismatched_batch_dims():
     """
-    Regression: when capture_source runs inside a sample-expanded forecast,
+    When capture_source runs inside a sample-expanded forecast,
     the captured residual carries the samples_per_batch dim. The patch hook
     must still apply cleanly to a single-batch target forward (e.g. the one
     extract_activations does), without raising on shape mismatch.
@@ -181,8 +183,8 @@ def test_paired_patch_aligns_mismatched_batch_dims():
         blend=1.0,
     )
 
-    # Apply the patch around a single-batch target forward. With the alignment
-    # fix this should not raise; without it, this raised
+    # Apply the patch around a single-batch target forward. The hook aligns
+    # the batch dimension, so this must not raise
     # "expanded size of the tensor (1) must match the existing size (4) ..."
     with apply_paired_patch(backbone, cfg):
         _forward(backbone, window)

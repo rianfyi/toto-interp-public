@@ -1,10 +1,9 @@
 """
-MOMENT (CMU/AutonLab) backbone loader for cross-model probing replication.
+MOMENT (CMU/AutonLab) backbone loader for the cross-model probing replication.
 
 This is a thin adapter to run the structural-concept probing
 protocol on a *second* time-series foundation model. We use MOMENT-base (~125M
-params, T5-encoder) as the partial replication target — it fits comfortably on
-an M4 16GB Mac at fp32, and an order of magnitude faster at fp16 / bf16.
+params, T5-encoder) as the replication model.
 
 Install (via the official package):
 
@@ -13,15 +12,14 @@ Install (via the official package):
 The model is downloaded on first call from
 https://huggingface.co/AutonLab/MOMENT-1-base.
 
-Why MOMENT for the partial replication:
+Why MOMENT for the replication:
   - Different architecture family from TOTO (encoder-only T5 vs. decoder-only)
-  - Different patch tokenization (patch_size=8 vs. TOTO's 4)
+  - Different patch tokenization (patch_size=8 vs. TOTO's 64)
   - Different pretraining objective (masked patch reconstruction vs. TOTO's
     autoregressive forecasting)
-  - Therefore: if the same 4 structural concepts (metric_type, domain,
-    frequency_bucket, cardinality_bucket) recover comparably from MOMENT's
-    residual stream, the structural-encoding finding generalizes beyond a
-    single system.
+  - Therefore, probing MOMENT's residual stream for the same 4 structural
+    concepts (metric_type, domain, frequency_bucket, cardinality_bucket)
+    tests whether the TOTO readouts recur in a second model.
 """
 from __future__ import annotations
 
@@ -72,11 +70,12 @@ def load_moment_with_fallback(
     reconstruction task retains MOMENT's pretrained reconstruction head while
     still allowing callers to invoke ``pipeline.embed(...)`` explicitly. This
     is used by the matched-interchange runner to share one frozen encoder
-    between the head-agnostic probe endpoint and the official short-forecast
-    reconstruction analogue.
+    between the probe check and the future-MAE forecast endpoint computed with
+    MOMENT's official short-forecast head.
 
     `weight_source="random_init"` mirrors the TOTO loader's random-control:
-    it loads the architecture but reinitializes all weights from scratch.
+    it loads the architecture and calls ``reset_parameters()`` on every
+    submodule that defines it.
     Useful as a control arm for "is this just architecture or pretraining?".
     """
     MOMENTPipeline = _import_moment()
@@ -104,7 +103,7 @@ def load_moment_with_fallback(
     pipeline.init()
 
     if weight_source == "random_init":
-        logger.info("Randomizing all MOMENT weights (control arm)")
+        logger.info("Re-initializing MOMENT modules via reset_parameters (random-init control)")
         for m in pipeline.modules():
             if hasattr(m, "reset_parameters"):
                 m.reset_parameters()

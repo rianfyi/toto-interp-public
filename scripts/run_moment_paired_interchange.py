@@ -12,12 +12,16 @@ The protocol is intentionally paired and head-agnostic:
   count; no synthetic channel broadcasting is permitted.
 * The exact same pair triples are evaluated at blends 0.25, 0.5, and 1.0.
 
-The primary endpoint is the fitted future-burstiness probe score at the fixed
-MOMENT view (real minus null within target). When the installed official
-MOMENT API exposes its pretrained reconstruction head and ``short_forecast``,
-the runner also reports held-out next-patch error as a secondary behavioral
-analogue. If that API is unavailable under ``--secondary-endpoint auto``, the
-secondary endpoint is explicitly marked unavailable rather than synthesized.
+The probe check compares the fitted future-burstiness probe score at the fixed
+MOMENT view under the real and null donors (real minus null within target);
+the paired summary reports the fraction of targets where the real donor scores
+higher. When the installed official MOMENT API exposes its pretrained
+reconstruction head and ``short_forecast``, the runner also computes the
+forecast endpoint: held-out future (next-patch) MAE under each donor,
+summarized as the fraction of targets with lower future MAE under the real
+donor. If that API is unavailable under ``--secondary-endpoint auto``, the
+runner writes probe-only results and records the forecast endpoint as
+unavailable.
 """
 from __future__ import annotations
 
@@ -131,7 +135,8 @@ def parse_args() -> argparse.Namespace:
         "--secondary-endpoint",
         choices=("auto", "required", "off"),
         default="auto",
-        help="Use MOMENT's official short-forecast reconstruction head when available.",
+        help="Compute the future-MAE forecast endpoint with MOMENT's official "
+        "short-forecast reconstruction head when available.",
     )
     return parser.parse_args()
 

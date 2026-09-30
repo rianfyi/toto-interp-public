@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "toto-interp"
 version = "0.1.0"
-description = "Independent interpretability research tooling for Datadog Toto"
+description = "Code for the NeurIPS 2026 paper \"A Control-First Representation Audit of an Observability Forecasting Foundation Model\""
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"

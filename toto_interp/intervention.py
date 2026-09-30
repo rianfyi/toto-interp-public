@@ -171,12 +171,14 @@ def apply_intervention(
 @dataclass(frozen=True)
 class PairedPatchConfig:
     """
-    Replace the target forward pass's residual stream at a chosen
-    (layer, token_position) with residuals captured from a source forward pass.
+    Blend residuals captured from a source (donor) forward pass into the target
+    forward pass's residual stream at a chosen (layer, token_position).
 
-    Unlike :class:`InterventionConfig`, this is an *interchange intervention*:
-    activations are by construction on the model's training manifold because
-    they came from a real forward pass on a real input.
+    Unlike :class:`InterventionConfig`, which steers along or ablates a
+    direction vector, this is an *interchange intervention*: the source values
+    come from a real forward pass on a real donor input, and
+    :func:`apply_paired_patch` writes ``blend * source + (1 - blend) * target``.
+    ``scripts/run_toto_paired_patch.py`` uses it for the Toto donor exchange.
 
     `source_residuals[layer_idx]` must have shape
     ``(1, num_variates, source_seq_len, hidden_dim)`` — i.e. the raw output of
@@ -196,17 +198,11 @@ def capture_source_residuals(
     layer_indices: tuple[int, ...],
 ) -> dict[int, torch.Tensor]:
     """
-    Lightweight hook helper: returns a dict that the caller registers hooks
-    against. The expected pattern is::
+    Placeholder that directs callers to :func:`capture_source`, which yields a
+    dict of the captured residuals::
 
-        residuals: dict[int, torch.Tensor] = {}
         with capture_source(model, layer_indices) as residuals:
             <run forward pass on source window>
-
-    But because the surrounding intervention code already calls
-    ``backbone(...)`` directly through TotoForecaster, callers can also
-    register hooks themselves. This helper exists so the runner script stays
-    readable.
     """
     raise NotImplementedError(
         "Use the `capture_source` context manager below."
@@ -237,8 +233,8 @@ def capture_source(
             # Only keep the *first* call per layer (the context pass), not the
             # subsequent decode-step calls. The runner script controls this by
             # entering the context manager around the forecast call we care
-            # about; if multiple seq_len contexts pass through, we keep the
-            # first one with seq_len > 1 (the encoder pass over context).
+            # about; the first call per layer is the pass over the full
+            # context (seq_len > 1).
             if layer_idx in captured:
                 return
             if not isinstance(output, torch.Tensor):
@@ -247,8 +243,8 @@ def capture_source(
                 return
             # Normalize to single-sample batch. When `forecaster.forecast` is
             # called with sample expansion (samples_per_batch > 1), TOTO runs
-            # the encoder pass with batch = samples_per_batch and the residual
-            # stream carries that dim. Encoder passes over identical context
+            # the context pass with batch = samples_per_batch and the residual
+            # stream carries that dim. Context passes over identical inputs
             # are deterministic across replicas, so slicing [0:1] is exact and
             # gives us the documented (1, V, T, H) shape that
             # `PairedPatchConfig` expects.
@@ -273,22 +269,21 @@ def apply_paired_patch(
     patch_config: PairedPatchConfig,
 ) -> Iterator[None]:
     """
-    Interchange intervention: replace the residual stream at chosen
-    (layer, token_position) with previously captured source residuals.
+    Interchange intervention: blend previously captured source residuals into
+    the residual stream at chosen (layer, token_position) as
+    ``blend * source + (1 - blend) * target``.
 
-    This is the on-manifold counterpart to :func:`apply_intervention` — the
-    replacement values come from a real forward pass, not a synthetic
-    direction vector, so the patched activations stay on the training
-    manifold by construction.
+    Unlike :func:`apply_intervention`, the source values come from a real
+    forward pass on a donor input rather than from a direction vector.
 
     Shape handling:
       - target output:  ``(B, V_t, T_t, H)``
       - source residual: ``(1, V_s, T_s, H)``
       - For matching variate counts the patch is direct.
-      - For mismatched variates, the source is broadcast across the target
-        variate dim (mean over source variates, then expanded). This is a
-        deliberate simplification — for cross-series patching where variate
-        identity is meaningful, callers should pre-align the variate axis.
+      - For mismatched variates, the source is averaged over its variates and
+        the mean is broadcast across the target variate dim. Callers that need
+        per-variate correspondence should pass a source with the target's
+        variate count.
     """
     backbone = _resolve_backbone(model)
     transformer_layers = backbone.transformer.layers
@@ -362,8 +357,7 @@ def apply_paired_patch(
             # Batch alignment. Two cases worth supporting cleanly:
             #   - target is a single deterministic forward (batch=1) but source
             #     was captured under sample-expansion (batch=samples_per_batch);
-            #     reduce by mean (same input -> identical replicas, but mean
-            #     remains correct under any future stochastic encoder).
+            #     reduce by mean (same input -> identical replicas).
             #   - target is sample-expanded (batch=N) and source is single
             #     (batch=1); broadcast source across the sample dim.
             if src_slice.shape[0] != tgt_slice.shape[0]:

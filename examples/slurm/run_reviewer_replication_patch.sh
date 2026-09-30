@@ -10,7 +10,7 @@
 #   VENV            Python 3.12 environment (default: ${REPO}/.venv-gpu)
 #   SOFTWARE_STACK  environment module that provides Python
 # Other ${VAR:-default} values below are functional defaults.
-# Five seeded, series-disjoint BOOM resplits for the matched future-burstiness patch.
+# Five seeded, series-disjoint BOOM resplits for the Toto future-burstiness donor exchange.
 # The fixed probe view is fit separately within each resplit.
 #SBATCH --job-name=toto-patch5
 #SBATCH --gres=gpu:A10:1

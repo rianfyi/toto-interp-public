@@ -64,8 +64,7 @@ def parse_args() -> tuple[argparse.Namespace, argparse.ArgumentParser]:
     return parser.parse_args(), parser
 
 
-# Superset of the intervention-pipeline labels; includes current_* labels for
-# standalone transfer runs that don't need the intervention filter.
+# The six continuous dynamic labels eligible for zero-shot probe transfer.
 _ALLOWED_TRANSFER_LABELS = frozenset({
     "current_sparsity",
     "future_sparsity",

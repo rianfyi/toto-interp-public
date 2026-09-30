@@ -47,8 +47,15 @@ files, activations, model weights, or manuscript sources are included.
 - `reproduce/` — `verify_paper_numbers.py` + `expected_numbers.csv`;
   `verify_against.sh` runs the same checks on another results directory.
 - `tests/` — unit tests for `toto_interp/` and the pipeline scripts.
-- `docs/` — LSTF dataset setup notes.
+- `docs/` — LSTF dataset setup (`lsf_setup.md`) and recorded asset revisions
+  (`asset_provenance.md`).
 - `requirements.txt` — frozen pins with per-pin provenance; `pyproject.toml`.
+- `LICENSE` — MIT License for the authors' original code, documentation, and
+  aggregate results.
+- `THIRD_PARTY_NOTICES.md` — attribution for material adapted from Datadog Toto
+  and notes on upstream terms for dependencies, datasets, and model weights.
+- `licenses/` — Apache-2.0 license text and Datadog Toto NOTICE for the adapted
+  files (`toto_interp/fev_tasks.py`, `toto_interp/boom.py`).
 
 ## Environment setup
 
@@ -261,8 +268,8 @@ No raw dataset files are included in this package; `results/` contains aggregate
 experimental results and provenance records. Third-party
 dataset and model terms apply to anything downloaded at rerun time.
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution and
-unresolved source terms, and [docs/asset_provenance.md](docs/asset_provenance.md)
-for recorded rerun revisions and the limits of the historical provenance.
+upstream terms, and [docs/asset_provenance.md](docs/asset_provenance.md)
+for recorded asset revisions.
 
 ## Known limitations (factual)
 

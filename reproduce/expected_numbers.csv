@@ -141,18 +141,18 @@ T3GAPRI.met.wins,Sec 5.3 text,Metric-type MOMENT beats random-init resplits,5,in
 T3GAPRI.dom.mean,Sec 5.3 text,Domain MOMENT-minus-random mean,0.028,m3
 T3GAPRI.dom.hw,Sec 5.3 text,Domain MOMENT-minus-random half-width,0.015,h3
 T3GAPRI.dom.wins,Sec 5.3 text,Domain MOMENT beats random-init resplits,5,int
-T4.025.burst.mean,Table 6,Blend 0.25 forecast-burst wins mean,0.480,m3
-T4.025.burst.hw,Table 6,Blend 0.25 forecast-burst wins half-width,0.086,h3
+T4.025.burst.mean,Table 6,Blend 0.25 burstier-forecast fraction mean,0.480,m3
+T4.025.burst.hw,Table 6,Blend 0.25 burstier-forecast fraction half-width,0.086,h3
 T4.025.cnt,Table 6,Blend 0.25 resplits above 0.5,1,int
 T4.025.wape.mean,Table 6,Blend 0.25 median WAPE ratio mean,0.969,m3
 T4.025.wape.hw,Table 6,Blend 0.25 median WAPE ratio half-width,0.062,h3
-T4.05.burst.mean,Table 6,Blend 0.50 forecast-burst wins mean,0.430,m3
-T4.05.burst.hw,Table 6,Blend 0.50 forecast-burst wins half-width,0.046,h3
+T4.05.burst.mean,Table 6,Blend 0.50 burstier-forecast fraction mean,0.430,m3
+T4.05.burst.hw,Table 6,Blend 0.50 burstier-forecast fraction half-width,0.046,h3
 T4.05.cnt,Table 6,Blend 0.50 resplits above 0.5,0,int
 T4.05.wape.mean,Table 6,Blend 0.50 median WAPE ratio mean,0.952,m3
 T4.05.wape.hw,Table 6,Blend 0.50 median WAPE ratio half-width,0.108,h3
-T4.10.burst.mean,Table 6,Blend 1.00 forecast-burst wins mean,0.390,m3
-T4.10.burst.hw,Table 6,Blend 1.00 forecast-burst wins half-width,0.127,h3
+T4.10.burst.mean,Table 6,Blend 1.00 burstier-forecast fraction mean,0.390,m3
+T4.10.burst.hw,Table 6,Blend 1.00 burstier-forecast fraction half-width,0.127,h3
 T4.10.cnt,Table 6,Blend 1.00 resplits above 0.5,1,int
 T4.10.wape.mean,Table 6,Blend 1.00 median WAPE ratio mean,0.903,m3
 T4.10.wape.hw,Table 6,Blend 1.00 median WAPE ratio half-width,0.155,h3

@@ -282,14 +282,14 @@ def render_markdown_report(
     lines.append("")
     if report_focus == "operational":
         lines.append(
-            "This run is organized around the narrowest main-track claim: operational regimes are linearly encoded"
-            " in Toto and are better recovered from a pretrained frozen checkpoint than from stronger controls."
+            "This run evaluates whether operational regime labels are linearly recoverable from a frozen pretrained"
+            " Toto checkpoint, relative to raw-feature, random-initialization, and raw-window FNO controls."
         )
     else:
         lines.append(
-            "This run evaluates whether Toto contains linearly decodable observability-native concepts, whether those"
-            " concepts localize to specific layers and token positions, and whether selected regime directions causally"
-            " influence forecasts."
+            "This run evaluates whether observability-native concepts are linearly decodable from Toto's residual"
+            " stream, whether those readouts localize to specific layers and token positions, and whether steering or"
+            " ablating selected regime directions changes forecasts."
         )
     lines.append("")
     lines.append("## Acceptance Snapshot")
@@ -353,7 +353,7 @@ def render_markdown_report(
                 lines.append(f"- Future-facing dynamic concepts average at layer {mean_layer:.2f}.")
         lines.append("")
 
-    lines.append("## Causal Interventions")
+    lines.append("## Direction Interventions")
     lines.append("")
     if not intervention_summaries:
         lines.append("No intervention outputs were found.")
@@ -406,10 +406,9 @@ def render_markdown_report(
     lines.append("")
     if report_focus == "operational":
         lines.append(
-            "This run supports a tighter main-track claim: operational regime variables such as burstiness,"
-            " shift risk, and coordination are more linearly recoverable from a pretrained Toto checkpoint than"
-            " from randomized weights or a nonlinear raw-window FNO baseline. Transfer and geometry should remain"
-            " secondary unless they become materially stronger in larger runs."
+            "This run compares linear recovery of operational regime variables (burstiness, shift risk, and"
+            " coordination) from a pretrained Toto checkpoint with randomized weights and a nonlinear raw-window FNO"
+            " baseline; the Acceptance Snapshot counts the labels on which the pretrained probe exceeds both."
         )
     else:
         lines.append(

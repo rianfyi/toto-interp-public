@@ -95,9 +95,8 @@ def apply_moment_interchange(
     Blend a real donor residual into the matching MOMENT block output.
 
     Source and target hidden states must agree exactly in channel, patch, and
-    hidden dimensions. Refusing implicit shape coercion is important here:
-    channel averaging or broadcasting would turn an interchange intervention
-    into a synthetic activation construction.
+    hidden dimensions, so each blended value pairs the target's residual with
+    the donor residual at the same channel and patch position.
     """
 
     source = _hidden_state(config.source_residual)
@@ -170,9 +169,10 @@ def score_moment_probe(
     """
     Return mean, standard deviation, and record count of a continuous probe.
 
-    The mean is the predeclared scalar endpoint. Retaining the within-window
-    dispersion and record count makes the reduction auditable for both
-    ``series_mean`` and ``per_variate`` probe views.
+    The mean is the predeclared scalar probe score that the probe check
+    compares between the real-donor and matched-null interchanges. Retaining
+    the within-window dispersion and record count makes the reduction
+    auditable for both ``series_mean`` and ``per_variate`` probe views.
     """
 
     if probe.label_spec.task_type != "continuous":

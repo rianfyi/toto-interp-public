@@ -598,11 +598,11 @@ def main() -> None:
     lines = [
         "# Taxonomy-Control Stress Tests",
         "",
-        "Execution resources, Slurm jobs, excluded historical outputs, and storage accounting are documented in [EXECUTION.md](EXECUTION.md).",
+        "Execution resources for the reported runs are documented in `results/reviewer3_controls/EXECUTION.md`.",
         "",
-        "Five seeded resplits, with train/validation/test series disjoint within each run. Values are means with Student-t(4) 95% confidence-interval half-widths across resplits; these intervals describe between-run variability, not independent-corpus inference. Raw controls receive the same masked context window and coverage channel; all neural raw controls use validation-selected checkpoints. The GBDT control receives explicit last-patch, spectral, and autocorrelation summaries. Pairwise Cramér's V uses one label record per series. The predeclared Toto view rule selects frequency, metric type, and domain by validation accuracy and cardinality by validation macro-F1; every reported macro-F1 remains held-out test performance. Conditional probes use only terminal-context or first-decode views, first average repeated windows within series, then balance target classes by series within each split and hold the two remaining structural labels fixed.",
+        "Five seeded resplits, with train/validation/test series disjoint within each run. Values are means +/- Student-t(4) 95% half-widths across resplits; the half-widths measure variability across resplits of one corpus and are descriptive rather than significance tests. Raw controls receive the same masked context window and coverage channel; all neural raw controls use validation-selected checkpoints. The GBDT control receives explicit last-patch, spectral, and autocorrelation summaries. Pairwise Cramér's V uses one label record per series. The predeclared Toto view rule selects frequency, metric type, and domain by validation accuracy and cardinality by validation macro-F1; every reported macro-F1 remains held-out test performance. Conditional probes use only terminal-context or first-decode views, first average repeated windows within series, then balance target classes by series within each split and hold the two remaining structural labels fixed.",
         "",
-        "## Stronger raw-window controls",
+        "## Raw-window controls",
         "",
         "| Target | Representation / raw family | Test accuracy | Test macro-F1 | Parameters | Selected epoch |",
         "|---|---|---:|---:|---:|---:|",
@@ -737,7 +737,7 @@ def main() -> None:
     lines.extend(
         [
             "",
-            "## Held-out structural generalization",
+            "## Within-BOOM held-out-combination stress tests",
             "",
             "Each run removes a support-valid rotated tuple/domain from source "
             "train and validation, then evaluates only matching source-test series. "

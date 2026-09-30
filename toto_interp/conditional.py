@@ -23,8 +23,8 @@ class ConditionalProbeSpec:
 def default_conditional_probe_specs() -> tuple[ConditionalProbeSpec, ...]:
     """Predeclared, nonempty BOOM strata that condition on both other labels.
 
-    BOOM lacks every domain--metric combination (for example, there are no
-    Infrastructure/rate series), so a fully crossed factorial test is not
+    BOOM does not contain every domain--metric combination (for example, there
+    are no Infrastructure/rate series), so a fully crossed factorial test is not
     identifiable. These three strata retain all classes of the target while
     fixing the two remaining structural labels.
     """
@@ -141,9 +141,9 @@ def conditional_subset(
 def aggregate_series_records(batch: ActivationBatch) -> ActivationBatch:
     """Average repeated windows before a conditional series-level probe.
 
-    The original audit intentionally evaluates window-level readouts. The
-    conditional stress test instead uses series as its statistical unit so
-    that a few series with many windows cannot inflate its apparent support.
+    The main readouts are evaluated at the window level. The common-support
+    probes instead use series as their statistical unit so that a few series
+    with many windows cannot inflate their apparent support.
     """
 
     groups: dict[tuple[int, int, int, str, str, str, str], list[int]] = defaultdict(list)

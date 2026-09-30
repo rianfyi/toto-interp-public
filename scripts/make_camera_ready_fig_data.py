@@ -1,8 +1,13 @@
 """Data for the camera-ready TikZ Figures 1, 3 and 4.
 
-Reads only the audited five-resplit CSVs under runs/rebuttal/ and writes small
-tables to paper/neurips2026/figures/data/. Every mean and Student-t(4) 95%
-half-width is asserted against the values printed in the paper (Table 1).
+Figures 1 and 3 are computed from the audited five-resplit control CSVs
+(results/reviewer3_controls/ in the release, read through the staging path R3
+described in the README); every Figure 1 mean and Student-t(4) 95% half-width
+is asserted against Table 1 of the paper. Figure 4 is drawn from the
+interchange tables that plot_camera_ready_figures.py writes to
+paper/neurips2026/figures/data/. Outputs are small CSV tables in
+paper/neurips2026/figures/data/ and TikZ snippets in
+paper/neurips2026/figures/tikz/gen/.
 """
 import csv
 import math

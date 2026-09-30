@@ -10,7 +10,7 @@
 #   VENV            Python 3.12 environment (default: ${REPO}/.venv-gpu)
 #   SOFTWARE_STACK  environment module that provides Python
 # Other ${VAR:-default} values below are functional defaults.
-# Fit all dynamic TOTO probes on five corrected eval-mode BOOM resplits.
+# Fit all dynamic Toto probes on eval-mode activations from the five BOOM resplits.
 #SBATCH --job-name=toto-dyn5
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=120G

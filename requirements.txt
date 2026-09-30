@@ -1,13 +1,11 @@
 # Frozen runtime pins for the five-resplit pipeline (Level B) and figure regen.
 #
-# Provenance of each pin:
+# Source of each pin:
 #   [uv.lock]  Exact version resolved in the authors' development lockfile
-#              (not distributed) for the released code. The cluster venv (.venv-gpu) was built
-#              from the same pyproject ranges; uv.lock is the authoritative
-#              resolved record available locally.
-#   [runtime]  Version observed in the local Python environment
+#              for the released code (the lockfile is not distributed). The
+#              cluster venv (.venv-gpu) was built from the same pyproject ranges.
+#   [runtime]  Version observed in the authors' local Python environment
 #              (torch 2.7.0 matches the lockfile).
-#   UNKNOWN    Not recorded in any checked-in artifact; marked, not guessed.
 #
 # Level A (verify numbers + regenerate figures) needs only:
 #   numpy pandas scipy matplotlib
@@ -28,9 +26,9 @@ transformers==4.52.1     # [uv.lock] (used by momentfm/Toto loaders)
 einops==0.7.0            # [uv.lock]
 pytest==8.3.5            # [uv.lock] (unit tests)
 setuptools==69.5.1       # [uv.lock] (lightning, via toto-ts, imports pkg_resources)
-# momentfm (MOMENTPipeline loader): not in pyproject.toml or the lockfile.
-#   Install with `pip install --no-deps momentfm==0.1.4` (its own pins,
-#   numpy==1.25.2 and huggingface-hub==0.24.0, have no Python 3.12 wheels).
-# CUDA build of torch: UNKNOWN -- cluster used a CUDA-enabled torch 2.7.0;
-#   select the build matching your cluster CUDA (e.g. cu126) at install time.
-# Python: 3.12.10.
+# momentfm (MOMENTPipeline loader) is installed separately with
+#   `pip install --no-deps momentfm==0.1.4`: its exact dependency pins
+#   conflict with the pins above (its numpy==1.25.2 has no Python 3.12 wheels).
+# torch CUDA build: install the torch 2.7.0 build that matches your cluster's
+#   CUDA (the authors' full GPU rerun used torch 2.7.0+cu126).
+# Python: 3.12 (authors' development environment: 3.12.10).

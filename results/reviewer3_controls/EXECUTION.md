@@ -41,22 +41,21 @@ run in correlated CPU follow-ups; the taxonomy-control A10 stage requests
 32 GB for two hours and hands its CPU work to the 16-core parent above.
 
 GPU-dependent activation or intervention stages (MOMENT structural, Toto
-matched patch, MOMENT random activations, layer-permuted activations,
+donor exchange, MOMENT random activations, layer-permuted activations,
 transfer, and MOMENT interchange) used NVIDIA A10 nodes. The MOMENT random
-activation job was stopped only after all required activation files were
-verified readable; its completed files fed the eligible CPU tail.
+activation job was stopped after all required activation files were verified
+readable; those files fed the MOMENT random-init CPU probe tail.
 
 | A10 stage | Observed elapsed / peak RSS | Checked-in request |
 |---|---:|---:|
-| MOMENT pretrained activation + historical inline probe | 21:21--37:17 / 28.6--29.1 GB | activation only, 40 GB, 1 h |
-| Toto matched patch | 3:19--3:56 / 6.7--9.0 GB | 24 GB, 30 min |
-| MOMENT random activation + interrupted inline probe | 48:03--53:06 / 29.3--30.9 GB | activation only, 40 GB, 2 h |
+| MOMENT pretrained activation + inline probe fit | 21:21--37:17 / 28.6--29.1 GB | activation only, 40 GB, 1 h |
+| Toto donor exchange | 3:19--3:56 / 6.7--9.0 GB | 24 GB, 30 min |
+| MOMENT random activation + inline probe fit (completed in the CPU tail) | 48:03--53:06 / 29.3--30.9 GB | activation only, 40 GB, 2 h |
 | Layer-permuted activation | 6:40--7:27 / 42.2--49.2 GB | 64 GB, 1 h |
-| Fixed transfer | 0:37--0:58 / 1.4--1.8 GB | 8 GB, 30 min |
+| External transfer | 0:37--0:58 / 1.4--1.8 GB | 8 GB, 30 min |
 | MOMENT matched interchange | 0:59--1:36 / 1.7--3.0 GB | 8 GB, 30 min |
 
-Canceled, stale, duplicate, wrong-root, or superseded jobs are not read by the
-aggregators.
+The aggregators read only the outputs of the jobs described above.
 
 ## Audit and statistical scope
 

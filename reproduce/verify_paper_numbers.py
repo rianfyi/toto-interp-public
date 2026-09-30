@@ -1,4 +1,5 @@
-"""Recompute every reported paper number from the packaged results CSVs.
+"""Recompute the paper's reported results (tables, plotted figure values,
+in-text statistics) from the packaged results CSVs.
 
 Reads ONLY results/ (audited five-resplit artifacts) and checks each value
 against reproduce/expected_numbers.csv.
@@ -70,7 +71,7 @@ def put(key, value):
     C[key] = value
 
 
-# ------------------------------------------------------- reviewer3 inputs
+# ------------------------------------------------------- taxonomy-control inputs
 un = load(os.path.join(R3, "unconditional_selected_all_seeds.csv"))
 pre, rnd, rawbase, shufbase = {}, {}, {}, {}
 pre_acc = {}
@@ -185,7 +186,7 @@ for lab in LABELS:
             put("T10.%s.perm.mean" % s, C["T1B.%s.perm.mean" % s])
             put("T10.%s.perm.hw" % s, C["T1B.%s.perm.hw" % s])
 
-# Domain accuracy sentence (Sec. Results, paragraph 1)
+# Domain accuracy sentence (Sec. 5.1)
 acc_toto = [pre_acc[("domain", sd)] for sd in SEEDS]
 acc_gbdt = [fam_acc[("domain",
                      "gbdt_spectral_autocorrelation_last_patch")][i]
@@ -233,7 +234,7 @@ for lab in LABELS:
     put("T3GAPRI.%s.hw" % s, hw)
     put("T3GAPRI.%s.wins" % s, wins(gaps_ri))
 
-# ------------------------------------------------------- Table 4 Toto donor exchange
+# ------------------------------------------------------- Table 6 Toto donor exchange
 for b in BLENDS:
     s = BSHORT[b]
     bv = [float(pp[(sd, b)]["burst_win_fraction"]) for sd in SEEDS]
@@ -260,7 +261,7 @@ put("T4R2.raw.mean", m)
 put("T4R2.raw.hw", hw)
 put("T4R2.wins", wins([a - b for a, b in zip(r2p, r2r)]))
 
-# ------------------------------------------------------- Table 5 transfer
+# ------------------------------------------------------- Table 7 external transfer
 for bench in ("fev", "lsf"):
     vals = [float(r["transfer_r2_macro"]) for r in tr
             if r["label"] == "coordination" and r["benchmark"] == bench]
@@ -272,7 +273,7 @@ for bench in ("fev", "lsf"):
         int(next(r["dataset_count"] for r in tr
                  if r["label"] == "coordination" and r["benchmark"] == bench)))
 
-# ------------------------------------------------------- Table 6 params (0.1k)
+# ------------------------------------------------------- Table 4 raw-window params (0.1k)
 put("T6.cnn.k", param_mean[("frequency_bucket", "cnn")] / 1000.0)
 put("T6.fno.k", param_mean[("frequency_bucket", "fno")] / 1000.0)
 trx_methods = [k for k in param_mean if k[0] == "frequency_bucket"
@@ -280,7 +281,7 @@ trx_methods = [k for k in param_mean if k[0] == "frequency_bucket"
 assert len(trx_methods) == 1, trx_methods
 put("T6.trx.k", param_mean[trx_methods[0]] / 1000.0)
 
-# ------------------------------------------------------- Table 7 held-out support
+# ------------------------------------------------------- Table 5 held-out support
 HO_ROWS = {("frequency_bucket", '["domain", "metric_type"]'): "cad_comb",
            ("frequency_bucket", '["domain"]'): "cad_dom",
            ("metric_type", '["domain", "frequency_bucket"]'): "met_comb",
@@ -331,7 +332,7 @@ put("T9PROBE.mean", m)
 put("T9PROBE.hw", hw)
 put("T9PROBE.wins", sum(v > 0.5 for v in mpv))
 
-# ------------------------------------------------------- Cramer's V trio (Sec. 4.2)
+# ------------------------------------------------------- Cramer's V trio (Sec. 5.2)
 CV_PAIRS = {(("domain", "metric_type"), ("metric_type", "domain")): "dom_met",
             (("domain", "frequency_bucket"),
              ("frequency_bucket", "domain")): "dom_cad",
@@ -410,7 +411,7 @@ for s in ("cad", "met", "dom", "card", "futb"):
 for key, val in FIG1.items():
     put("FIG1.%s.%s" % key, val)
 
-# ------------------------------------------------------- Figure 2 values
+# ------------------------------------------------------- Figures 3 and 4 values
 for lab in LABELS:
     s = SHORT[lab]
     fam = STRONG[lab]

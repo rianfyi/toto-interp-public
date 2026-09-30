@@ -5,19 +5,19 @@ Mirrors `dump_toto_activations.py` but routes through MOMENT (T5-encoder) so
 the existing probe-fitting code (`fit_toto_probes.py`) can consume the result
 without modification. Output schema is identical: per-window per-layer
 activations with the same `labels` dict (taxonomy metadata + dynamic regime
-features), so cross-backbone comparison is apples-to-apples.
+features), so both backbones share the probe-fitting code and label definitions.
 
 Scope notes:
-  - MOMENT uses fixed patch_size=8 (TOTO uses 4); we adjust window construction
+  - MOMENT uses fixed patch_size=8 (Toto uses 64); we adjust window construction
     accordingly. The dynamic regime labels (future_burstiness, etc.) and
     structural taxonomy labels (metric_type, domain, ...) are computed from the
     raw context+next_patch and are model-agnostic.
   - MOMENT is channel-independent: each variate is processed as its own
     univariate sequence inside the encoder. Per-variate pooling captures this
     natively; series_mean averages across channels.
-  - Default seq_len=512, layers=[3, 6, 9, 11] — a 4-layer slice is enough to
-    test whether the structural-encoding pattern recurs without paying for the
-    full layer sweep.
+  - Default seq_len=512, layers=[3, 6, 9, 11] (the layers read in the
+    paper); a four-layer slice tests whether the taxonomy readouts recur
+    without a full layer sweep.
 """
 from __future__ import annotations
 

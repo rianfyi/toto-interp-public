@@ -1,22 +1,28 @@
-"""Camera-ready Figures A (evidence map) and B (resplit results) for NeurIPS 2026.
+"""Audited values behind the NeurIPS 2026 camera-ready figures.
 
 Reads ONLY the audited five-resplit artifacts listed in E2E_AUDIT.json (results/ in the
-release, staged under runs/rebuttal/ as described in the README):
-  runs/rebuttal/reviewer3_controls/unconditional_selected_all_seeds.csv
-  runs/rebuttal/reviewer3_controls/raw_control_all_seeds.csv
-  runs/rebuttal/reviewer3_controls/conditional_all_seeds.csv
-  runs/rebuttal/reviewer3_controls/layer_permuted_selected_all_seeds.csv
-  runs/rebuttal/reviewer_replications_5seed/paired_patch_per_resplit.csv
-  runs/rebuttal/reviewer_replications_5seed/moment_per_resplit.csv
-  runs/rebuttal/reviewer_replications_5seed/moment_random_structural_per_resplit.csv
-  runs/rebuttal/reviewer_replications_5seed/moment_dynamic_per_resplit.csv
-  runs/rebuttal/reviewer_replications_5seed/moment_interchange_per_resplit.csv
-  runs/rebuttal/reviewer_replications_5seed/transfer_per_resplit.csv
+release, read through the staging paths R3 and R5 described in the README):
+  reviewer3_controls/unconditional_selected_all_seeds.csv
+  reviewer3_controls/raw_control_all_seeds.csv
+  reviewer3_controls/conditional_all_seeds.csv
+  reviewer3_controls/layer_permuted_selected_all_seeds.csv
+  reviewer_replications_5seed/paired_patch_per_resplit.csv
+  reviewer_replications_5seed/moment_per_resplit.csv
+  reviewer_replications_5seed/moment_random_structural_per_resplit.csv
+  reviewer_replications_5seed/moment_dynamic_per_resplit.csv
+  reviewer_replications_5seed/moment_interchange_per_resplit.csv
+  reviewer_replications_5seed/transfer_per_resplit.csv
 
-Writes:
-  paper/neurips2026/figures/fig_evidence_map.pdf (+ .png at 200 dpi)
-  paper/neurips2026/figures/fig_resplit_results.pdf (+ .png at 200 dpi)
-  paper/neurips2026/figures/cr_figure_values.csv
+Writes (under paper/neurips2026/figures/):
+  cr_figure_values.csv: every computed value with its source file, columns
+    and filter
+  data/interchange_{toto,moment}_{dots,stats}.csv: probe check and forecast
+    endpoint per resplit (dots) and as means with half-widths (stats), drawn
+    in Figure 4 by make_camera_ready_fig_data.py
+  data/evidence_map.csv, data/resplit_slopes.csv, and TikZ snippets in tikz/
+  fig_evidence_map.pdf and fig_resplit_results.pdf (+ .png at 200 dpi):
+    matplotlib overview figures (Figures A and B in the code below) of the
+    same values
 
 Deterministic: no RNG anywhere (fixed positional offsets for dots).
 A win = a resplit with a strictly positive paired difference.
@@ -763,15 +769,17 @@ def main():
                   (name, ck, m, hw, sum(v > 0.5 for v in vals)))
 
 
-# ================================================================ TikZ export (job K1)
-# Writes data CSVs + generated TikZ snippets for the camera-ready TikZ
-# figures (paper/neurips2026/figures/{data,tikz}/). Every value is asserted
-# against cr_figure_values.csv (the audited values behind the matplotlib
-# figures); failure raises AssertionError.
+# ================================================================ TikZ export
+# Writes data CSVs + generated TikZ snippets (paper/neurips2026/figures/
+# {data,tikz}/); the interchange CSVs feed Figure 4 through
+# make_camera_ready_fig_data.py. verify_tikz_data() checks the evidence
+# cells, slope coordinates and interchange values against
+# cr_figure_values.csv or the values computed above; failure raises
+# AssertionError.
 TIKZDIR = os.path.join(FIGDIR, "tikz")
 DATADIR = os.path.join(FIGDIR, "data")
 
-# Row/column order shared with figures/tikz/evidence_map.tex.
+# Row/column order of the evidence-map cell grid.
 EV_ROWS = ROWS
 EV_COLS = COLS
 
@@ -836,8 +844,8 @@ def write_tikz_data():
             w.writerow([lab, PRETTY[lab], s, _fmt6(t), _fmt6(r), fam,
                         FAM_SHORT[fam], 1 if t > r else 0])
     # generated per-panel \addplot lines (each file is \input inside one
-    # axis env in figures/tikz/resplit_results.tex); coordinates at
-    # 4 decimals. Wins macros live in resplit_slope_wins.tex.
+    # pgfplots axis environment); coordinates at 4 decimals. Wins macros
+    # live in resplit_slope_wins.tex.
     winnames = {"frequency_bucket": "Cadence", "metric_type": "MetricType",
                 "domain": "Domain", "cardinality_bucket": "Cardinality"}
     with open(os.path.join(TIKZDIR, "resplit_slope_wins.tex"), "w") as f:
@@ -915,7 +923,7 @@ def verify_tikz_data():
             assert r["k"] == str(k), (lab, ckey)
     ev_wins = {(l, c): cell[(l, c)] for l in ROWS for c in COLS
                if cell[(l, c)] is not None}
-    assert len(ev_wins) == 28, len(ev_wins)  # 6+6+6+5+3+2 per F3 matrix
+    assert len(ev_wins) == 28, len(ev_wins)  # 6+6+6+5+3+2 tested cells per row
     # generated cells file round-trips the CSV.
     cells = {}
     with open(os.path.join(TIKZDIR, "evidence_map_cells.tex")) as f:

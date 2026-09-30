@@ -1,8 +1,9 @@
-# LSF Dataset Setup
+# LSTF Dataset Setup
 
-The LSF CSV datasets are not bundled in this repo and are not shipped inside
-`toto-ts`. They come from the public long-sequence forecasting benchmark setup
-used by Toto.
+The long-sequence time-series forecasting (LSTF) CSV datasets, called LSF in
+the code and command-line flags, are not bundled in this repo and are not
+shipped inside `toto-ts`. They come from the public long-sequence forecasting
+benchmark setup used by Toto.
 
 The original public source referenced by Toto is the
 [Time-Series-Library](https://github.com/thuml/Time-Series-Library), with the
@@ -36,7 +37,7 @@ data/
 
 ## Recommended Setup
 
-This repo now includes a helper that downloads the archives, extracts them, and
+This repo includes a helper that downloads the archives, extracts them, and
 normalizes them into the exact structure above:
 
 ```bash

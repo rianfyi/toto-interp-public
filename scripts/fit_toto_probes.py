@@ -41,7 +41,9 @@ warnings.filterwarnings("ignore", category=RuntimeWarning, module=r"sklearn\.lin
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Fit linear interpretability probes on Toto activation dumps.")
+    parser = argparse.ArgumentParser(
+        description="Fit linear probes on Toto or MOMENT activation dumps, or raw-window control models (--method)."
+    )
     parser.add_argument("--activation-files", type=Path, nargs="+", required=True)
     parser.add_argument("--window-files", type=Path, nargs="*", default=None)
     parser.add_argument("--output-dir", type=Path, required=True)

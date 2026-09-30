@@ -1,28 +1,35 @@
 """
-Matched source-residual interchange intervention for future_burstiness.
+Toto donor exchange for future_burstiness.
 
-Synthetic direction-vector ablations can push activations off the training
-manifold, making "behavioral necessity" hard to interpret. This script tests
-the causal claim with a same-target, randomized-donor residual protocol:
+The donor exchange tests forecast behavior by blending layer-K residuals from
+real donor series into a low-future-burstiness target's state, comparing a
+high-burst donor with a randomized donor on the same target:
 
-    1. Bin BOOM val windows by future_burstiness into HIGH (top quartile) and
-       LOW (bottom quartile) groups.
-    2. For each (low-target, high-source) pair, run three forecasts on the
-       low-target's context:
-         (a) clean        - no intervention
-         (b) real-patched - layer-K residuals replaced with high-source's
-                            layer-K residuals (interchange intervention)
-         (c) null-patched - layer-K residuals replaced with a *random* other
-                            window's layer-K residuals (control)
-    3. Compare WAPE, MASE, forecast-burstiness, and probe-score across the
-       three conditions.
+    1. Bin windows of --split (the reported runs use held-out test windows)
+       by future_burstiness into HIGH (top quartile) and LOW (bottom
+       quartile) groups.
+    2. For each of up to --num-pairs low targets sampled per seed, draw a
+       high-burst donor and a randomized donor from other series, and run
+       three forecasts on the target's context:
+         (a) clean        - no exchange
+         (b) real-patched - the target's layer-K residuals at the patched
+                            token position blended toward the high-burst
+                            donor's (--blend; 1.0 replaces them)
+         (c) null-patched - the same blend toward a randomized donor (any
+                            eligible window from another series)
+    3. Record WAPE, MASE, forecast burstiness, and the probe score for each
+       condition.
 
-The source residuals come from real forward passes rather than synthetic
-directions. The resulting target/source hybrid is not guaranteed to lie on the
-training manifold. The random-source control uses the same target but is not
-covariate- or taxonomy-matched to the high-burst source.
+Donor residuals come from real forward passes rather than synthetic
+directions. Both arms use the same target; the randomized donor is not
+covariate- or taxonomy-matched to the high-burst donor.
+summarize_reviewer_replications.py reports the probe check (fraction of
+targets whose probe score is higher under the high-burst donor than under the
+randomized donor), the forecast endpoint (fraction of targets whose forecast is
+burstier under the high-burst donor than under the randomized donor), and the
+median WAPE ratio (high-burst/randomized) as a secondary endpoint.
 
-Output schema (paired_patch_results.csv):
+Key columns of paired_patch_results.csv:
   pair_id, seed, target_window_id, source_window_id, condition,
   wape, mase, probe_score, forecast_burstiness, wape_ratio_vs_clean
 """
@@ -92,8 +99,8 @@ def parse_args() -> argparse.Namespace:
              "pair-sampling seed for backward compatibility.",
     )
     p.add_argument("--context-length", type=int, default=512,
-                   help="Smaller than the paper's 1024 to fit M4 16GB; results "
-                        "should be qualitatively unchanged at this scope.")
+                   help="Context length in observations. The default of 512 "
+                        "reduces memory use; the reported runs use 1024.")
     p.add_argument("--max-series", type=int, default=200)
     p.add_argument("--max-windows-per-series", type=int, default=4)
     p.add_argument("--num-pairs", type=int, default=40,

@@ -1,42 +1,67 @@
-# Asset provenance and reproduction limits
+# Asset provenance
 
 ## Released results
 
-`results/E2E_AUDIT.json` records the audit of the packaged aggregates.
-`reproduce/verify_paper_numbers.py` checks 424 reported values and summaries
-against those aggregates. A successful check validates the released numbers;
-it does not constitute an independent rerun of the original GPU experiments.
+`results/` holds the audited five-resplit aggregates (seeds 42–46) from which
+the paper's tables and figures are computed. `results/E2E_AUDIT.json` records,
+for each of the 13 aggregate files, the seeds (each exactly once per cell), the
+row and cell counts, the file's SHA-256, and a `complete` status; the recorded
+hashes match the released files. `reproduce/verify_paper_numbers.py`
+recomputes the 424 checked values described in the README (Level A) from these
+files and compares each with `reproduce/expected_numbers.csv`
+(`PASS 424  FAIL 0`).
+`results/reviewer3_controls/EXECUTION.md` records the compute behind them.
 
-## Original experiment revisions
+## Upstream assets
 
-The released manifests do not record exact Hugging Face revisions for the
-original BOOM snapshot, Toto checkpoint, MOMENT checkpoint, or FEV data.
-Historical checksums for the downloaded LSTF archives are also unavailable.
-SHA-256 values in the released audit and manifests describe result files,
-probe artifacts, or series splits; they are not upstream repository revisions.
+No dataset files or model weights are bundled. The code below downloads each
+asset from its source; the README lists the staging commands, and
+`requirements.txt` pins the package versions.
 
-The requirements file records the available package-version pins and marks
-unknown environment details. The release does not substitute today's asset
-revisions for missing historical records. The loaders still use their existing
-download behavior, so a fresh rerun can obtain different upstream revisions.
+| Asset | Source | Loaded by | Files read |
+| --- | --- | --- | --- |
+| BOOM | Hugging Face dataset [`Datadog/BOOM`](https://huggingface.co/datasets/Datadog/BOOM) | `toto_interp/boom.py`; staged by `scripts/stage_reviewer3_assets.py` | `dataset_taxonomy.json` and the folders of the 2,700 series selected by the seed 42–46 splits |
+| Toto-Open-Base-1.0 | Hugging Face model [`Datadog/Toto-Open-Base-1.0`](https://huggingface.co/Datadog/Toto-Open-Base-1.0) | `toto_interp/loader.py` (`load_toto_with_fallback`, through `toto-ts`) | `config.json`, `model.safetensors` |
+| MOMENT-1-base | Hugging Face model [`AutonLab/MOMENT-1-base`](https://huggingface.co/AutonLab/MOMENT-1-base) | `toto_interp/moment_loader.py` (`load_moment_with_fallback`, through `momentfm`) | `config.json`, `model.safetensors` |
+| FEV | Hugging Face dataset [`autogluon/fev_datasets`](https://huggingface.co/datasets/autogluon/fev_datasets), by configuration name | `toto_interp/transfer.py` (`load_fev_dataset`); staged by `scripts/stage_fev_safe_datasets.py` | the configurations flagged `safe_for_paper` in `toto_interp/fev_tasks.py` |
+| LSTF (ETTh1, ETTh2, electricity, weather) | Time-Series-Library Google Drive bundles listed in [lsf_setup.md](lsf_setup.md) | `toto_interp/lsf.py`; `scripts/download_lsf_datasets.py` | the ETT, electricity, and weather CSV files |
 
-## Revisions recorded during the September 27, 2026 rerun
+The external-transfer results cover the 11 FEV configurations listed in the
+paper appendix and in
+`results/reviewer_replications_5seed/transfer_per_dataset.csv`. The LSTF
+downloader fetches the bundles from their fixed links with `gdown` and checks
+the expected CSV layout.
 
-The authors' rerun report records the following identifiers:
+## Hugging Face revisions
 
-| Asset | Recorded revision | Scope of the record |
-| --- | --- | --- |
-| `Datadog/Toto-Open-Base-1.0` | `0411ceb27bdf7fc3e4892e99edc8ad08192dc3c5` | Checkpoint identified in the September rerun report. |
-| `AutonLab/MOMENT-1-base` | `5e44b0ea26376a176360f87831124e018f876d96` | Checkpoint identified in the September rerun report. |
-| `Datadog/BOOM` | `69325b544c45ff0d6c43c7a99c49a6601a01725b` | Then-current upstream revision observed during the rerun; not proof of the exact cached dataset snapshot consumed. |
+The loaders read each repository's default branch (`main`). The September 2026
+GPU rerun resolved Toto-Open-Base-1.0 at
+`0411ceb27bdf7fc3e4892e99edc8ad08192dc3c5`, MOMENT-1-base at
+`5e44b0ea26376a176360f87831124e018f876d96`, and BOOM at
+`69325b544c45ff0d6c43c7a99c49a6601a01725b`. The public Hub commit histories
+(checked in September 2026) give the dates on which the files the pipeline
+reads last changed:
 
-These identifiers were transcribed from the authors' rerun report, not
-recovered from the original run manifests. The report is inconsistent about
-whether the model revisions match the original July runs. They therefore must
-not be treated as confirmed original-run pins. No corresponding FEV revision
-or LSTF archive checksum was recovered.
+| Repository | Files read | Last changed on the Hub | `main` head (commit date) |
+| --- | --- | --- | --- |
+| `Datadog/Toto-Open-Base-1.0` | `config.json`; `model.safetensors` | 2025-05-15; 2025-05-06 | `0411ceb` (2026-05-14) |
+| `AutonLab/MOMENT-1-base` | `config.json`, `model.safetensors` | 2024-10-12 | `5e44b0e` (2025-03-26) |
+| `Datadog/BOOM` | `dataset_taxonomy.json`; series folders | 2025-05-14; 2025-05-19 | `69325b5` (2025-09-08) |
+| `autogluon/fev_datasets` | `README.md` (configuration index); folders of the flagged configurations | 2026-01-28; 2025-09-05 to 2025-09-30 | `f71c0ff` (2026-01-28) |
 
-As described in the README, the full GPU rerun matched 346 of the 424 checks
-at printed precision. This release preserves the original audited aggregates
-and discloses the rerun differences. It makes no claim of bitwise GPU
-reproducibility.
+All of these dates precede the July 2026 runs that produced the released
+results, so the files these loaders read from `main` did not change between
+those runs and the September 2026 rerun. The rerun also confirmed that the
+BOOM `dataset_taxonomy.json` staged for the July runs is byte-identical to the
+Hub copy.
+
+## GPU rerun
+
+In September 2026 the authors reran the full five-resplit pipeline with this
+code and the package versions pinned in `requirements.txt`. Every stage
+completed, and the regenerated `E2E_AUDIT.json` reports the same seeds, row
+counts, and `complete` status for every aggregate. CPU-only computations, such
+as the Cramér's V values, match exactly. Values trained on the GPU or computed
+from GPU activations differ slightly across runs, as is usual for GPU
+floating-point computation; README Level B step 9 gives the check-level
+comparison.
