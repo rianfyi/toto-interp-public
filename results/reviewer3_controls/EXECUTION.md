@@ -1,7 +1,8 @@
 # Taxonomy-control suite: execution and compute record
 
-The five-resplit inputs were produced under the launchers' default run root
-(`runs/reviewer3_evalmode_20260728`, on cluster scratch). Only seeds 42--46
+The five-resplit inputs were produced on cluster scratch under the launchers'
+default run roots (`runs/reviewer3_evalmode_20260728` for the taxonomy-control
+suite; README Level B lists the others). Only seeds 42--46
 from the successful jobs described below enter the compact results in this
 directory and `results/E2E_AUDIT.json`. Activation tensors and estimator
 artifacts are not distributed.
@@ -9,11 +10,11 @@ artifacts are not distributed.
 ## Protocol
 
 - Each seed defines a series-disjoint train/validation/test resplit.
-- Activation metadata and SHA256 hashes must match across pretrained,
-  random-init, layer-permuted, and raw-control inputs.
-- Representation views are selected on validation data and evaluated on test
-  once.
-- Repeated windows are averaged within series for conditional probes.
+- Activation metadata and SHA-256 hashes must match across pretrained,
+  random-init, block-permuted (layer-permuted), and raw-control inputs.
+- Representation views are selected on validation data and evaluated once on
+  test data.
+- Repeated windows are averaged within series for common-support (conditional) probes.
 - Held-out rotations remove a domain or taxonomy combination from both
   training and validation.
 
@@ -30,19 +31,19 @@ The parent estimator grid saturated roughly 15--16 cores, while the tail
 saturated approximately two. The checked-in parent releases its 16-core
 allocation after the unconditional controls. One tail task per seed then loads
 each pretrained/random activation source once and evaluates all four held-out
-cells plus conditional probes in-process. This replaces 15 separately queued
+cells plus conditional probes in-process. The consolidated tail replaces 15 separately queued
 tasks with five and avoids repeated activation loads. Slurm `aftercorr`
 dependencies pair each tail seed with its own successful parent seed, so one
 failed seed cannot create an impossible all-array dependency.
 
 The checked-in A10 launchers also stop after GPU-dependent activation or
 interchange work. MOMENT taxonomy/dynamic fitting and provenance enrichment
-run in correlated CPU follow-ups; the taxonomy-control A10 stage requests
+run in seed-correlated CPU follow-ups; the taxonomy-control A10 stage requests
 32 GB for two hours and hands its CPU work to the 16-core parent above.
 
-GPU-dependent activation or intervention stages (MOMENT structural, Toto
+GPU-dependent activation or intervention stages (MOMENT pretrained activations, Toto
 donor exchange, MOMENT random activations, layer-permuted activations,
-transfer, and MOMENT interchange) used NVIDIA A10 nodes. The MOMENT random
+external transfer, and MOMENT matched interchange) used NVIDIA A10 nodes. The MOMENT random
 activation job was stopped after all required activation files were verified
 readable; those files fed the MOMENT random-init CPU probe tail.
 
@@ -63,11 +64,11 @@ The taxonomy-control summarizer enforces exact activation provenance, matching
 split hashes, and zero train/validation/test series overlap before producing
 these aggregates. `results/E2E_AUDIT.json` then requires exactly seeds 42--46
 once per expected aggregate cell, finite headline metrics, exact row counts,
-and aggregate file hashes. It records 80 marginal rows, 40 unconditional rows,
+and aggregate file hashes. It records 80 raw-control rows, 40 unconditional rows,
 20 layer-permuted rows, 30 conditional rows, 60 confound rows, and 40 held-out
 rows.
 
-Intervals are Student-\(t_4\) 95% interval half-widths across the five
+Intervals are Student-t(4) 95% half-widths across the five
 resplits. They summarize between-resplit variability within BOOM. Paired win
 counts are directional-consistency summaries, not significance claims.
 Held-out brackets are coverage ranges because each rotation selects a

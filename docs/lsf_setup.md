@@ -1,4 +1,4 @@
-# LSTF Dataset Setup
+# LSTF dataset setup
 
 The long-sequence time-series forecasting (LSTF) CSV datasets, called LSF in
 the code and command-line flags, are not bundled in this repo and are not
@@ -9,7 +9,7 @@ The original public source referenced by Toto is the
 [Time-Series-Library](https://github.com/thuml/Time-Series-Library), with the
 preprocessed CSV bundles hosted on Google Drive.
 
-## Download Sources
+## Download sources
 
 | Dataset bundle | Public link |
 | --- | --- |
@@ -17,7 +17,7 @@ preprocessed CSV bundles hosted on Google Drive.
 | Electricity | [Google Drive](https://drive.google.com/file/d/1FHH0S3d6IK_UOpg6taBRavx4MragRLo1/view?usp=drive_link) |
 | Weather | [Google Drive](https://drive.google.com/file/d/1nXdMIJ7K201Bx3IBGNiaNFQ6FzeDEzIr/view?usp=drive_link) |
 
-## Expected Directory Layout
+## Expected directory layout
 
 After download and extraction, Toto expects this layout:
 
@@ -35,7 +35,7 @@ data/
         └── weather.csv
 ```
 
-## Recommended Setup
+## Recommended setup
 
 This repo includes a helper that downloads the archives, extracts them, and
 normalizes them into the exact structure above:
@@ -56,15 +56,15 @@ To download only a subset:
 python scripts/download_lsf_datasets.py --output-dir data/lsf_datasets --datasets ett weather
 ```
 
-## Using LSF In Transfer Runs
+## Using LSTF in transfer runs
 
-Once the files are present, either of these will work:
+With the files in place, run:
 
 ```bash
 python scripts/run_toto_transfer.py --probe-dir runs/probes --output-dir runs/transfer --dataset lsf --lsf-path data/lsf_datasets --lsf-datasets ETTh1 electricity
 ```
 
-or, letting the repo fetch missing files automatically:
+To fetch missing files automatically, add `--download-lsf`:
 
 ```bash
 python scripts/run_toto_transfer.py --probe-dir runs/probes --output-dir runs/transfer --dataset lsf --lsf-path data/lsf_datasets --lsf-datasets ETTh1 electricity --download-lsf

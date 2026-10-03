@@ -10,7 +10,7 @@ hashes match the released files. `reproduce/verify_paper_numbers.py`
 recomputes the 424 checked values described in the README (Level A) from these
 files and compares each with `reproduce/expected_numbers.csv`
 (`PASS 424  FAIL 0`).
-`results/reviewer3_controls/EXECUTION.md` records the compute behind them.
+`results/reviewer3_controls/EXECUTION.md` records the compute behind these aggregates.
 
 ## Upstream assets
 
@@ -39,8 +39,8 @@ GPU rerun resolved Toto-Open-Base-1.0 at
 `0411ceb27bdf7fc3e4892e99edc8ad08192dc3c5`, MOMENT-1-base at
 `5e44b0ea26376a176360f87831124e018f876d96`, and BOOM at
 `69325b544c45ff0d6c43c7a99c49a6601a01725b`. The public Hub commit histories
-(checked in September 2026) give the dates on which the files the pipeline
-reads last changed:
+(checked in September 2026) give the last-change dates of the files the
+pipeline reads:
 
 | Repository | Files read | Last changed on the Hub | `main` head (commit date) |
 | --- | --- | --- | --- |
@@ -61,7 +61,7 @@ In September 2026 the authors reran the full five-resplit pipeline with this
 code and the package versions pinned in `requirements.txt`. Every stage
 completed, and the regenerated `E2E_AUDIT.json` reports the same seeds, row
 counts, and `complete` status for every aggregate. CPU-only computations, such
-as the Cramér's V values, match exactly. Values trained on the GPU or computed
-from GPU activations differ slightly across runs, as is usual for GPU
+as the Cramér's V values, match exactly. Values from GPU-trained models or
+GPU activations differ slightly across runs, as is usual for GPU
 floating-point computation; README Level B step 9 gives the check-level
 comparison.

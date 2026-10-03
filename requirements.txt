@@ -18,10 +18,10 @@ scipy==1.15.3            # [uv.lock]
 torch==2.7.0             # [uv.lock] (+[runtime] local: 2.7.0)
 matplotlib==3.9.2        # [uv.lock]
 toto-ts==0.2.0           # [uv.lock] (Toto checkpoint loader)
-datasets==2.17.1         # [uv.lock] (BOOM/FEV via HuggingFace datasets)
+datasets==2.17.1         # [uv.lock] (BOOM/FEV via Hugging Face datasets)
 gluonts==0.16.2          # [uv.lock, as gluonts[torch]]
 huggingface-hub==0.36.2  # [uv.lock]
-gdown==6.0.0             # [uv.lock] (LSF archives via Google Drive links)
+gdown==6.0.0             # [uv.lock] (LSTF archives via Google Drive links)
 transformers==4.52.1     # [uv.lock] (used by momentfm/Toto loaders)
 einops==0.7.0            # [uv.lock]
 pytest==8.3.5            # [uv.lock] (unit tests)
