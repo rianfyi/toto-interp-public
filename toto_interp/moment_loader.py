@@ -1,9 +1,9 @@
 """
-MOMENT (CMU/AutonLab) backbone loader for the cross-model probing replication.
+MOMENT (CMU/AutonLab) backbone loader for the cross-model probing comparison.
 
 This is a thin adapter to run the structural-concept probing
 protocol on a *second* time-series foundation model. We use MOMENT-base (~125M
-params, T5-encoder) as the replication model.
+params, T5-encoder) as the comparison model.
 
 Install (via the official package):
 
@@ -12,7 +12,7 @@ Install (via the official package):
 The model is downloaded on first call from
 https://huggingface.co/AutonLab/MOMENT-1-base.
 
-Why MOMENT for the replication:
+Why MOMENT for the comparison:
   - Different architecture family from TOTO (encoder-only T5 vs. decoder-only)
   - Different patch tokenization (patch_size=8 vs. TOTO's 64)
   - Different pretraining objective (masked patch reconstruction vs. TOTO's
@@ -76,7 +76,8 @@ def load_moment_with_fallback(
     `weight_source="random_init"` mirrors the TOTO loader's random-control:
     it loads the architecture and calls ``reset_parameters()`` on every
     submodule that defines it.
-    Useful as a control arm for "is this just architecture or pretraining?".
+    Useful as a control arm separating trained weights from architecture
+    alone.
     """
     MOMENTPipeline = _import_moment()
 

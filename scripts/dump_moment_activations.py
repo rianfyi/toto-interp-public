@@ -9,9 +9,9 @@ features), so both backbones share the probe-fitting code and label definitions.
 
 Scope notes:
   - MOMENT uses fixed patch_size=8 (Toto uses 64); we adjust window construction
-    accordingly. The dynamic regime labels (future_burstiness, etc.) and
-    structural taxonomy labels (metric_type, domain, ...) are computed from the
-    raw context+next_patch and are model-agnostic.
+    accordingly. The dynamic regime labels (future_burstiness, etc.) are
+    computed from the raw context+next_patch and the structural taxonomy labels
+    (metric_type, domain, ...) come from BOOM metadata; both are model-agnostic.
   - MOMENT is channel-independent: each variate is processed as its own
     univariate sequence inside the encoder. Per-variate pooling captures this
     natively; series_mean averages across channels.
