@@ -189,6 +189,6 @@ def test_write_report_operational_focus_uses_pretrained_slice(tmp_path: Path):
     )
 
     report_text = report_path.read_text()
-    assert "Main-Track Operational Results" in report_text
+    assert "## Operational Results" in report_text
     assert "linear_probe/pretrained=0.310" in report_text
     assert summary["acceptance"]["operational_control_wins"] == 1

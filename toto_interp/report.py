@@ -307,7 +307,7 @@ def render_markdown_report(
     lines.append("")
 
     if report_focus == "operational":
-        lines.append("## Main-Track Operational Results")
+        lines.append("## Operational Results")
     else:
         lines.append("## Best BOOM Probe Views")
     lines.append("")

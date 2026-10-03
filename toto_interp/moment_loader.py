@@ -7,7 +7,7 @@ params, T5-encoder) as the comparison model.
 
 Install (via the official package):
 
-    pip install momentfm
+    pip install --no-deps momentfm==0.1.4
 
 The model is downloaded on first call from
 https://huggingface.co/AutonLab/MOMENT-1-base.
@@ -44,7 +44,7 @@ def _import_moment():
     except ImportError as exc:
         raise ImportError(
             "MOMENT is not installed. Install with:\n\n"
-            "    pip install momentfm\n\n"
+            "    pip install --no-deps momentfm==0.1.4\n\n"
             "(The MOMENT-base checkpoint, ~125M params, will download on first use.)"
         ) from exc
     from momentfm import MOMENTPipeline

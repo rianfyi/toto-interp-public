@@ -1,8 +1,22 @@
 # toto-interp — code for "A Control-First Representation Audit of an Observability Forecasting Foundation Model" (NeurIPS 2026)
 
-Camera-ready code release: [`neurips-2026-v1`](https://github.com/DhyeyMavani2003/toto-interp/releases/tag/neurips-2026-v1).
-Use this tag when reproducing or citing the released package. The release
-includes a source ZIP and its SHA-256 checksum.
+Camera-ready code release: tag
+[`neurips-2026-v1`](https://github.com/DhyeyMavani2003/toto-interp/tree/neurips-2026-v1),
+the version linked from the paper. Use this tag when reproducing or citing
+the code.
+
+Authors: Dhyey Dharmendrakumar Mavani, Rian Atri, Tairan Ji.
+
+## Citation
+
+```bibtex
+@inproceedings{mavani2026controlfirst,
+  title     = {A Control-First Representation Audit of an Observability Forecasting Foundation Model},
+  author    = {Mavani, Dhyey Dharmendrakumar and Atri, Rian and Ji, Tairan},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026}
+}
+```
 
 ## License and third-party material
 
@@ -15,12 +29,12 @@ No new dataset or model weights are released.
 
 ## Reproduction scope
 
-This repository reproduces the reported five-resplit results at two levels:
+This repository supports two levels of reproduction for the reported five-resplit results:
 
 - **Level A (CPU, minutes):** recompute the reported results (424 checks
   over Tables 1–10, the values plotted in Figures 1, 3 and 4, the
-  in-text means, half-widths and win counts, and a 48-cell supplementary
-  win-count summary) from the
+  in-text means, half-widths and win counts, the appendix series/window
+  counts, and a 48-cell supplementary win-count summary) from the
   compact, audited result CSVs in `results/`, and regenerate the figure data.
 - **Level B (GPU cluster):** rerun the five-resplit pipeline from scratch
   (seeds 42–46) with the exact scripts, seeds, and settings used.
@@ -72,14 +86,13 @@ the CUDA build matching your cluster, then:
     python3.12 -m venv .venv-gpu && source .venv-gpu/bin/activate
     pip install -r requirements.txt
     pip install -e .
-    pip install --no-deps momentfm==0.1.4   # its own pins have no Python 3.12 wheels
+    pip install --no-deps momentfm==0.1.4   # its exact dependency pins conflict with requirements.txt
 
 Stage data and checkpoints on a networked login node before submitting
 GPU jobs (see `examples/slurm/setup_reviewer3_cluster.sh`). The launchers
-run offline and read the Hugging Face cache under the repository root.
-Log in to the Hub first (`huggingface-cli login` or `HF_TOKEN`); the BOOM
-snapshot has about 2,700 per-series folders and unauthenticated downloads
-hit rate limits.
+read the Hugging Face cache under the repository root. Log in to the Hub
+first (`huggingface-cli login` or `HF_TOKEN`): staging fetches about 2,700
+per-series BOOM folders, and unauthenticated downloads hit rate limits.
 
     export HF_HOME="$PWD/.cache/huggingface"
     python scripts/stage_reviewer3_assets.py --snapshot-path data/boom_snapshot --seeds 42 43 44 45 46 --max-series-per-split 500
@@ -108,9 +121,10 @@ expect the layout `runs/rebuttal/...` and write under
     ln -s ../../results/reviewer_replications_5seed runs/rebuttal/reviewer_replications_5seed
     python scripts/plot_camera_ready_figures.py
     python scripts/make_camera_ready_fig_data.py
-    # writes paper/neurips2026/figures/data/*.csv (plotted values) and
-    # paper/neurips2026/figures/tikz/gen/*.tex; the second script asserts
-    # every Table 1 mean and half-width before writing.
+    # writes under paper/neurips2026/figures/: data/*.csv (plotted values),
+    # TikZ coordinates in tikz/ and tikz/gen/ (Figures 1, 3 and 4 read
+    # tikz/gen/), cr_figure_values.csv, and matplotlib renderings. Both
+    # scripts assert the paper's printed values before writing.
 
 Byte-compile check: `python -m compileall -q toto_interp scripts reproduce`.
 Unit tests (Level B environment): `python -m pytest -q tests`.
@@ -161,7 +175,9 @@ authoritative; the commands below list their main settings.
    --pooling-modes series_mean` (pretrained and random-init), then
    taxonomy + dynamic probe fits. `enrich_moment_run_provenance.py` runs in
    `run_moment_random_probe_followup.sh` (random-init) and in the step-7
-   interchange launcher (pretrained).
+   interchange launcher (pretrained);
+   `examples/slurm/enrich_moment_random_provenance.sh` reruns only the
+   random-init enrichment.
    Default root: `runs/reviewer_replications_20260728`.
 6. **Toto donor exchange** (`run_reviewer_replication_patch.sh`, GPU):
    fit layer-11/all-context/series-mean future-burstiness probe, then
@@ -170,7 +186,7 @@ authoritative; the commands below list their main settings.
    --max-windows-eval 2000 --num-pairs 40 --num-samples 16
    --blend {0.25,0.5,1.0}`.
    Default root: `runs/reviewer_replications_evalmode_20260728`.
-7. **MOMENT interchange** (`run_reviewer_replication_moment_interchange.sh`,
+7. **MOMENT matched interchange** (`run_reviewer_replication_moment_interchange.sh`,
    GPU): `run_moment_paired_interchange.py --split-seed SEED
    --sampling-seed SEED --num-pairs 40 --blends 0.25 0.5 1.0
    --high-quantile 0.75 --low-quantile 0.25 --null-match-k 5
@@ -200,12 +216,14 @@ authoritative; the commands below list their main settings.
        bash reproduce/verify_against.sh runs/summary
 
    Expect status complete for all cells (compare `results/E2E_AUDIT.json`).
-   Outputs go to `runs/summary/`, not the Level A staging links. Expect small
-   differences from the packaged results: in the authors' full rerun of this
-   code, 346 of 424 checks matched at printed precision. GPU nondeterminism
-   moved the others by a median of about 0.002 (at most about 0.024), flipped
-   one near-tie win count (domain vs. strongest raw-window model, 2 to 3 of 5),
-   and swapped the near-tied strongest cardinality raw-window family (FNO/CNN).
+   Outputs go to `runs/summary/`, not the Level A staging links. GPU-trained
+   values differ slightly between runs: in the authors' full rerun of this
+   code, CPU-only quantities such as Cramér's V matched exactly and 346 of the
+   424 verifier checks passed; the other values moved by a median of about
+   0.002 (at most about 0.024), and three near-tie selections changed (the
+   domain win count against the strongest raw-window model, 2 to 3 of 5; the
+   strongest cardinality raw-window family, FNO/CNN; and one random-init
+   common-support view, seed 46).
 10. **Figures**: the Level A figure-data commands regenerate the figures
     from the packaged results. Both figure scripts assert the paper's printed
     values, so they stop on rerun outputs that differ.
@@ -218,12 +236,12 @@ authoritative; the commands below list their main settings.
 | Table 2 (common-support probes) | `run_conditional_probes.py` | `reviewer3_controls/conditional_all_seeds.csv` |
 | Table 3 (MOMENT-base taxonomy) | `dump_moment_activations.py`, `fit_toto_probes.py` | `reviewer_replications_5seed/moment_per_resplit.csv`, `moment_random_structural_per_resplit.csv` |
 | Table 4 (raw-window control models) | `fit_toto_probes.py` (+ `toto_interp/fno.py`, `gbdt.py`) | `reviewer3_controls/reviewer3_summary.json` (parameter counts) |
-| Table 5 (rotated within-BOOM support tests) | `run_structural_holdout_probes.py` | `reviewer3_controls/structural_holdout_all_seeds.csv` |
+| Table 5 (rotated within-BOOM held-out-combination tests) | `run_structural_holdout_probes.py` | `reviewer3_controls/structural_holdout_all_seeds.csv` |
 | Table 6 (Toto donor exchange) | `run_toto_paired_patch.py` | `reviewer_replications_5seed/paired_patch_per_resplit.csv` (+ `_manifest.csv`) |
 | Table 7 (external transfer) | `run_toto_transfer.py` | `reviewer_replications_5seed/transfer_per_resplit.csv`, `transfer_per_dataset.csv` |
 | Table 8 (MOMENT dynamic readouts) | `fit_toto_probes.py --label-group dynamic` | `reviewer_replications_5seed/moment_dynamic_per_resplit.csv`, `moment_random_dynamic_per_resplit.csv` |
 | Table 9 (MOMENT matched interchange) | `run_moment_paired_interchange.py` | `reviewer_replications_5seed/moment_interchange_per_resplit.csv` (+ `_manifest.csv`) |
-| Table 10 (full taxonomy-control matrix) | same as Table 1 | `reviewer3_controls/raw_control_all_seeds.csv`, `unconditional_selected_all_seeds.csv`, `layer_permuted_selected_all_seeds.csv` |
+| Table 10 (full raw-window control matrix) | same as Table 1 | `reviewer3_controls/raw_control_all_seeds.csv`, `unconditional_selected_all_seeds.csv`, `layer_permuted_selected_all_seeds.csv` |
 | Figure 1 (Toto vs. controls per label) | `scripts/make_camera_ready_fig_data.py` | same inputs as Table 1 |
 | Figure 3 (per-resplit Toto vs. strongest raw-window model) | `scripts/make_camera_ready_fig_data.py` | same inputs as Table 1 |
 | Figure 4 (probe check vs. forecast endpoint) | `scripts/plot_camera_ready_figures.py`, `scripts/make_camera_ready_fig_data.py` | `paired_patch_per_resplit.csv`, `moment_interchange_per_resplit.csv` |
@@ -241,28 +259,31 @@ a 48-cell supplementary win-count summary (424 checks).
 
 ## Compute notes (from results/reviewer3_controls/EXECUTION.md)
 
-Taxonomy-control CPU stage (`run_reviewer3_cpu_followup.sh`, seeds 42–46): 16 CPU / 32 GB request; observed
-1:07–1:25 elapsed, 18.7–21.3 GB peak RSS. Held-out + conditional tail:
-2 CPU / 16 GB; 11:34–21:25, up to 8.8 GB. Layer-perm probes: 96 GB ask,
-~79 GB observed. MOMENT random-init CPU tail: 100 GB ask, ~91 GB
-observed. A10 GPU stages: MOMENT activations 21–37 min / ~29 GB; Toto
-patch 3–4 min / 7–9 GB; MOMENT random activations 48–53 min / ~30 GB;
-layer-perm activations 6–7 min / 42–49 GB; transfer ~1 min / ~2 GB;
-MOMENT interchange 1–2 min / 2–3 GB.
+Taxonomy-control CPU stage (`run_reviewer3_cpu_followup.sh`, seeds 42–46):
+16 CPUs (launcher request 32 GB); 1:07–1:25 elapsed, 18.7–21.3 GB peak RSS.
+Held-out + common-support tail: 2 CPUs / 16 GB request; 11:34–21:25 elapsed,
+up to 8.8 GB. Block-permutation (layer-permuted) probes: 96 GB request, about
+79 GB peak. MOMENT random-init CPU tail: 100 GB request, about 91 GB peak.
+A10 GPU stages: MOMENT activations 21–37 min / 28.6–29.1 GB; Toto donor
+exchange 3–4 min / 6.7–9.0 GB; MOMENT random activations 48–53 min /
+29.3–30.9 GB; layer-permuted activations about 7 min / 42.2–49.2 GB; external
+transfer about 1 min / 1.4–1.8 GB; MOMENT matched interchange 1–2 min /
+1.7–3.0 GB.
 
 ## Data and model sources (downloaded at rerun; not included)
 
-- BOOM benchmark: HuggingFace dataset `Datadog/BOOM` (2,807 series).
-- Toto checkpoint: `Datadog/Toto-Open-Base-1.0` (Hub revisions unpinned).
+- BOOM benchmark: Hugging Face dataset `Datadog/BOOM` (2,807 series).
+- Toto checkpoint: `Datadog/Toto-Open-Base-1.0` (revisions: [docs/asset_provenance.md](docs/asset_provenance.md)).
 - MOMENT-base checkpoint: `AutonLab/MOMENT-1-base` via `momentfm`.
 - FEV: `autogluon/fev_datasets`. Transfer uses the 11 configurations
   listed in the paper; `stage_fev_safe_datasets.py` stages all
   configurations marked safe in `toto_interp/fev_tasks.py`. Rohlik
-  configurations come from Rohlik competition data and must never be
-  redistributed; only per-dataset aggregate transfer metrics (R2, RMSE,
-  MAE, window counts) are bundled, with no series values.
-- LSTF (ETTh1, ETTh2, weather, electricity): Google Drive bundles
-  resolved by `toto_interp/lsf.py`.
+  configurations come from Rohlik's Kaggle competition data, whose rules
+  set its terms; this repository contains none of that data, only
+  per-dataset aggregate transfer metrics (R2, RMSE, MAE, window counts).
+- LSTF (ETTh1, ETTh2, weather, electricity): Time-Series-Library bundles on
+  Google Drive, resolved by `toto_interp/lsf.py` (see
+  [docs/lsf_setup.md](docs/lsf_setup.md)).
 
 No raw dataset files are included in this package; `results/` contains aggregate
 experimental results and provenance records. Third-party
@@ -271,12 +292,16 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution and
 upstream terms, and [docs/asset_provenance.md](docs/asset_provenance.md)
 for recorded asset revisions.
 
-## Known limitations (factual)
+## Release scope
 
-- Per-view (layer × token × pooling) probe metrics exist only on cluster
-  scratch; the package carries validation-selected rows only.
-- Toto taxonomy-suite window counts are not recorded in the released
-  artifacts (MOMENT-suite counts are in `moment_manifest.csv`).
-- Hub revisions (BOOM snapshot, Toto/MOMENT checkpoints) are unpinned;
-  reruns download current revisions.
-- `momentfm` has no recorded version pin (see `requirements.txt`).
+- `results/` carries the validation-selected probe rows behind every
+  reported number; per-view (layer × token × pooling) sweeps are not
+  included.
+- Window counts per split are recorded for the MOMENT suite
+  (`moment_manifest.csv`) and the Toto donor exchange
+  (`paired_patch_manifest.csv`).
+- The loaders read each Hugging Face repository's default branch;
+  [docs/asset_provenance.md](docs/asset_provenance.md) records the resolved
+  revisions and when the files the pipeline reads last changed.
+- `momentfm` is installed separately with
+  `pip install --no-deps momentfm==0.1.4` (see `requirements.txt`).
