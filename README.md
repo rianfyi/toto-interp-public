@@ -34,7 +34,8 @@ This repository supports two levels of reproduction for the reported five-respli
 - **Level A (CPU, minutes):** recompute the reported results (424 checks
   over Tables 1–10, the values plotted in Figures 1, 3 and 4, the
   in-text means, half-widths and win counts, the appendix series/window
-  counts, and a 48-cell supplementary win-count summary) from the
+  counts, and supplementary checks: a 48-cell win-count summary and 11
+  derived margins) from the
   compact, audited result CSVs in `results/`, and regenerate the figure data.
 - **Level B (GPU cluster):** rerun the five-resplit pipeline from scratch
   (seeds 42–46) with the exact scripts, seeds, and settings used.
@@ -53,7 +54,7 @@ files, activations, model weights, or manuscript sources are included.
 
 ## Layout
 
-- `toto_interp/` — analysis library (probes, labels, controls, transfer).
+- `toto_interp/` — analysis library (probes, labels, baselines, transfer).
 - `scripts/` — pipeline scripts (dumps, probe fits, interventions,
   transfer, summarizers, audit, figure generation, data staging).
 - `examples/slurm/` — Slurm launchers with site placeholders (Level B).
@@ -140,13 +141,13 @@ Each array covers seeds 42–46 and consumes the previous stage's outputs;
 `RUNS_ROOT` redirects a stage's output root. The launchers are
 authoritative; the commands below list their main settings.
 
-1. **Toto dumps, confounding, and raw-window controls**
+1. **Toto dumps, confounding, and raw-window baselines**
    (`examples/slurm/run_reviewer3_suite.sh`, GPU):
    `run_reviewer3_suite.py --seed SEED --raw-only` runs
    `dump_toto_activations.py --context-length 1024
    --max-series-per-split 500 --max-windows-per-series 4`
    (pretrained + random-init), `compute_structural_confounding.py`, and
-   the FNO/CNN/Transformer/GBDT raw-window controls (`fit_toto_probes.py`;
+   the FNO/CNN/Transformer/GBDT raw-window models (`fit_toto_probes.py`;
    width 32 / 3 layers / 16 modes / 20 epochs / batch 16).
 2. **Unconditional linear probes**
    (`examples/slurm/run_reviewer3_cpu_followup.sh`, CPU):
@@ -222,7 +223,7 @@ authoritative; the commands below list their main settings.
    424 verifier checks passed; the other values moved by a median of about
    0.002 (at most about 0.024), and three near-tie selections changed (the
    domain win count against the strongest raw-window model, 2 to 3 of 5; the
-   strongest cardinality raw-window family, FNO/CNN; and one random-init
+   strongest cardinality raw-window model, FNO/CNN; and one random-init
    common-support view, seed 46).
 10. **Figures**: the Level A figure-data commands regenerate the figures
     from the packaged results. Both figure scripts assert the paper's printed
@@ -232,17 +233,17 @@ authoritative; the commands below list their main settings.
 
 | Paper item | Pipeline stage(s) | Results file(s) |
 |---|---|---|
-| Table 1 (Toto taxonomy readouts and controls) | `run_reviewer3_suite.py`, `run_reviewer3_cpu_followup.py`, `fit_toto_probes.py`; block permutation: step 4 | `reviewer3_controls/unconditional_selected_all_seeds.csv`, `raw_control_all_seeds.csv`, `layer_permuted_selected_all_seeds.csv` |
+| Table 1 (Toto taxonomy readouts vs. input baselines, backbone baselines, and shuffled-label floor) | `run_reviewer3_suite.py`, `run_reviewer3_cpu_followup.py`, `fit_toto_probes.py`; block permutation: step 4 | `reviewer3_controls/unconditional_selected_all_seeds.csv`, `raw_control_all_seeds.csv`, `layer_permuted_selected_all_seeds.csv` |
 | Table 2 (common-support probes) | `run_conditional_probes.py` | `reviewer3_controls/conditional_all_seeds.csv` |
 | Table 3 (MOMENT-base taxonomy) | `dump_moment_activations.py`, `fit_toto_probes.py` | `reviewer_replications_5seed/moment_per_resplit.csv`, `moment_random_structural_per_resplit.csv` |
-| Table 4 (raw-window control models) | `fit_toto_probes.py` (+ `toto_interp/fno.py`, `gbdt.py`) | `reviewer3_controls/reviewer3_summary.json` (parameter counts) |
+| Table 4 (raw-window baseline models) | `fit_toto_probes.py` (+ `toto_interp/fno.py`, `gbdt.py`) | `reviewer3_controls/reviewer3_summary.json` (parameter counts) |
 | Table 5 (rotated within-BOOM held-out-combination tests) | `run_structural_holdout_probes.py` | `reviewer3_controls/structural_holdout_all_seeds.csv` |
 | Table 6 (Toto donor exchange) | `run_toto_paired_patch.py` | `reviewer_replications_5seed/paired_patch_per_resplit.csv` (+ `_manifest.csv`) |
-| Table 7 (external transfer) | `run_toto_transfer.py` | `reviewer_replications_5seed/transfer_per_resplit.csv`, `transfer_per_dataset.csv` |
+| Table 7 (zero-shot coordination-probe transfer) | `run_toto_transfer.py` | `reviewer_replications_5seed/transfer_per_resplit.csv`, `transfer_per_dataset.csv` |
 | Table 8 (MOMENT dynamic readouts) | `fit_toto_probes.py --label-group dynamic` | `reviewer_replications_5seed/moment_dynamic_per_resplit.csv`, `moment_random_dynamic_per_resplit.csv` |
 | Table 9 (MOMENT matched interchange) | `run_moment_paired_interchange.py` | `reviewer_replications_5seed/moment_interchange_per_resplit.csv` (+ `_manifest.csv`) |
-| Table 10 (full raw-window control matrix) | same as Table 1 | `reviewer3_controls/raw_control_all_seeds.csv`, `unconditional_selected_all_seeds.csv`, `layer_permuted_selected_all_seeds.csv` |
-| Figure 1 (Toto vs. controls per label) | `scripts/make_camera_ready_fig_data.py` | same inputs as Table 1 |
+| Table 10 (all raw-window and backbone baselines) | same as Table 1 | `reviewer3_controls/raw_control_all_seeds.csv`, `unconditional_selected_all_seeds.csv`, `layer_permuted_selected_all_seeds.csv` |
+| Figure 1 (Toto vs. its baselines per label) | `scripts/make_camera_ready_fig_data.py` | same inputs as Table 1 |
 | Figure 3 (per-resplit Toto vs. strongest raw-window model) | `scripts/make_camera_ready_fig_data.py` | same inputs as Table 1 |
 | Figure 4 (probe check vs. forecast endpoint) | `scripts/plot_camera_ready_figures.py`, `scripts/make_camera_ready_fig_data.py` | `paired_patch_per_resplit.csv`, `moment_interchange_per_resplit.csv` |
 | Cramér's V between labels | `compute_structural_confounding.py` | `reviewer3_controls/pairwise_cramers_v_all_seeds.csv` |
@@ -255,7 +256,8 @@ compute record) and every
 
 `verify_paper_numbers.py` checks Tables 1–10, the plotted figure values,
 the in-text means/half-widths/wins, the appendix series/window counts, and
-a 48-cell supplementary win-count summary (424 checks).
+supplementary checks (a 48-cell win-count summary and 11 derived margins;
+424 checks).
 
 ## Compute notes (from results/reviewer3_controls/EXECUTION.md)
 
