@@ -10,7 +10,7 @@ Authors: Dhyey Dharmendrakumar Mavani, Rian Atri, Tairan Ji.
 ## Citation
 
 ```bibtex
-@inproceedings{mavani2026controlfirst,
+@inproceedings{mavani2026observability,
   title     = {What Does an Observability Foundation Model Know?},
   author    = {Mavani, Dhyey Dharmendrakumar and Atri, Rian and Ji, Tairan},
   booktitle = {Advances in Neural Information Processing Systems},

@@ -158,7 +158,7 @@ T4.10.wape.mean,Table 6,Blend 1.00 median WAPE ratio mean,0.903,m3
 T4.10.wape.hw,Table 6,Blend 1.00 median WAPE ratio half-width,0.155,h3
 T4PROBE.mean,Table 6 caption,Toto probe check mean,0.655,m3
 T4PROBE.hw,Table 6 caption,Toto probe check half-width,0.136,h3
-T4PROBE.wins,Table 6 caption,Toto probe check resplits above 0.5,5,int
+T4PROBE.wins,Sec 5.4 text,Toto probe check resplits above 0.5,5,int
 T4R2.probe.mean,Sec 5.4 text,Donor probe R2 mean,0.106,m3
 T4R2.probe.hw,Sec 5.4 text,Donor probe R2 half-width,0.100,h3
 T4R2.raw.mean,Sec 5.4 text,Donor raw six-stat R2 mean,0.111,m3
