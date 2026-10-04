@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "toto-interp"
 version = "0.1.0"
-description = "Code for the NeurIPS 2026 paper \"A Control-First Representation Audit of an Observability Forecasting Foundation Model\""
+description = "Code for the NeurIPS 2026 paper \"What Does an Observability Foundation Model Know?\""
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"

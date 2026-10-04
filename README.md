@@ -1,4 +1,4 @@
-# toto-interp — code for "A Control-First Representation Audit of an Observability Forecasting Foundation Model" (NeurIPS 2026)
+# toto-interp — code for "What Does an Observability Foundation Model Know?" (NeurIPS 2026)
 
 Camera-ready code release: tag
 [`neurips-2026-v1`](https://github.com/DhyeyMavani2003/toto-interp/tree/neurips-2026-v1),
@@ -11,7 +11,7 @@ Authors: Dhyey Dharmendrakumar Mavani, Rian Atri, Tairan Ji.
 
 ```bibtex
 @inproceedings{mavani2026controlfirst,
-  title     = {A Control-First Representation Audit of an Observability Forecasting Foundation Model},
+  title     = {What Does an Observability Foundation Model Know?},
   author    = {Mavani, Dhyey Dharmendrakumar and Atri, Rian and Ji, Tairan},
   booktitle = {Advances in Neural Information Processing Systems},
   year      = {2026}
