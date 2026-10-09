@@ -146,16 +146,16 @@ GPU launchers request one NVIDIA A10 (`--gres=gpu:A10:1`). Override this if your
 
 The last column shows the time and peak memory each launcher used in the reported runs (per seed). "—" means it wasn't recorded; the launcher's memory request is the guide there. When a stage has several launchers, run them top to bottom; each line in the last columns belongs to the launcher on the same line.
 
-| # | Stage | Launcher(s) | Runs on | Paper items | Time / peak memory |
+| # | Stage | Launcher(s) | Runs on | Paper items | Time / peak memory |
 |---|---|---|---|---|---|
-| 1 | Toto activations (pretrained, random-init),<br>Cramér's V, raw-window models | `run_taxonomy_suite.sh` | GPU | Tables 1, 4, 10; Figs. 1, 3; §5.2 | — (requests 32 GB) |
-| 2 | Linear probes on Toto activations | `run_taxonomy_probes.sh` | CPU (16 cores) | Tables 1, 10; Figs. 1, 3 | 1 h 07 – 1 h 25 / 18.7–21.3 GB |
-| 3 | Held-out-combination tests,<br>common-support probes | `run_holdout_grid.sh` | CPU (2 cores) | Tables 2, 5 | 11–21 min / up to 8.8 GB |
-| 4 | Block-permuted Toto activations,<br>then probes | `run_layer_permuted_pretrained_a10.sh`<br>`run_layer_permuted_pretrained_probe_followup.sh` | GPU<br>CPU | Tables 1, 10 | ~7 min / 42–49 GB<br>39 min – 1 h 19 / ~79 GB |
-| 5 | MOMENT activations (pretrained, random-init),<br>then probes | `run_moment.sh`<br>`run_moment_random.sh`<br>`run_moment_dynamic.sh`<br>`run_moment_random_probe_followup.sh` | GPU<br>GPU<br>CPU<br>CPU | Tables 3, 8 | 21–37 min / ~29 GB<br>48–53 min / 29–31 GB<br>—<br>— / ~91 GB |
-| 6 | Toto donor exchange | `run_toto_donor_exchange.sh` | GPU | Table 6; Fig. 4 (left) | 3–4 min / 6.7–9.0 GB |
-| 7 | MOMENT matched interchange | `run_moment_interchange.sh` | GPU | Table 9; Fig. 4 (right) | 1–2 min / 1.7–3.0 GB |
-| 8 | Toto dynamic probes,<br>then zero-shot transfer | `run_toto_dynamic.sh`<br>`run_transfer.sh` | CPU<br>GPU | Table 7 | —<br>~1 min / 1.4–1.8 GB |
+| 1 | Toto activations (pretrained, random‑init),<br>Cramér's V, raw‑window models | `run_taxonomy_suite.sh` | GPU | Tables 1, 4, 10; Figs. 1, 3; §5.2 | — (requests 32 GB) |
+| 2 | Linear probes on Toto activations | `run_taxonomy_probes.sh` | CPU (16 cores) | Tables 1, 10; Figs. 1, 3 | 1 h 07 –⁠ 1 h 25 / 18.7–⁠21.3 GB |
+| 3 | Held‑out‑combination tests,<br>common‑support probes | `run_holdout_grid.sh` | CPU (2 cores) | Tables 2, 5 | 11–⁠21 min / up to 8.8 GB |
+| 4 | Block‑permuted Toto activations,<br>then probes | `run_layer_permuted_pretrained_a10.sh`<br>`run_layer_permuted_pretrained_probe_followup.sh` | GPU<br>CPU | Tables 1, 10 | ~7 min / 42–⁠49 GB<br>39 min –⁠ 1 h 19 / ~79 GB |
+| 5 | MOMENT activations (pretrained, random‑init),<br>then probes | `run_moment.sh`<br>`run_moment_random.sh`<br>`run_moment_dynamic.sh`<br>`run_moment_random_probe_followup.sh` | GPU<br>GPU<br>CPU<br>CPU | Tables 3, 8 | 21–⁠37 min / ~29 GB<br>48–⁠53 min / 29–⁠31 GB<br>—<br>— / ~91 GB |
+| 6 | Toto donor exchange | `run_toto_donor_exchange.sh` | GPU | Table 6; Fig. 4 (left) | 3–⁠4 min / 6.7–⁠9.0 GB |
+| 7 | MOMENT matched interchange | `run_moment_interchange.sh` | GPU | Table 9; Fig. 4 (right) | 1–⁠2 min / 1.7–⁠3.0 GB |
+| 8 | Toto dynamic probes,<br>then zero‑shot transfer | `run_toto_dynamic.sh`<br>`run_transfer.sh` | CPU<br>GPU | Table 7 | —<br>~1 min / 1.4–⁠1.8 GB |
 
 <details>
 <summary><b>Main settings of each stage</b></summary>
