@@ -209,7 +209,6 @@ The figure scripts check the paper's printed values, so they stop on rerun outpu
 
 - **Seeds.** Each seed from 42 to 46 defines one series-disjoint train/validation/test resplit of BOOM. Activation views are chosen on validation series and evaluated once on test series.
 - **GBDT backend.** `fit_toto_probes.py` defaults `--gbdt-backend` to `hist_gradient_boosting`. In the reported runs the backend was set to `auto`, which used scikit-learn's HistGradientBoosting because XGBoost wasn't installed. The new default makes that choice explicit. It is the only functional change from the code that produced the results.
-- **Renamed files.** Since the reported runs, the pipeline's files, folders and default output directories have been renamed, and the figure scripts now read `results/` directly. No computed value changes. `E2E_AUDIT.json` was regenerated with the renamed audit script: its paths and check names changed, and every hash, row count and seed is identical.
 - **Validation-selected rows.** `results/` holds the validation-selected probe rows behind every reported number.
 - **Window counts.** `moment_manifest.csv` and `paired_patch_manifest.csv` in `results/moment_exchange_transfer/` record the window counts per split for the MOMENT suite and the Toto donor exchange.
 - **Model and data revisions.** The loaders read each Hugging Face repository's default branch. [docs/asset_provenance.md](docs/asset_provenance.md) records the revisions the rerun resolved and when the files the pipeline reads last changed.
