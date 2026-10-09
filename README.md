@@ -10,42 +10,14 @@ Code and audited results for the paper "What Does an Observability Foundation Mo
 
 ## Contents
 
-- [Overview](#overview)
 - [What's in this repo](#whats-in-this-repo)
 - [Installation](#installation)
 - [Check the paper's numbers (CPU)](#check-the-papers-numbers-cpu)
 - [Rerun the pipeline (GPU cluster)](#rerun-the-pipeline-gpu-cluster)
 - [Paper → code → results](#paper--code--results)
+- [Results](#results)
 - [Citation](#citation)
 - [License](#license)
-
-## Overview
-
-A linear probe can show that a label is recoverable from a model's hidden states. It can't show whether the input window already gives the label away, or whether the model actually uses it. We audit Toto, an observability forecasting foundation model, on the BOOM benchmark across five series-disjoint resplits. For each label we ask three questions:
-
-1. Is the label more linearly recoverable from Toto's frozen residual stream than from the raw input window?
-2. Does that depend on Toto's trained weights and their order?
-3. Does moving the readout move the forecast?
-
-**Findings.** Cadence (short vs. medium) and metric type are more recoverable from Toto than from every raw-window model we tested, in all five resplits. Domain is nearly tied. Cardinality is recovered far better from the raw window.
-
-| Label | Toto | Strongest raw-window model | Paired gap | Resplits Toto wins |
-|---|---|---|---|---|
-| Cadence | 0.766 ± 0.024 | FNO 0.633 ± 0.047 | +0.133 ± 0.063 | 5/5 |
-| Metric type | 0.545 ± 0.037 | GBDT 0.498 ± 0.007 | +0.047 ± 0.036 | 5/5 |
-| Domain | 0.484 ± 0.011 | GBDT 0.482 ± 0.040 | +0.002 ± 0.040 | 2/5 |
-| Cardinality | 0.471 ± 0.029 | FNO 0.961 ± 0.016 | −0.490 ± 0.044 | 0/5 |
-
-<sub>Held-out test macro-F1, mean ± Student-t(4) 95% half-width over five resplits (paper Table 1).</sub>
-
-![Held-out test macro-F1 of Toto, its baselines, and the shuffled-label floor for each taxonomy label](assets/fig1_label_profile.png)
-
-- **Trained weights matter.** Cadence and metric type also beat Toto with random weights and Toto with its blocks shuffled, in all five resplits.
-- **MOMENT-base** shows related cadence, metric-type and domain readouts on the same resplits.
-- **Readout is not use.** Swapping in residuals from high-burst donor series moves a future-burstiness readout as intended, but the forecasts do not become consistently burstier than with a randomized donor.
-- **Zero-shot transfer fails.** A coordination probe trained on BOOM has negative R² on the external benchmarks we tested.
-
-**Scope.** These results are about linear recoverability from one representation with one probe family, on one corpus. Five resplits of BOOM measure split-to-split variability, not uncertainty over independent data, and Toto's pretraining overlap with BOOM is unknown. The full protocol (resplits, activation views, probes and baselines) is in §3–4 and App. A of the paper.
 
 ## What's in this repo
 
@@ -279,6 +251,28 @@ Some file names use the code's terms rather than the paper's:
 | `structural_holdout` | held-out-combination tests |
 | `paired_patch` | donor exchange |
 | `frequency_bucket` | cadence |
+
+## Results
+
+Across five series-disjoint resplits of the BOOM benchmark, cadence (short vs. medium) and metric type are more linearly recoverable from the frozen residual stream of Toto, an observability forecasting foundation model, than from every raw-window model we tested. Domain is nearly tied, and cardinality is recovered far better from the raw window.
+
+| Label | Toto | Strongest raw-window model | Paired gap | Resplits Toto wins |
+|---|---|---|---|---|
+| Cadence | 0.766 ± 0.024 | FNO 0.633 ± 0.047 | +0.133 ± 0.063 | 5/5 |
+| Metric type | 0.545 ± 0.037 | GBDT 0.498 ± 0.007 | +0.047 ± 0.036 | 5/5 |
+| Domain | 0.484 ± 0.011 | GBDT 0.482 ± 0.040 | +0.002 ± 0.040 | 2/5 |
+| Cardinality | 0.471 ± 0.029 | FNO 0.961 ± 0.016 | −0.490 ± 0.044 | 0/5 |
+
+<sub>Held-out test macro-F1, mean ± Student-t(4) 95% half-width over five resplits (paper Table 1).</sub>
+
+![Held-out test macro-F1 of Toto, its baselines, and the shuffled-label floor for each taxonomy label](assets/fig1_label_profile.png)
+
+- **Trained weights matter.** Cadence and metric type also beat Toto with random weights and Toto with its blocks shuffled, in all five resplits.
+- **MOMENT-base** shows related cadence, metric-type and domain readouts on the same resplits.
+- **Readout is not use.** Swapping in residuals from high-burst donor series moves a future-burstiness readout as intended, but the forecasts do not become consistently burstier than with a randomized donor.
+- **Zero-shot transfer fails.** A coordination probe trained on BOOM has negative R² on the external benchmarks we tested.
+
+**Scope.** These are claims about linear recoverability from one representation with one probe family, on BOOM. Five resplits of one corpus measure split-to-split variability, not uncertainty over independent data, and Toto's pretraining overlap with BOOM is unknown. The full protocol is in §3–4 and App. A of the paper.
 
 ## Citation
 
