@@ -18,15 +18,15 @@
 #SBATCH --mem=24G
 #SBATCH --time=00:30:00
 #SBATCH --array=42-46%5
-#SBATCH --output=logs/reviewer_rep_patch_%A_%a.out
-#SBATCH --error=logs/reviewer_rep_patch_%A_%a.err
+#SBATCH --output=logs/toto_donor_exchange_%A_%a.out
+#SBATCH --error=logs/toto_donor_exchange_%A_%a.err
 
 set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-SOURCE_ROOT="${SOURCE_ROOT:-${REPO}/runs/reviewer3_evalmode_20260728}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer_replications_evalmode_20260728}"
+SOURCE_ROOT="${SOURCE_ROOT:-${REPO}/runs/taxonomy_suite}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/toto_exchange_transfer}"
 SNAPSHOT_PATH="${SNAPSHOT_PATH:-${REPO}/data/boom_snapshot}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"
 PYTHON="${VENV}/bin/python"

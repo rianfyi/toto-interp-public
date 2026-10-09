@@ -18,21 +18,21 @@
 #SBATCH --mem=16G
 #SBATCH --time=04:00:00
 #SBATCH --array=42-46%5
-#SBATCH --output=logs/reviewer3_holdouts_%A_%a.out
-#SBATCH --error=logs/reviewer3_holdouts_%A_%a.err
+#SBATCH --output=logs/holdout_grid_%A_%a.out
+#SBATCH --error=logs/holdout_grid_%A_%a.err
 
 set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer3_evalmode_20260728}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/taxonomy_suite}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"
 ROTATION="${STRUCTURAL_HOLDOUT_ROTATION:-$((SEED - 42))}"
 SEED_ROOT="${RUNS_ROOT}/seed_${SEED}"
 
 module load ${SOFTWARE_STACK}
 for SOURCE in pretrained random_init; do
-  "${VENV}/bin/python" "${REPO}/scripts/run_reviewer3_holdout_grid.py" \
+  "${VENV}/bin/python" "${REPO}/scripts/run_holdout_grid.py" \
     --activation-files \
       "${SEED_ROOT}/${SOURCE}_activations/train_activations.pt" \
       "${SEED_ROOT}/${SOURCE}_activations/val_activations.pt" \

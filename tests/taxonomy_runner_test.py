@@ -17,7 +17,7 @@ def _load_script(name: str):
     return module
 
 
-@pytest.mark.parametrize("script_name", ["run_reviewer3_suite.py", "run_reviewer3_cpu_followup.py"])
+@pytest.mark.parametrize("script_name", ["run_taxonomy_suite.py", "run_taxonomy_probes.py"])
 def test_run_reuses_only_an_exact_command_signature(tmp_path: Path, script_name: str) -> None:
     module = _load_script(script_name)
     done_path = tmp_path / "done.txt"
@@ -43,7 +43,7 @@ def test_run_reuses_only_an_exact_command_signature(tmp_path: Path, script_name:
     assert done_path.read_text() == "changed"
 
 
-@pytest.mark.parametrize("script_name", ["run_reviewer3_suite.py", "run_reviewer3_cpu_followup.py"])
+@pytest.mark.parametrize("script_name", ["run_taxonomy_suite.py", "run_taxonomy_probes.py"])
 def test_run_treats_scratch_symlink_aliases_as_the_same_command(
     tmp_path: Path, script_name: str
 ) -> None:
@@ -61,7 +61,7 @@ def test_run_treats_scratch_symlink_aliases_as_the_same_command(
     signature_path.write_text(json.dumps({"command": prior_command}))
 
     current_command = [sys.executable, "-c", code, str(real_root / "input.pt")]
-    if script_name == "run_reviewer3_suite.py":
+    if script_name == "run_taxonomy_suite.py":
         module.run(
             current_command,
             done_path=done_path,
@@ -73,8 +73,8 @@ def test_run_treats_scratch_symlink_aliases_as_the_same_command(
     assert not counter_path.exists()
 
 
-def test_reviewer3_suite_dispatches_gbdt_confounding_and_structural_holdout(tmp_path: Path, monkeypatch) -> None:
-    module = _load_script("run_reviewer3_suite.py")
+def test_taxonomy_suite_dispatches_gbdt_confounding_and_structural_holdout(tmp_path: Path, monkeypatch) -> None:
+    module = _load_script("run_taxonomy_suite.py")
     captured: list[list[str]] = []
 
     def capture(command: list[str], *, done_path: Path | None, reuse_existing: bool) -> None:
@@ -85,7 +85,7 @@ def test_reviewer3_suite_dispatches_gbdt_confounding_and_structural_holdout(tmp_
         sys,
         "argv",
         [
-            "run_reviewer3_suite.py",
+            "run_taxonomy_suite.py",
             "--output-root",
             str(tmp_path / "runs"),
             "--seed",

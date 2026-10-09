@@ -1,7 +1,7 @@
 {
   "checks": {
     "external_transfer": {
-      "path": "runs/rebuttal/reviewer_replications_5seed/transfer_per_resplit.csv",
+      "path": "results/moment_exchange_transfer/transfer_per_resplit.csv",
       "replicated_cells": 12,
       "rows": 60,
       "seeds": [
@@ -15,7 +15,7 @@
       "status": "complete"
     },
     "moment_dynamic": {
-      "path": "runs/rebuttal/reviewer_replications_5seed/moment_dynamic_per_resplit.csv",
+      "path": "results/moment_exchange_transfer/moment_dynamic_per_resplit.csv",
       "replicated_cells": 6,
       "rows": 30,
       "seeds": [
@@ -29,7 +29,7 @@
       "status": "complete"
     },
     "moment_matched_interchange": {
-      "path": "runs/rebuttal/reviewer_replications_5seed/moment_interchange_per_resplit.csv",
+      "path": "results/moment_exchange_transfer/moment_interchange_per_resplit.csv",
       "replicated_cells": 3,
       "rows": 15,
       "seeds": [
@@ -43,7 +43,7 @@
       "status": "complete"
     },
     "moment_random_dynamic": {
-      "path": "runs/rebuttal/reviewer_replications_5seed/moment_random_dynamic_per_resplit.csv",
+      "path": "results/moment_exchange_transfer/moment_random_dynamic_per_resplit.csv",
       "replicated_cells": 6,
       "rows": 30,
       "seeds": [
@@ -57,7 +57,7 @@
       "status": "complete"
     },
     "moment_random_structural": {
-      "path": "runs/rebuttal/reviewer_replications_5seed/moment_random_structural_per_resplit.csv",
+      "path": "results/moment_exchange_transfer/moment_random_structural_per_resplit.csv",
       "replicated_cells": 4,
       "rows": 20,
       "seeds": [
@@ -71,7 +71,7 @@
       "status": "complete"
     },
     "moment_structural": {
-      "path": "runs/rebuttal/reviewer_replications_5seed/moment_per_resplit.csv",
+      "path": "results/moment_exchange_transfer/moment_per_resplit.csv",
       "replicated_cells": 4,
       "rows": 20,
       "seeds": [
@@ -84,8 +84,8 @@
       "sha256": "c73aa9875cca1f309d39e59646fc7659d7de45eba6edeada7c96f0426329fcae",
       "status": "complete"
     },
-    "reviewer3_conditional": {
-      "path": "runs/rebuttal/reviewer3_controls/conditional_all_seeds.csv",
+    "taxonomy_conditional": {
+      "path": "results/toto_taxonomy/conditional_all_seeds.csv",
       "replicated_cells": 6,
       "rows": 30,
       "seeds": [
@@ -98,8 +98,8 @@
       "sha256": "bec3545a8b99233b1d7bd429654d8795ec30a12218dad6bfc160e631e639daac",
       "status": "complete"
     },
-    "reviewer3_confounding": {
-      "path": "runs/rebuttal/reviewer3_controls/pairwise_cramers_v_all_seeds.csv",
+    "taxonomy_confounding": {
+      "path": "results/toto_taxonomy/pairwise_cramers_v_all_seeds.csv",
       "replicated_cells": 12,
       "rows": 60,
       "seeds": [
@@ -112,8 +112,8 @@
       "sha256": "7b539275f02539891a575b96f87e42149ef79b54bd78edd5f8bcaee3f86f280d",
       "status": "complete"
     },
-    "reviewer3_layer_permuted": {
-      "path": "runs/rebuttal/reviewer3_controls/layer_permuted_selected_all_seeds.csv",
+    "taxonomy_layer_permuted": {
+      "path": "results/toto_taxonomy/layer_permuted_selected_all_seeds.csv",
       "replicated_cells": 4,
       "rows": 20,
       "seeds": [
@@ -126,8 +126,8 @@
       "sha256": "2e6fc2b5a961f941ca53da3ef87815a7669ac10e4424f8e51314f57b661e3f1b",
       "status": "complete"
     },
-    "reviewer3_raw_controls": {
-      "path": "runs/rebuttal/reviewer3_controls/raw_control_all_seeds.csv",
+    "taxonomy_raw_controls": {
+      "path": "results/toto_taxonomy/raw_control_all_seeds.csv",
       "replicated_cells": 16,
       "rows": 80,
       "seeds": [
@@ -140,8 +140,8 @@
       "sha256": "eb925357067e37be85c1ba0a0312c7928b35d10f9ac155cd2d38135809b61b87",
       "status": "complete"
     },
-    "reviewer3_structural_holdout": {
-      "path": "runs/rebuttal/reviewer3_controls/structural_holdout_all_seeds.csv",
+    "taxonomy_structural_holdout": {
+      "path": "results/toto_taxonomy/structural_holdout_all_seeds.csv",
       "replicated_cells": 8,
       "rows": 40,
       "seeds": [
@@ -154,8 +154,8 @@
       "sha256": "e4dfbf89b36cff6205b2f30c3ef3adea151bf0a9d959131d681a9a7ec06ea2fa",
       "status": "complete"
     },
-    "reviewer3_toto_pretrained_random": {
-      "path": "runs/rebuttal/reviewer3_controls/unconditional_selected_all_seeds.csv",
+    "taxonomy_toto_pretrained_random": {
+      "path": "results/toto_taxonomy/unconditional_selected_all_seeds.csv",
       "replicated_cells": 8,
       "rows": 40,
       "seeds": [
@@ -169,7 +169,7 @@
       "status": "complete"
     },
     "toto_matched_patch": {
-      "path": "runs/rebuttal/reviewer_replications_5seed/paired_patch_per_resplit.csv",
+      "path": "results/moment_exchange_transfer/paired_patch_per_resplit.csv",
       "replicated_cells": 3,
       "rows": 15,
       "seeds": [

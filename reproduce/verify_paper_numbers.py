@@ -26,8 +26,8 @@ from scipy.stats import t as t_dist
 HERE = os.path.dirname(os.path.abspath(__file__))
 PKG = os.path.dirname(HERE)
 RES = os.path.join(PKG, "results")
-R3 = os.path.join(RES, "reviewer3_controls")
-R5 = os.path.join(RES, "reviewer_replications_5seed")
+R3 = os.path.join(RES, "toto_taxonomy")
+R5 = os.path.join(RES, "moment_exchange_transfer")
 
 SEEDS = ["42", "43", "44", "45", "46"]
 T95 = float(t_dist.ppf(0.975, 4))
@@ -117,7 +117,7 @@ ho = load(os.path.join(R3, "structural_holdout_all_seeds.csv"))
 
 cv = load(os.path.join(R3, "pairwise_cramers_v_all_seeds.csv"))
 
-with open(os.path.join(R3, "reviewer3_summary.json")) as f:
+with open(os.path.join(R3, "taxonomy_summary.json")) as f:
     summary = json.load(f)
 param_mean = {(r["label"], r["method"]): float(r["parameter_count_mean"])
               for r in summary["raw_control_summary"]}

@@ -1,0 +1,3 @@
+# Keep the released results byte-identical on every OS, so their SHA-256
+# hashes match the ones recorded in results/E2E_AUDIT.json after checkout.
+results/** text eol=lf

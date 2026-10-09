@@ -24,7 +24,7 @@ set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer_replications_20260728}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/moment_suite}"
 SNAPSHOT_PATH="${SNAPSHOT_PATH:-${REPO}/data/boom_snapshot}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"
 

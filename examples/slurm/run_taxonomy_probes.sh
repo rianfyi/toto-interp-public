@@ -16,21 +16,21 @@
 #SBATCH --mem=32G
 #SBATCH --time=04:00:00
 #SBATCH --array=42-46%5
-#SBATCH --output=logs/reviewer3_cpu_%A_%a.out
-#SBATCH --error=logs/reviewer3_cpu_%A_%a.err
+#SBATCH --output=logs/taxonomy_probes_%A_%a.out
+#SBATCH --error=logs/taxonomy_probes_%A_%a.err
 
 set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer3_evalmode_20260728}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/taxonomy_suite}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"
 ROTATION="${STRUCTURAL_HOLDOUT_ROTATION:-$((SEED - 42))}"
 HOLDOUT_TARGET="${STRUCTURAL_HOLDOUT_TARGET:-frequency_bucket}"
 HOLDOUT_MODE="${STRUCTURAL_HOLDOUT_MODE:-combination}"
 
 module load ${SOFTWARE_STACK}
-"${VENV}/bin/python" "${REPO}/scripts/run_reviewer3_cpu_followup.py" \
+"${VENV}/bin/python" "${REPO}/scripts/run_taxonomy_probes.py" \
   --runs-root "${RUNS_ROOT}" \
   --seed "${SEED}" \
   --n-jobs "${SLURM_CPUS_PER_TASK}" \

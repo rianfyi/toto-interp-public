@@ -4,7 +4,7 @@ import json
 
 import pandas as pd
 
-from scripts.summarize_reviewer_replications import (
+from scripts.summarize_moment_exchange_transfer import (
     DYNAMIC_LABELS,
     STRUCTURAL_LABELS,
     aggregate_columns,

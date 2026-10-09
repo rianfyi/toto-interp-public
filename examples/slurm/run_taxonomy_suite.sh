@@ -15,9 +15,9 @@
 # the two CPU stages with task-correlated dependencies so each seed advances
 # independently:
 #
-#   gpu=$(sbatch --parsable examples/slurm/run_reviewer3_suite.sh)
-#   cpu=$(sbatch --parsable --dependency=aftercorr:${gpu} examples/slurm/run_reviewer3_cpu_followup.sh)
-#   sbatch --dependency=aftercorr:${cpu} examples/slurm/run_reviewer3_holdout_grid.sh
+#   gpu=$(sbatch --parsable examples/slurm/run_taxonomy_suite.sh)
+#   cpu=$(sbatch --parsable --dependency=aftercorr:${gpu} examples/slurm/run_taxonomy_probes.sh)
+#   sbatch --dependency=aftercorr:${cpu} examples/slurm/run_holdout_grid.sh
 #
 #SBATCH --job-name=toto-r3
 #SBATCH --gres=gpu:A10:1
@@ -25,14 +25,14 @@
 #SBATCH --mem=32G
 #SBATCH --time=02:00:00
 #SBATCH --array=42-46%5
-#SBATCH --output=logs/reviewer3_%A_%a.out
-#SBATCH --error=logs/reviewer3_%A_%a.err
+#SBATCH --output=logs/taxonomy_suite_%A_%a.out
+#SBATCH --error=logs/taxonomy_suite_%A_%a.err
 
 set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer3_evalmode_20260728}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/taxonomy_suite}"
 SNAPSHOT_PATH="${SNAPSHOT_PATH:-${REPO}/data/boom_snapshot}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"
 ROTATION="${STRUCTURAL_HOLDOUT_ROTATION:-$((SEED - 42))}"
@@ -46,9 +46,9 @@ export HUGGING_FACE_HUB_OFFLINE=1
 export HF_DATASETS_OFFLINE=1
 
 mkdir -p "${REPO}/logs" "${RUNS_ROOT}"
-echo "reviewer3 seed=${SEED} host=$(hostname) start=$(date)"
+echo "taxonomy_suite seed=${SEED} host=$(hostname) start=$(date)"
 
-"${PYTHON}" "${REPO}/scripts/run_reviewer3_suite.py" \
+"${PYTHON}" "${REPO}/scripts/run_taxonomy_suite.py" \
   --output-root "${RUNS_ROOT}" \
   --seed "${SEED}" \
   --device cuda \
@@ -67,4 +67,4 @@ echo "reviewer3 seed=${SEED} host=$(hostname) start=$(date)"
   --raw-only \
   ${REUSE_EXISTING:+--reuse-existing}
 
-echo "reviewer3 seed=${SEED} end=$(date)"
+echo "taxonomy_suite seed=${SEED} end=$(date)"

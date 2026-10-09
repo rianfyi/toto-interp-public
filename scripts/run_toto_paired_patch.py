@@ -23,7 +23,7 @@ high-burst donor with a randomized donor on the same target:
 Donor residuals come from real forward passes rather than synthetic
 directions. Both arms use the same target; the randomized donor is not
 covariate- or taxonomy-matched to the high-burst donor.
-summarize_reviewer_replications.py reports the probe check (fraction of
+summarize_moment_exchange_transfer.py reports the probe check (fraction of
 targets whose probe score is higher under the high-burst donor than under the
 randomized donor), the forecast endpoint (fraction of targets whose forecast is
 burstier under the high-burst donor than under the randomized donor), and the

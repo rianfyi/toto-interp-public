@@ -18,14 +18,14 @@
 #SBATCH --mem=8G
 #SBATCH --time=00:30:00
 #SBATCH --array=42-46%5
-#SBATCH --output=logs/reviewer_rep_moment_xchg_%A_%a.out
-#SBATCH --error=logs/reviewer_rep_moment_xchg_%A_%a.err
+#SBATCH --output=logs/moment_interchange_%A_%a.out
+#SBATCH --error=logs/moment_interchange_%A_%a.err
 
 set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer_replications_20260728}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/moment_suite}"
 SNAPSHOT_PATH="${SNAPSHOT_PATH:-${REPO}/data/boom_snapshot}"
 NUM_PAIRS="${NUM_PAIRS:-40}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"

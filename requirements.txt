@@ -1,4 +1,4 @@
-# Frozen runtime pins for the five-resplit pipeline (Level B) and figure regen.
+# Frozen runtime pins for the five-resplit pipeline and figure regeneration.
 #
 # Source of each pin:
 #   [uv.lock]  Exact version resolved in the authors' development lockfile
@@ -7,9 +7,9 @@
 #   [runtime]  Version observed in the authors' local Python environment
 #              (torch 2.7.0 matches the lockfile).
 #
-# Level A (verify numbers + regenerate figures) needs only:
+# Checking the paper's numbers and regenerating figures needs only:
 #   numpy pandas scipy matplotlib
-# Level B (GPU cluster rerun) needs the full list below.
+# A full pipeline rerun (GPU cluster) needs the full list below.
 
 numpy==1.26.4            # [uv.lock]
 pandas==2.2.3            # [uv.lock]

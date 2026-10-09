@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 from scipy.stats import t as student_t
 
-CANONICAL_REVIEWER_SEEDS = [42, 43, 44, 45, 46]
+CANONICAL_SEEDS = [42, 43, 44, 45, 46]
 
 
 def parse_args() -> argparse.Namespace:
@@ -22,17 +22,17 @@ def parse_args() -> argparse.Namespace:
         help="Optional root containing the five layer-permuted-pretrained controls.",
     )
     parser.add_argument(
-        "--seeds", type=int, nargs="+", default=CANONICAL_REVIEWER_SEEDS
+        "--seeds", type=int, nargs="+", default=CANONICAL_SEEDS
     )
     parser.add_argument("--output-dir", type=Path, required=True)
     return parser.parse_args()
 
 
 def validate_requested_seeds(seeds: list[int]) -> None:
-    if seeds != CANONICAL_REVIEWER_SEEDS:
+    if seeds != CANONICAL_SEEDS:
         raise ValueError(
             "Taxonomy-control aggregation requires exactly the canonical five ordered "
-            f"resplits {CANONICAL_REVIEWER_SEEDS}; received {seeds}"
+            f"resplits {CANONICAL_SEEDS}; received {seeds}"
         )
 
 
@@ -598,7 +598,7 @@ def main() -> None:
     lines = [
         "# Taxonomy-Control Stress Tests",
         "",
-        "Execution resources for the reported runs are documented in `results/reviewer3_controls/EXECUTION.md`.",
+        "Compute resources for the reported runs are listed in the repository README.",
         "",
         "Five seeded resplits, with train/validation/test series disjoint within each run. Values are means +/- Student-t(4) 95% half-widths across resplits; the half-widths measure variability across resplits of one corpus and are descriptive rather than significance tests. Raw controls receive the same masked context window and coverage channel; all neural raw controls use validation-selected checkpoints. The GBDT control receives explicit last-patch, spectral, and autocorrelation summaries. Pairwise Cramér's V uses one label record per series. The predeclared Toto view rule selects frequency, metric type, and domain by validation accuracy and cardinality by validation macro-F1; every reported macro-F1 remains held-out test performance. Conditional probes use only terminal-context or first-decode views, first average repeated windows within series, then balance target classes by series within each split and hold the two remaining structural labels fixed.",
         "",
@@ -766,8 +766,8 @@ def main() -> None:
             )
         )
     lines.append("")
-    (args.output_dir / "REVIEWER3_RESULTS.md").write_text("\n".join(lines))
-    with open(args.output_dir / "reviewer3_summary.json", "w") as handle:
+    (args.output_dir / "TAXONOMY_RESULTS.md").write_text("\n".join(lines))
+    with open(args.output_dir / "taxonomy_summary.json", "w") as handle:
         json.dump(
             {
                 "seeds": args.seeds,
