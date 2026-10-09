@@ -22,7 +22,7 @@ Code and audited results for the paper "What Does an Observability Foundation Mo
 ## What's in this repo
 
 - **Audited results** (`results/`): the result tables behind every number in the paper, for all five resplits. `results/E2E_AUDIT.json` records each file's seeds, row counts and SHA-256 hash.
-- **A CPU verifier** (`reproduce/`): recomputes 424 reported values from `results/` and checks them against the paper. It runs in seconds.
+- **A CPU verifier** (`reproduce/`): recomputes 424 reported values from `results/` and checks them against the paper.
 - **Figure data**: scripts that rebuild the values plotted in Figures 1, 3 and 4.
 - **The full pipeline** (`scripts/`, `examples/slurm/`): every stage from activation dumps to the summary tables, with Slurm launchers.
 
@@ -160,8 +160,6 @@ The last column shows the time and peak memory each stage used in the reported r
 <details>
 <summary><b>Main settings of each stage</b></summary>
 
-The launchers are the authoritative source. This list gives their main settings.
-
 1. `run_taxonomy_suite.py --seed SEED --raw-only` runs `dump_toto_activations.py --context-length 1024 --max-series-per-split 500 --max-windows-per-series 4` for pretrained and random-init Toto, then `compute_structural_confounding.py`, then the FNO, CNN, Transformer and GBDT raw-window models (`fit_toto_probes.py`; width 32, 3 layers, 16 modes, 20 epochs, batch 16).
 2. `run_taxonomy_probes.py --seed SEED --skip-post-controls --reuse-existing` fits the taxonomy linear probes on pretrained and random-init activations.
 3. `run_holdout_grid.py --source {pretrained,random_init} --seed SEED --rotation SEED-42` runs the held-out-combination tests (`run_structural_holdout_probes.py`) and the common-support probes (`run_conditional_probes.py`).
@@ -198,7 +196,7 @@ The audit fails unless every expected cell is present for all five seeds. Its ou
 
 ### What to expect from a rerun
 
-Values from GPU-trained models or GPU activations differ slightly between runs. In the authors' full rerun of this code (September 2026):
+Values from GPU-trained models or GPU activations differ slightly between runs. In our full rerun of this code (September 2026):
 
 - Cramér's V and the other CPU-only values matched exactly.
 - 346 of the 424 verifier checks passed. The other values moved by a median of about 0.002, and at most about 0.024.
@@ -221,23 +219,23 @@ The figure scripts check the paper's printed values, so they stop on rerun outpu
 
 ## Paper → code → results
 
-Each row gives the script that computes a paper item and the file in `results/` that holds its numbers. `taxonomy/` is short for `results/toto_taxonomy/` and `exchange/` for `results/moment_exchange_transfer/`.
+Each row gives the script that computes a paper item and the files in `results/` that hold its numbers.
 
 | Paper item | Script(s) | Results file(s) |
 |---|---|---|
-| Table 1: Toto vs. input and backbone baselines | `run_taxonomy_suite.py`, `run_taxonomy_probes.py`, `fit_toto_probes.py`; block permutation: stage 4 | `taxonomy/unconditional_selected_all_seeds.csv`, `raw_control_all_seeds.csv`, `layer_permuted_selected_all_seeds.csv` |
-| Table 2: common-support probes | `run_conditional_probes.py` | `taxonomy/conditional_all_seeds.csv` |
-| Table 3: MOMENT-base taxonomy readouts | `dump_moment_activations.py`, `fit_toto_probes.py` | `exchange/moment_per_resplit.csv`, `moment_random_structural_per_resplit.csv` |
-| Table 4: raw-window baseline models | `fit_toto_probes.py`, `toto_interp/fno.py`, `toto_interp/gbdt.py` | `taxonomy/taxonomy_summary.json` (parameter counts) |
-| Table 5: held-out-combination tests | `run_structural_holdout_probes.py` | `taxonomy/structural_holdout_all_seeds.csv` |
-| Table 6: Toto donor exchange | `run_toto_paired_patch.py` | `exchange/paired_patch_per_resplit.csv`, `paired_patch_manifest.csv` |
-| Table 7: zero-shot coordination-probe transfer | `run_toto_transfer.py` | `exchange/transfer_per_resplit.csv`, `transfer_per_dataset.csv` |
-| Table 8: MOMENT dynamic readouts | `fit_toto_probes.py --label-group dynamic` | `exchange/moment_dynamic_per_resplit.csv`, `moment_random_dynamic_per_resplit.csv` |
-| Table 9: MOMENT matched interchange | `run_moment_paired_interchange.py` | `exchange/moment_interchange_per_resplit.csv`, `moment_interchange_manifest.csv` |
+| Table 1: Toto vs. input and backbone baselines | `run_taxonomy_suite.py`, `run_taxonomy_probes.py`, `fit_toto_probes.py`; block permutation: stage 4 | `toto_taxonomy/unconditional_selected_all_seeds.csv`, `toto_taxonomy/raw_control_all_seeds.csv`, `toto_taxonomy/layer_permuted_selected_all_seeds.csv` |
+| Table 2: common-support probes | `run_conditional_probes.py` | `toto_taxonomy/conditional_all_seeds.csv` |
+| Table 3: MOMENT-base taxonomy readouts | `dump_moment_activations.py`, `fit_toto_probes.py` | `moment_exchange_transfer/moment_per_resplit.csv`, `moment_exchange_transfer/moment_random_structural_per_resplit.csv` |
+| Table 4: raw-window baseline models | `fit_toto_probes.py`, `toto_interp/fno.py`, `toto_interp/gbdt.py` | `toto_taxonomy/taxonomy_summary.json` (parameter counts) |
+| Table 5: held-out-combination tests | `run_structural_holdout_probes.py` | `toto_taxonomy/structural_holdout_all_seeds.csv` |
+| Table 6: Toto donor exchange | `run_toto_paired_patch.py` | `moment_exchange_transfer/paired_patch_per_resplit.csv`, `moment_exchange_transfer/paired_patch_manifest.csv` |
+| Table 7: zero-shot coordination-probe transfer | `run_toto_transfer.py` | `moment_exchange_transfer/transfer_per_resplit.csv`, `moment_exchange_transfer/transfer_per_dataset.csv` |
+| Table 8: MOMENT dynamic readouts | `fit_toto_probes.py --label-group dynamic` | `moment_exchange_transfer/moment_dynamic_per_resplit.csv`, `moment_exchange_transfer/moment_random_dynamic_per_resplit.csv` |
+| Table 9: MOMENT matched interchange | `run_moment_paired_interchange.py` | `moment_exchange_transfer/moment_interchange_per_resplit.csv`, `moment_exchange_transfer/moment_interchange_manifest.csv` |
 | Table 10: all raw-window and backbone baselines | same as Table 1 | same as Table 1 |
 | Figures 1 and 3 | `make_camera_ready_fig_data.py` | same as Table 1 |
-| Figure 4 | `plot_camera_ready_figures.py`, `make_camera_ready_fig_data.py` | `exchange/paired_patch_per_resplit.csv`, `moment_interchange_per_resplit.csv` |
-| Cramér's V between labels (§5.2) | `compute_structural_confounding.py` | `taxonomy/pairwise_cramers_v_all_seeds.csv` |
+| Figure 4 | `plot_camera_ready_figures.py`, `make_camera_ready_fig_data.py` | `moment_exchange_transfer/paired_patch_per_resplit.csv`, `moment_exchange_transfer/moment_interchange_per_resplit.csv` |
+| Cramér's V between labels (§5.2) | `compute_structural_confounding.py` | `toto_taxonomy/pairwise_cramers_v_all_seeds.csv` |
 
 `summarize_taxonomy_suite.py` writes every file in `results/toto_taxonomy/`, and `summarize_moment_exchange_transfer.py` writes every file in `results/moment_exchange_transfer/`.
 
@@ -287,4 +285,4 @@ Across five series-disjoint resplits of the BOOM benchmark, cadence (short vs. m
 
 ## License
 
-The authors' code, documentation and aggregate results are released under the [MIT License](LICENSE). Two files adapted from [Datadog Toto](https://github.com/DataDog/toto), `toto_interp/fev_tasks.py` and `toto_interp/boom.py`, keep their Apache-2.0 terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [licenses/](licenses/). The MIT License doesn't cover third-party datasets, model weights or dependencies.
+Our code, documentation and aggregate results are released under the [MIT License](LICENSE). Two files adapted from [Datadog Toto](https://github.com/DataDog/toto), `toto_interp/fev_tasks.py` and `toto_interp/boom.py`, keep their Apache-2.0 terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [licenses/](licenses/). The MIT License doesn't cover third-party datasets, model weights or dependencies.
