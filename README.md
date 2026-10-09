@@ -2,16 +2,11 @@
 
 Code and audited results for the paper "What Does an Observability Foundation Model Know?", **NeurIPS 2026 (Poster)**.
 
-Dhyey Dharmendrakumar Mavani, Rian Atri, Tairan Ji
-
 <p align="center">
-  <a href="https://arxiv.org/abs/2610.05577">Paper (arXiv)</a> ·
-  <a href="https://github.com/DhyeyMavani2003/toto-interp/tree/neurips-2026-v1">Code release (<code>neurips-2026-v1</code>)</a>
+  <a href="https://arxiv.org/abs/2610.05577">Paper (arXiv)</a>
 </p>
 
 ![Method overview: linear probes on frozen Toto residuals compared with raw-window and backbone baselines (a), and the donor exchange that tests whether moving a readout moves the forecast (b)](assets/fig2_method.png)
-
-The paper links to the `neurips-2026-v1` tag. Use that tag when you reproduce or cite the code.
 
 ## Contents
 
