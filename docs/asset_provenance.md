@@ -2,27 +2,27 @@
 
 ## Released results
 
-`results/` holds the audited five-resplit aggregates (seeds 42–46) from which
+`results/` holds the audited five-resplit aggregates (seeds 42 to 46) from which
 the paper's tables and figures are computed. `results/E2E_AUDIT.json` records,
 for each of the 13 aggregate files, the seeds (each exactly once per cell), the
 row and cell counts, the file's SHA-256, and a `complete` status; the recorded
 hashes match the released files. `reproduce/verify_paper_numbers.py`
 recomputes the 424 checked values described in the
-[README](../README.md#check-the-papers-numbers-cpu) from these
+[README](../README.md#quick-start-check-the-papers-numbers) from these
 files and compares each with `reproduce/expected_numbers.csv`
-(`PASS 424  FAIL 0`). The README's
-[rerun section](../README.md#rerun-the-pipeline-gpu-cluster) lists the compute
+(`PASS 424  FAIL 0`). The
+[stage table](reproducing.md#stages) in reproducing.md lists the compute
 each pipeline stage used.
 
 ## Upstream assets
 
 No dataset files or model weights are bundled. The code below downloads each
-asset from its source; the README lists the staging commands, and
+asset from its source; [reproducing.md](reproducing.md#data-and-models) lists the staging commands, and
 `requirements.txt` pins the package versions.
 
 | Asset | Source | Loaded by | Files read |
 | --- | --- | --- | --- |
-| BOOM | Hugging Face dataset [`Datadog/BOOM`](https://huggingface.co/datasets/Datadog/BOOM) | `toto_interp/boom.py`; staged by `scripts/stage_assets.py` | `dataset_taxonomy.json` and the folders of the 2,700 series selected by the seed 42–46 splits |
+| BOOM | Hugging Face dataset [`Datadog/BOOM`](https://huggingface.co/datasets/Datadog/BOOM) | `toto_interp/boom.py`; staged by `scripts/stage_assets.py` | `dataset_taxonomy.json` and the folders of the 2,700 series selected by the seed 42 to 46 splits |
 | Toto-Open-Base-1.0 | Hugging Face model [`Datadog/Toto-Open-Base-1.0`](https://huggingface.co/Datadog/Toto-Open-Base-1.0) | `toto_interp/loader.py` (`load_toto_with_fallback`, through `toto-ts`) | `config.json`, `model.safetensors` |
 | MOMENT-1-base | Hugging Face model [`AutonLab/MOMENT-1-base`](https://huggingface.co/AutonLab/MOMENT-1-base) | `toto_interp/moment_loader.py` (`load_moment_with_fallback`, through `momentfm`) | `config.json`, `model.safetensors` |
 | FEV | Hugging Face dataset [`autogluon/fev_datasets`](https://huggingface.co/datasets/autogluon/fev_datasets), by configuration name | `toto_interp/transfer.py` (`load_fev_dataset`); staged by `scripts/stage_fev_safe_datasets.py` | the configurations flagged `safe_for_paper` in `toto_interp/fev_tasks.py` |
@@ -65,6 +65,6 @@ completed, and the regenerated `E2E_AUDIT.json` reports the same seeds, row
 counts, and `complete` status for every aggregate. CPU-only computations, such
 as the Cramér's V values, match exactly. Values from GPU-trained models or
 GPU activations differ slightly across runs, as is usual for GPU
-floating-point computation; the README's
-[rerun section](../README.md#what-to-expect-from-a-rerun) gives the
+floating-point computation;
+[reproducing.md](reproducing.md#what-to-expect-from-a-rerun) gives the
 check-level comparison.

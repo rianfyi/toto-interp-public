@@ -598,7 +598,7 @@ def main() -> None:
     lines = [
         "# Taxonomy-Control Stress Tests",
         "",
-        "Compute resources for the reported runs are listed in the repository README.",
+        "Compute resources for the reported runs are listed in docs/reproducing.md.",
         "",
         "Five seeded resplits, with train/validation/test series disjoint within each run. Values are means +/- Student-t(4) 95% half-widths across resplits; the half-widths measure variability across resplits of one corpus and are descriptive rather than significance tests. Raw controls receive the same masked context window and coverage channel; all neural raw controls use validation-selected checkpoints. The GBDT control receives explicit last-patch, spectral, and autocorrelation summaries. Pairwise Cramér's V uses one label record per series. The predeclared Toto view rule selects frequency, metric type, and domain by validation accuracy and cardinality by validation macro-F1; every reported macro-F1 remains held-out test performance. Conditional probes use only terminal-context or first-decode views, first average repeated windows within series, then balance target classes by series within each split and hold the two remaining structural labels fixed.",
         "",
