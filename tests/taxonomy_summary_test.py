@@ -9,8 +9,8 @@ import pytest
 
 
 def _load_summary_module():
-    path = Path(__file__).resolve().parents[1] / "scripts" / "summarize_reviewer3_suite.py"
-    spec = importlib.util.spec_from_file_location("summarize_reviewer3_suite", path)
+    path = Path(__file__).resolve().parents[1] / "scripts" / "summarize_taxonomy_suite.py"
+    spec = importlib.util.spec_from_file_location("summarize_taxonomy_suite", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -51,7 +51,7 @@ def test_artifact_paths_are_relativized_for_portable_result_tables():
     assert portable["artifact_path"].iloc[0] == "seed_42/probe.pt"
 
 
-def test_requested_reviewer3_seeds_must_be_the_canonical_five():
+def test_requested_taxonomy_seeds_must_be_the_canonical_five():
     module = _load_summary_module()
 
     module.validate_requested_seeds([42, 43, 44, 45, 46])

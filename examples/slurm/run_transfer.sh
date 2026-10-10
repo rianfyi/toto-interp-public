@@ -17,14 +17,14 @@
 #SBATCH --mem=8G
 #SBATCH --time=00:30:00
 #SBATCH --array=42-46%5
-#SBATCH --output=logs/reviewer_rep_transfer_%A_%a.out
-#SBATCH --error=logs/reviewer_rep_transfer_%A_%a.err
+#SBATCH --output=logs/transfer_%A_%a.out
+#SBATCH --error=logs/transfer_%A_%a.err
 
 set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer_replications_evalmode_20260728}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/toto_exchange_transfer}"
 LSF_PATH="${LSF_PATH:-${REPO}/data/lsf_datasets}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"
 PYTHON="${VENV}/bin/python"

@@ -142,7 +142,7 @@ def test_structural_holdout_runner_reuses_activation_dumps_and_records_leakage_g
     assert selected["source_test_only_evaluation"].all()
 
 
-def test_reviewer3_holdout_grid_loads_each_activation_file_once(tmp_path: Path, monkeypatch):
+def test_holdout_grid_loads_each_activation_file_once(tmp_path: Path, monkeypatch):
     batch = _structural_batch()
     activation_files = []
     for split in ("train", "val", "test"):
@@ -150,8 +150,8 @@ def test_reviewer3_holdout_grid_loads_each_activation_file_once(tmp_path: Path, 
         batch.subset(split=split).save(path)
         activation_files.append(path)
 
-    script_path = Path(__file__).resolve().parents[1] / "scripts" / "run_reviewer3_holdout_grid.py"
-    spec = importlib.util.spec_from_file_location("run_reviewer3_holdout_grid", script_path)
+    script_path = Path(__file__).resolve().parents[1] / "scripts" / "run_holdout_grid.py"
+    spec = importlib.util.spec_from_file_location("run_holdout_grid", script_path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -166,7 +166,7 @@ def test_reviewer3_holdout_grid_loads_each_activation_file_once(tmp_path: Path, 
         sys,
         "argv",
         [
-            "run_reviewer3_holdout_grid.py",
+            "run_holdout_grid.py",
             "--activation-files",
             *(str(path) for path in activation_files),
             "--output-root",

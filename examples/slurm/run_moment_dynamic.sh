@@ -17,14 +17,14 @@
 #SBATCH --mem=100G
 #SBATCH --time=02:00:00
 #SBATCH --array=42-46%5
-#SBATCH --output=logs/reviewer_rep_moment_dynamic_%A_%a.out
-#SBATCH --error=logs/reviewer_rep_moment_dynamic_%A_%a.err
+#SBATCH --output=logs/moment_dynamic_%A_%a.out
+#SBATCH --error=logs/moment_dynamic_%A_%a.err
 
 set -euo pipefail
 
 REPO="${REPO:-${SCRATCH}}"
 VENV="${VENV:-${REPO}/.venv-gpu}"
-RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/reviewer_replications_20260728}"
+RUNS_ROOT="${RUNS_ROOT:-${REPO}/runs/moment_suite}"
 SEED="${SLURM_ARRAY_TASK_ID:?}"
 PYTHON="${VENV}/bin/python"
 

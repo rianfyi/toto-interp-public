@@ -1,6 +1,6 @@
 #!/bin/bash
 # Run directly on a networked login node, not via sbatch:
-#   REPO=/abs/path/to/checkout SOFTWARE_STACK=<module> bash examples/slurm/setup_reviewer3_cluster.sh
+#   REPO=/abs/path/to/checkout SOFTWARE_STACK=<module> bash examples/slurm/setup_cluster.sh
 # VENV defaults to ${REPO}/.venv-gpu. Other ${VAR:-default} values below are
 # functional defaults.
 # Create an isolated GPU-capable environment and stage all assets while the
@@ -21,7 +21,7 @@ fi
 "${VENV}/bin/python" -m pip check
 
 export HF_HOME="${REPO}/.cache/huggingface"
-"${VENV}/bin/python" "${REPO}/scripts/stage_reviewer3_assets.py" \
+"${VENV}/bin/python" "${REPO}/scripts/stage_assets.py" \
   --snapshot-path "${SNAPSHOT_PATH}" \
   --seeds 42 43 44 45 46 \
   --max-series-per-split 500

@@ -41,7 +41,7 @@ def main() -> None:
     model = load_toto_with_fallback(args.model_id, device="cpu")
     del model
     args.snapshot_path.mkdir(parents=True, exist_ok=True)
-    (args.snapshot_path / "reviewer3_stage_manifest.json").write_text(
+    (args.snapshot_path / "taxonomy_stage_manifest.json").write_text(
         json.dumps(
             {
                 "seeds": args.seeds,

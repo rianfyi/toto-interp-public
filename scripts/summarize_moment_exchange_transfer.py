@@ -999,7 +999,7 @@ def main() -> None:
         args.output_dir / "transfer_per_dataset.csv", index=False
     )
     transfer_summary.to_csv(args.output_dir / "transfer_summary.csv", index=False)
-    (args.output_dir / "REVIEWER_REPLICATION_RESULTS.md").write_text(
+    (args.output_dir / "MOMENT_EXCHANGE_TRANSFER_RESULTS.md").write_text(
         render_markdown(
             patch_per_seed,
             patch_summary,

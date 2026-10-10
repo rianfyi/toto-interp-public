@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-CANONICAL_REVIEWER_SEEDS = [42, 43, 44, 45, 46]
+CANONICAL_SEEDS = [42, 43, 44, 45, 46]
 STRUCTURAL_LABELS = (
     "cardinality_bucket",
     "domain",
@@ -29,11 +29,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Fail closed unless every reported five-resplit cell is complete."
     )
-    parser.add_argument("--replication-summary-dir", type=Path, required=True)
-    parser.add_argument("--reviewer3-summary-dir", type=Path, required=True)
+    parser.add_argument("--moment-exchange-transfer-summary-dir", type=Path, required=True)
+    parser.add_argument("--taxonomy-summary-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
-        "--seeds", type=int, nargs="+", default=CANONICAL_REVIEWER_SEEDS
+        "--seeds", type=int, nargs="+", default=CANONICAL_SEEDS
     )
     return parser.parse_args()
 
@@ -119,14 +119,14 @@ def require_cell_replication(
 
 def main() -> None:
     args = parse_args()
-    if args.seeds != CANONICAL_REVIEWER_SEEDS:
+    if args.seeds != CANONICAL_SEEDS:
         raise ValueError(
             "The end-to-end audit requires exactly the canonical five ordered "
-            f"resplits {CANONICAL_REVIEWER_SEEDS}; received {args.seeds}"
+            f"resplits {CANONICAL_SEEDS}; received {args.seeds}"
         )
     n = len(args.seeds)
-    replication = args.replication_summary_dir
-    reviewer3 = args.reviewer3_summary_dir
+    replication = args.moment_exchange_transfer_summary_dir
+    taxonomy = args.taxonomy_summary_dir
 
     checks: dict[str, dict[str, object]] = {}
 
@@ -142,7 +142,7 @@ def main() -> None:
     ) -> None:
         checks[name] = {
             "status": "complete",
-            "path": str(path),
+            "path": path.as_posix(),
             "sha256": sha256_file(path),
             "rows": int(len(frame)),
             "replicated_cells": require_cell_replication(
@@ -316,10 +316,10 @@ def main() -> None:
         for label in STRUCTURAL_LABELS
         for source in ("pretrained", "random_init")
     }
-    reviewer3_specs = (
+    taxonomy_specs = (
         (
             "raw_control_all_seeds.csv",
-            "reviewer3_raw_controls",
+            "taxonomy_raw_controls",
             16,
             ["label", "method"],
             {
@@ -331,7 +331,7 @@ def main() -> None:
         ),
         (
             "unconditional_selected_all_seeds.csv",
-            "reviewer3_toto_pretrained_random",
+            "taxonomy_toto_pretrained_random",
             8,
             ["label", "source"],
             structural_sources,
@@ -346,7 +346,7 @@ def main() -> None:
         ),
         (
             "layer_permuted_selected_all_seeds.csv",
-            "reviewer3_layer_permuted",
+            "taxonomy_layer_permuted",
             4,
             ["label"],
             {(label,) for label in STRUCTURAL_LABELS},
@@ -359,7 +359,7 @@ def main() -> None:
         ),
         (
             "conditional_all_seeds.csv",
-            "reviewer3_conditional",
+            "taxonomy_conditional",
             6,
             ["conditional_key", "source"],
             {
@@ -380,7 +380,7 @@ def main() -> None:
         ),
         (
             "pairwise_cramers_v_all_seeds.csv",
-            "reviewer3_confounding",
+            "taxonomy_confounding",
             12,
             ["left_label", "right_label", "split"],
             {
@@ -396,7 +396,7 @@ def main() -> None:
         ),
         (
             "structural_holdout_all_seeds.csv",
-            "reviewer3_structural_holdout",
+            "taxonomy_structural_holdout",
             8,
             ["target", "holdout_mode", "source"],
             {
@@ -425,8 +425,8 @@ def main() -> None:
         cell_columns,
         expected_cell_values,
         required_finite_columns,
-    ) in reviewer3_specs:
-        path = reviewer3 / filename
+    ) in taxonomy_specs:
+        path = taxonomy / filename
         frame = load_checked(
             path,
             seed_column="suite_seed",

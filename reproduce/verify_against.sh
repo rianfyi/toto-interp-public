@@ -8,7 +8,7 @@
 #
 # Usage:
 #   bash reproduce/verify_against.sh results                  # packaged audited results
-#   bash reproduce/verify_against.sh /path/to/rerun/results   # a Level B rerun
+#   bash reproduce/verify_against.sh /path/to/rerun/results   # a full pipeline rerun
 #
 # Expected on the packaged results: PASS 424 / FAIL 0. A rerun uses the same
 # subfolder layout as results/. CPU-only, finishes in seconds.

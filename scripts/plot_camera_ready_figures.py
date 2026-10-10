@@ -1,17 +1,16 @@
 """Audited values behind the NeurIPS 2026 camera-ready figures.
 
-Reads ONLY the audited five-resplit artifacts listed in E2E_AUDIT.json (results/ in the
-release, read through the staging paths R3 and R5 described in the README):
-  reviewer3_controls/unconditional_selected_all_seeds.csv
-  reviewer3_controls/raw_control_all_seeds.csv
-  reviewer3_controls/conditional_all_seeds.csv
-  reviewer3_controls/layer_permuted_selected_all_seeds.csv
-  reviewer_replications_5seed/paired_patch_per_resplit.csv
-  reviewer_replications_5seed/moment_per_resplit.csv
-  reviewer_replications_5seed/moment_random_structural_per_resplit.csv
-  reviewer_replications_5seed/moment_dynamic_per_resplit.csv
-  reviewer_replications_5seed/moment_interchange_per_resplit.csv
-  reviewer_replications_5seed/transfer_per_resplit.csv
+Reads ONLY the audited five-resplit artifacts listed in results/E2E_AUDIT.json:
+  toto_taxonomy/unconditional_selected_all_seeds.csv
+  toto_taxonomy/raw_control_all_seeds.csv
+  toto_taxonomy/conditional_all_seeds.csv
+  toto_taxonomy/layer_permuted_selected_all_seeds.csv
+  moment_exchange_transfer/paired_patch_per_resplit.csv
+  moment_exchange_transfer/moment_per_resplit.csv
+  moment_exchange_transfer/moment_random_structural_per_resplit.csv
+  moment_exchange_transfer/moment_dynamic_per_resplit.csv
+  moment_exchange_transfer/moment_interchange_per_resplit.csv
+  moment_exchange_transfer/transfer_per_resplit.csv
 
 Writes (under paper/neurips2026/figures/):
   cr_figure_values.csv: every computed value with its source file, columns
@@ -41,8 +40,8 @@ from scipy import stats as sstats
 
 # ---------------------------------------------------------------- paths
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-R3 = os.path.join(ROOT, "runs", "rebuttal", "reviewer3_controls")
-R5 = os.path.join(ROOT, "runs", "rebuttal", "reviewer_replications_5seed")
+R3 = os.path.join(ROOT, "results", "toto_taxonomy")
+R5 = os.path.join(ROOT, "results", "moment_exchange_transfer")
 FIGDIR = os.path.join(ROOT, "paper", "neurips2026", "figures")
 
 SEEDS = ["42", "43", "44", "45", "46"]
@@ -198,16 +197,16 @@ mi_cell = {(r["split_seed"], r["blend"]): r for r in mi}
 
 tr = load(os.path.join(R5, "transfer_per_resplit.csv"))
 
-UNCOND_SRC = "runs/rebuttal/reviewer3_controls/unconditional_selected_all_seeds.csv"
-RAW_SRC = "runs/rebuttal/reviewer3_controls/raw_control_all_seeds.csv"
-COND_SRC = "runs/rebuttal/reviewer3_controls/conditional_all_seeds.csv"
-PERM_SRC = "runs/rebuttal/reviewer3_controls/layer_permuted_selected_all_seeds.csv"
-PP_SRC = "runs/rebuttal/reviewer_replications_5seed/paired_patch_per_resplit.csv"
-MP_SRC = "runs/rebuttal/reviewer_replications_5seed/moment_per_resplit.csv"
-MR_SRC = "runs/rebuttal/reviewer_replications_5seed/moment_random_structural_per_resplit.csv"
-MD_SRC = "runs/rebuttal/reviewer_replications_5seed/moment_dynamic_per_resplit.csv"
-MI_SRC = "runs/rebuttal/reviewer_replications_5seed/moment_interchange_per_resplit.csv"
-TR_SRC = "runs/rebuttal/reviewer_replications_5seed/transfer_per_resplit.csv"
+UNCOND_SRC = "results/toto_taxonomy/unconditional_selected_all_seeds.csv"
+RAW_SRC = "results/toto_taxonomy/raw_control_all_seeds.csv"
+COND_SRC = "results/toto_taxonomy/conditional_all_seeds.csv"
+PERM_SRC = "results/toto_taxonomy/layer_permuted_selected_all_seeds.csv"
+PP_SRC = "results/moment_exchange_transfer/paired_patch_per_resplit.csv"
+MP_SRC = "results/moment_exchange_transfer/moment_per_resplit.csv"
+MR_SRC = "results/moment_exchange_transfer/moment_random_structural_per_resplit.csv"
+MD_SRC = "results/moment_exchange_transfer/moment_dynamic_per_resplit.csv"
+MI_SRC = "results/moment_exchange_transfer/moment_interchange_per_resplit.csv"
+TR_SRC = "results/moment_exchange_transfer/transfer_per_resplit.csv"
 
 
 def wins(gaps):

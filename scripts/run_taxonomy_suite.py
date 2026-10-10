@@ -187,7 +187,7 @@ def main() -> None:
                 "batch_size": args.batch_size,
             },
         }
-        (seed_root / "reviewer3_raw_manifest.json").write_text(json.dumps(raw_manifest, indent=2))
+        (seed_root / "taxonomy_raw_manifest.json").write_text(json.dumps(raw_manifest, indent=2))
         return
 
     for source_name, activation_root in (("pretrained", pretrained), ("random_init", random_init)):
@@ -272,7 +272,7 @@ def main() -> None:
             "batch_size": args.batch_size,
         },
     }
-    (seed_root / "reviewer3_suite_manifest.json").write_text(json.dumps(manifest, indent=2))
+    (seed_root / "taxonomy_suite_manifest.json").write_text(json.dumps(manifest, indent=2))
 
 
 if __name__ == "__main__":

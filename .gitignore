@@ -6,7 +6,7 @@ __pycache__/
 # Downloaded data, activations, and pipeline outputs are never committed.
 data/
 runs/
-# Figure data written by the figure scripts (see README, Level A).
+# Figure data written by the figure scripts (see README, "Check the paper's numbers").
 paper/
 logs/
 .cache/
